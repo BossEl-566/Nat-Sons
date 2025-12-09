@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom'; // Add useNavigate
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import natlogo from '../assets/Original-logo.png';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const navigate = useNavigate(); // Add this hook
+  const navigate = useNavigate();
+  const location = useLocation(); // Get current location
 
   const handleMenuClick = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -15,9 +16,46 @@ export default function Header() {
   };
 
   const handleSearchClick = () => {
-    // Navigate to search page when input is clicked
     navigate('/search');
   };
+
+  // Helper function to check if a path is active
+  const isActive = (path) => {
+    // For exact home page match
+    if (path === '/' && location.pathname === '/') {
+      return true;
+    }
+    // For other paths, check if current path starts with the link path
+    if (path !== '/' && location.pathname.startsWith(path)) {
+      return true;
+    }
+    return false;
+  };
+
+  // Navigation links configuration
+  const navLinks = [
+    { path: '/', label: 'Home', exact: true },
+    { path: '/healthcare-products', label: 'Healthcare' },
+    { path: '/vitamins', label: 'Vitamins' },
+    { path: '/personal-care', label: 'Personal Care' },
+    { path: '/medical-equipment', label: 'Equipment' },
+    { path: '/health-articles', label: 'Articles' },
+    { path: '/about', label: 'About' },
+  ];
+
+  // Mobile navigation links configuration
+  const mobileNavLinks = [
+    { path: '/', label: 'Home' },
+    { path: '/healthcare-products', label: 'Healthcare Products' },
+    { path: '/vitamins', label: 'Vitamins & Supplements' },
+    { path: '/personal-care', label: 'Personal Care' },
+    { path: '/medical-equipment', label: 'Medical Equipment' },
+    { path: '/health-articles', label: 'Health Articles' },
+    { path: '/about', label: 'About Us' },
+    { path: '/store-locator', label: 'Store Locator' },
+    { path: '/contact', label: 'Contact Us' },
+    { path: '/health-tips', label: 'Health Tips' },
+  ];
 
   return (
     <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
@@ -47,8 +85,8 @@ export default function Header() {
                   type="text"
                   placeholder="Search products..."
                   className="w-full px-4 py-2 pl-10 rounded-lg border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-transparent text-sm cursor-pointer"
-                  onClick={() => { handleSearchClick(); handleMenuItemClick(); }} // Add onClick handler
-                  readOnly // Make it read-only so keyboard doesn't open on mobile
+                  onClick={() => { handleSearchClick(); handleMenuItemClick(); }}
+                  readOnly
                 />
                 <div className="absolute left-3 top-1/2 transform -translate-y-1/2">
                   <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -77,89 +115,39 @@ export default function Header() {
 
           {/* Bottom Navigation - More Compact */}
           <div className="hidden lg:flex justify-center space-x-6 border-t border-gray-100 pt-2 pb-2">
-            <Link to="/" className="text-gray-700 hover:text-blue-600 font-medium py-1 transition-colors text-sm">Home</Link>
-            <Link to="/healthcare-products" className="text-gray-700 hover:text-blue-600 font-medium py-1 transition-colors text-sm">Healthcare</Link>
-            <Link to="/vitamins" className="text-gray-700 hover:text-blue-600 font-medium py-1 transition-colors text-sm">Vitamins</Link>
-            <Link to="/personal-care" className="text-gray-700 hover:text-blue-600 font-medium py-1 transition-colors text-sm">Personal Care</Link>
-            <Link to="/medical-equipment" className="text-gray-700 hover:text-blue-600 font-medium py-1 transition-colors text-sm">Equipment</Link>
-            <Link to="/health-articles" className="text-gray-700 hover:text-blue-600 font-medium py-1 transition-colors text-sm">Articles</Link>
-            <Link to="/about" className="text-gray-700 hover:text-blue-600 font-medium py-1 transition-colors text-sm">About</Link>
+            {navLinks.map((link) => (
+              <Link
+                key={link.path}
+                to={link.path}
+                className={`font-medium py-1 transition-colors text-sm ${
+                  isActive(link.path)
+                    ? 'text-blue-600 font-semibold border-b-2 border-blue-600'
+                    : 'text-gray-700 hover:text-blue-600'
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
           </div>
 
           {/* Mobile Menu - Complete with all links */}
           {isMenuOpen && (
             <div className="lg:hidden bg-white border border-gray-200 rounded-lg shadow-lg mb-2">
               <div className="py-1">
-                <Link 
-                  to="/" 
-                  className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors border-b border-gray-100 text-sm"
-                  onClick={handleMenuItemClick}
-                >
-                  Home
-                </Link>
-                <Link 
-                  to="/healthcare-products" 
-                  className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors border-b border-gray-100 text-sm"
-                  onClick={handleMenuItemClick}
-                >
-                  Healthcare Products
-                </Link>
-                <Link 
-                  to="/vitamins" 
-                  className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors border-b border-gray-100 text-sm"
-                  onClick={handleMenuItemClick}
-                >
-                  Vitamins & Supplements
-                </Link>
-                <Link 
-                  to="/personal-care" 
-                  className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors border-b border-gray-100 text-sm"
-                  onClick={handleMenuItemClick}
-                >
-                  Personal Care
-                </Link>
-                <Link 
-                  to="/medical-equipment" 
-                  className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors border-b border-gray-100 text-sm"
-                  onClick={handleMenuItemClick}
-                >
-                  Medical Equipment
-                </Link>
-                <Link 
-                  to="/health-articles" 
-                  className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors border-b border-gray-100 text-sm"
-                  onClick={handleMenuItemClick}
-                >
-                  Health Articles
-                </Link>
-                <Link 
-                  to="/about" 
-                  className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors border-b border-gray-100 text-sm"
-                  onClick={handleMenuItemClick}
-                >
-                  About Us
-                </Link>
-                <Link 
-                  to="/store-locator" 
-                  className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors border-b border-gray-100 text-sm"
-                  onClick={handleMenuItemClick}
-                >
-                  Store Locator
-                </Link>
-                <Link 
-                  to="/contact" 
-                  className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors border-b border-gray-100 text-sm"
-                  onClick={handleMenuItemClick}
-                >
-                  Contact Us
-                </Link>
-                <Link 
-                  to="/health-tips" 
-                  className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors text-sm"
-                  onClick={handleMenuItemClick}
-                >
-                  Health Tips
-                </Link>
+                {mobileNavLinks.map((link) => (
+                  <Link
+                    key={link.path}
+                    to={link.path}
+                    className={`block px-4 py-2 transition-colors border-b border-gray-100 text-sm ${
+                      isActive(link.path)
+                        ? 'bg-blue-50 text-blue-600 font-semibold'
+                        : 'text-gray-700 hover:bg-blue-50 hover:text-blue-600'
+                    }`}
+                    onClick={handleMenuItemClick}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
               </div>
               
               {/* Mobile Search */}
@@ -169,8 +157,8 @@ export default function Header() {
                     type="text"
                     placeholder="Search products..."
                     className="w-full px-3 py-2 pl-9 rounded-lg border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-transparent text-sm cursor-pointer"
-                    onClick={() => { handleSearchClick(); handleMenuItemClick(); }} // Add onClick handler
-                    readOnly // Make it read-only
+                    onClick={() => { handleSearchClick(); handleMenuItemClick(); }}
+                    readOnly
                   />
                   <div className="absolute left-3 top-1/2 transform -translate-y-1/2">
                     <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
