@@ -500,9 +500,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Existing Locations, Services, and CTA sections remain the same */}
-      {/* ... (previous Locations, Services, and CTA sections) ... */}
-
     </div>
   );
 }
