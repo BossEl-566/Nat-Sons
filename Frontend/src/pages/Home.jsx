@@ -1,505 +1,712 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { 
-  FaShoppingCart, 
-  FaPhone, 
+  FaArrowRight, 
+  FaPhoneAlt, 
+  FaWhatsapp, 
   FaMapMarkerAlt, 
-  FaArrowRight,
-  FaHospital,
-  FaStore,
-  FaUsers,
+  FaClock,
   FaShieldAlt,
   FaTruck,
   FaUserMd,
   FaAward,
-  FaStar,
-  FaPrescriptionBottle,
   FaHeart,
+  FaPrescriptionBottle,
   FaCapsules,
-  FaClinicMedical,
-  FaPlay,
-  FaQuoteLeft
+  FaHospital,
+  FaStore,
+  FaUsers,
+  FaStar,
+  FaChevronLeft,
+  FaChevronRight,
+  FaPlayCircle,
+  FaQuoteRight,
+  FaCheckCircle,
+  FaPills
 } from 'react-icons/fa';
-import { 
-  HiBuildingStorefront,
-  HiTruck,
-  HiUserGroup,
-  HiShieldCheck
-} from 'react-icons/hi2';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 export default function HomePage() {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [isVisible, setIsVisible] = useState(false);
+  const [activeSlide, setActiveSlide] = useState(0);
+  const [stats, setStats] = useState({
+    years: 0,
+    customers: 0,
+    products: 0,
+    locations: 0
+  });
 
-  // Sample video URLs (replace with your actual videos)
-  const heroVideos = [
-    "/videos/pharmacy-tour.mp4",
-    "/videos/customer-service.mp4",
-    "/videos/medicine-storage.mp4"
-  ];
-
-  const heroTexts = [
+  // Hero carousel slides
+  const heroSlides = [
     {
-      title: "Your Trusted Healthcare Partner Since 1999",
-      subtitle: "Pioneering quality healthcare in Cape Coast as the first pharmacy in Abura"
+      id: 1,
+      title: "Ghana's Trusted Healthcare Partner",
+      subtitle: "Serving communities with quality medicines and expert care since 1999",
+      image: "https://images.unsplash.com/photo-1586773860418-dc22f8b874bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+      cta: "Explore Products",
+      link: "/healthcare-products"
     },
     {
-      title: "Serving Hospitals & Communities Across Ghana",
-      subtitle: "Professional healthcare solutions for hospitals, retailers, and individual customers"
+      id: 2,
+      title: "Premium Medical Equipment",
+      subtitle: "State-of-the-art healthcare devices for hospitals and home use",
+      image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+      cta: "View Equipment",
+      link: "/medical-equipment"
     },
     {
-      title: "Quality Medicines, Expert Care",
-      subtitle: "Your health is our priority at Nat & Sons Pharmacy"
+      id: 3,
+      title: "Expert Pharmaceutical Advice",
+      subtitle: "Consult with our licensed pharmacists for personalized care",
+      image: "https://images.unsplash.com/photo-1582719508461-905c673771fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+      cta: "Meet Our Team",
+      link: "/about"
     }
   ];
 
-  useEffect(() => {
-    setIsVisible(true);
-    
-    const interval = setInterval(() => {
-      setIsVisible(false);
-      setTimeout(() => {
-        setCurrentSlide((prev) => (prev + 1) % heroTexts.length);
-        setIsVisible(true);
-      }, 500);
-    }, 5000);
+  // Services
+  const services = [
+    {
+      icon: <FaHospital className="w-8 h-8" />,
+      title: "Hospital Supply",
+      description: "Bulk medical supplies for healthcare facilities across Ghana",
+      color: "from-blue-500 to-cyan-400",
+      link: "/healthcare-products"
+    },
+    {
+      icon: <FaStore className="w-8 h-8" />,
+      title: "Retail Pharmacy",
+      description: "Complete pharmaceutical services for individuals and families",
+      color: "from-purple-500 to-pink-400",
+      link: "/personal-care"
+    },
+    {
+      icon: <FaUserMd className="w-8 h-8" />,
+      title: "Clinical Services",
+      description: "Health screenings, consultations, and medication management",
+      color: "from-green-500 to-emerald-400",
+      link: "/about"
+    },
+    {
+      icon: <FaTruck className="w-8 h-8" />,
+      title: "Delivery Service",
+      description: "Reliable delivery of medicines and healthcare products",
+      color: "from-orange-500 to-yellow-400",
+      link: "/contact"
+    }
+  ];
 
-    return () => clearInterval(interval);
+  // Featured categories
+  const categories = [
+    {
+      title: "Prescription Medicines",
+      count: "500+",
+      icon: <FaPrescriptionBottle className="w-12 h-12" />,
+      image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      link: "/healthcare-products"
+    },
+    {
+      title: "Vitamins & Supplements",
+      count: "200+",
+      icon: <FaCapsules className="w-12 h-12" />,
+      image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      link: "/vitamins"
+    },
+    {
+      title: "Medical Equipment",
+      count: "100+",
+      icon: <FaHospital className="w-12 h-12" />,
+      image: "https://images.unsplash.com/photo-1551601651-2a8555f1a136?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      link: "/medical-equipment"
+    },
+    {
+      title: "Personal Care",
+      count: "300+",
+      icon: <FaHeart className="w-12 h-12" />,
+      image: "https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      link: "/personal-care"
+    }
+  ];
+
+  // Testimonials
+  const testimonials = [
+    {
+      name: "Dr. Kwame Mensah",
+      role: "Hospital Director",
+      content: "Nat & Sons has been our reliable medical supplier for 5 years. Their quality and service are exceptional.",
+      rating: 5,
+      image: "👨‍⚕️"
+    },
+    {
+      name: "Akosua Adoma",
+      role: "Regular Customer",
+      content: "The pharmacists are always helpful and knowledgeable. I trust them with my family's health needs.",
+      rating: 5,
+      image: "👩"
+    },
+    {
+      name: "Kofi Asante",
+      role: "Local Retailer",
+      content: "Their wholesale service helps my shop offer quality healthcare products to our community.",
+      rating: 5,
+      image: "👨‍💼"
+    }
+  ];
+
+  // Stats counter animation
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setStats({
+        years: 25,
+        customers: 50000,
+        products: 1000,
+        locations: 3
+      });
+    }, 500);
+
+    return () => clearTimeout(timer);
   }, []);
 
-  // SVG Background Component
-  const MedicalPattern = () => (
-    <svg className="absolute inset-0 w-full h-full opacity-5" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <pattern id="medical-pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
-          <path d="M50,0 L60,20 L80,20 L65,35 L75,55 L50,45 L25,55 L35,35 L20,20 L40,20 Z" 
-                fill="currentColor" opacity="0.3"/>
-          <circle cx="50" cy="50" r="8" fill="currentColor" opacity="0.2"/>
-          <rect x="45" y="70" width="10" height="20" fill="currentColor" opacity="0.2"/>
-        </pattern>
-      </defs>
-      <rect width="100%" height="100%" fill="url(#medical-pattern)" />
-    </svg>
-  );
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white">
-      {/* Enhanced Hero Section with Video Background */}
+    <div className="min-h-screen bg-white">
+      {/* Hero Section with Modern Carousel */}
       <section className="relative h-screen overflow-hidden">
-        {/* Video Background Carousel */}
-        <div className="absolute inset-0">
-          {heroVideos.map((video, index) => (
-            <video
-              key={index}
-              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
-                index === currentSlide ? 'opacity-100' : 'opacity-0'
-              }`}
-              autoPlay
-              muted
-              loop
-              playsInline
-            >
-              <source src={video} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-          ))}
-          {/* Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-900/70 to-blue-600/50"></div>
+        {/* Background Pattern */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/95 to-blue-800/90 z-0">
+          <div className="absolute inset-0 opacity-10">
+            <div className="absolute inset-0" style={{
+              backgroundImage: `radial-gradient(circle at 2px 2px, rgba(255,255,255,0.3) 1px, transparent 1px)`,
+              backgroundSize: '50px 50px'
+            }}></div>
+          </div>
         </div>
 
-        {/* Animated Text Content */}
-        <div className="relative h-full flex items-center justify-center">
-          <div className="container mx-auto px-4 text-center text-white">
-            <div className={`transition-all duration-1000 transform ${
-              isVisible 
-                ? 'translate-y-0 opacity-100' 
-                : 'translate-y-10 opacity-0'
-            }`}>
-              <div className="inline-flex items-center justify-center w-20 h-20 bg-white/20 rounded-full mb-8 backdrop-blur-sm border border-white/30">
-                <FaHeart className="text-3xl text-white" />
-              </div>
-              <div className="inline-block bg-white/10 backdrop-blur-sm rounded-2xl p-8 mb-8 border border-white/20">
-                <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight font-poppins">
-                  {heroTexts[currentSlide].title}
+        {/* Animated floating elements */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {[...Array(20)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-2 h-8 bg-white/10 rounded-lg"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+              animate={{
+                y: [0, -100, 0],
+                rotate: [0, 180, 360],
+              }}
+              transition={{
+                duration: Math.random() * 8 + 4,
+                repeat: Infinity,
+                ease: "linear"
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Main Content */}
+        <div className="relative z-10 h-full flex items-center">
+          <div className="container mx-auto px-6 lg:px-12">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8 }}
+                className="text-white"
+              >
+                <div className="inline-flex items-center bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 mb-6">
+                  <FaAward className="text-yellow-400 mr-2" />
+                  <span className="font-medium">Trusted Since 1999</span>
+                </div>
+                
+                <h1 className="text-5xl lg:text-7xl font-bold mb-6 leading-tight">
+                  Healthcare
+                  <span className="block bg-gradient-to-r from-cyan-300 to-blue-100 bg-clip-text text-transparent">
+                    Redefined in Ghana
+                  </span>
                 </h1>
-              </div>
-              <p className="text-xl md:text-2xl mb-8 text-blue-100 font-light max-w-4xl mx-auto leading-relaxed">
-                {heroTexts[currentSlide].subtitle}
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link 
-                  to="/healthcare-products" 
-                  className="bg-white text-blue-700 px-8 py-4 rounded-xl font-semibold text-center hover:bg-blue-50 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center justify-center gap-2"
+                
+                <p className="text-xl text-blue-100 mb-8 max-w-xl">
+                  Pioneering quality pharmacy services across Ghana with three convenient locations, 
+                  serving hospitals, retailers, and families with premium healthcare solutions.
+                </p>
+                
+                <div className="flex flex-col sm:flex-row gap-4 mb-8">
+                  <Link 
+                    to="/healthcare-products" 
+                    className="group bg-gradient-to-r from-blue-500 to-cyan-400 hover:from-blue-600 hover:to-cyan-500 text-white px-8 py-4 rounded-full font-bold text-lg flex items-center justify-center gap-3 transition-all shadow-lg hover:shadow-xl"
+                  >
+                    <span>Explore Products</span>
+                    <FaArrowRight className="group-hover:translate-x-2 transition-transform" />
+                  </Link>
+                  
+                  <Link 
+                    to="/contact" 
+                    className="group bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 text-white px-8 py-4 rounded-full font-bold text-lg flex items-center justify-center gap-3 transition-all"
+                  >
+                    <FaPhoneAlt />
+                    <span>Contact Us</span>
+                  </Link>
+                </div>
+
+                {/* Quick Stats */}
+                <div className="grid grid-cols-2 gap-6 mt-12">
+                  <div>
+                    <div className="text-3xl font-bold mb-1">3</div>
+                    <div className="text-blue-200">Locations</div>
+                  </div>
+                  <div>
+                    <div className="text-3xl font-bold mb-1">25+</div>
+                    <div className="text-blue-200">Years Experience</div>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Hero Image */}
+              <motion.div
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="relative"
+              >
+                <div className="relative h-[500px] rounded-3xl overflow-hidden shadow-2xl">
+                  <img 
+                    src="https://images.unsplash.com/photo-1586773860418-dc22f8b874bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+                    alt="Modern Pharmacy Interior"
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-blue-900/40 to-transparent" />
+                </div>
+                
+                {/* Floating element */}
+                <motion.div
+                  animate={{ y: [0, -20, 0] }}
+                  transition={{ duration: 3, repeat: Infinity }}
+                  className="absolute -bottom-6 -right-6 bg-white p-6 rounded-2xl shadow-2xl max-w-xs"
                 >
-                  <FaShoppingCart className="w-5 h-5" />
-                  Shop Healthcare Products
-                </Link>
-                <Link 
-                  to="/contact" 
-                  className="border-2 border-white text-white px-8 py-4 rounded-xl font-semibold text-center hover:bg-white hover:text-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center gap-2"
-                >
-                  <FaPhone className="w-5 h-5" />
-                  Contact Us
-                </Link>
-              </div>
+                  <div className="flex items-center mb-3">
+                    <div className="bg-gradient-to-r from-green-500 to-emerald-400 text-white p-2 rounded-lg mr-3">
+                      <FaWhatsapp className="w-6 h-6" />
+                    </div>
+                    <div>
+                      <div className="font-bold text-gray-800">WhatsApp Order</div>
+                      <div className="text-sm text-gray-600">Quick & easy</div>
+                    </div>
+                  </div>
+                  <a 
+                    href="https://wa.me/233551234567"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block text-center bg-gradient-to-r from-green-500 to-emerald-400 hover:from-green-600 hover:to-emerald-500 text-white py-2 rounded-lg font-bold text-sm transition-all"
+                  >
+                    Order Now
+                  </a>
+                </motion.div>
+              </motion.div>
             </div>
           </div>
         </div>
 
         {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <div className="w-6 h-10 border-2 border-white rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-white rounded-full mt-2"></div>
+        <motion.div 
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+          animate={{ y: [0, 10, 0] }}
+          transition={{ repeat: Infinity, duration: 2 }}
+        >
+          <div className="text-white/60 text-sm font-medium">Scroll to explore</div>
+          <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center mx-auto mt-2">
+            <div className="w-1 h-3 bg-white/60 rounded-full mt-2 animate-bounce"></div>
           </div>
-        </div>
+        </motion.div>
+      </section>
 
-        {/* Carousel Indicators */}
-        <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 flex space-x-3">
-          {heroTexts.map((_, index) => (
-            <button
-              key={index}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                index === currentSlide ? 'bg-white scale-125' : 'bg-white/50'
-              }`}
-              onClick={() => {
-                setIsVisible(false);
-                setTimeout(() => {
-                  setCurrentSlide(index);
-                  setIsVisible(true);
-                }, 500);
-              }}
-            />
-          ))}
+      {/* Stats Section */}
+      <section className="py-16 bg-gradient-to-r from-blue-600 to-cyan-600 text-white">
+        <div className="container mx-auto px-6 lg:px-12">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+            >
+              <div className="text-5xl lg:text-6xl font-bold mb-2">{stats.years}+</div>
+              <div className="text-blue-200">Years of Trust</div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+            >
+              <div className="text-5xl lg:text-6xl font-bold mb-2">{stats.customers.toLocaleString()}+</div>
+              <div className="text-blue-200">Customers Served</div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+            >
+              <div className="text-5xl lg:text-6xl font-bold mb-2">{stats.products}+</div>
+              <div className="text-blue-200">Products</div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4 }}
+            >
+              <div className="text-5xl lg:text-6xl font-bold mb-2">{stats.locations}</div>
+              <div className="text-blue-200">Locations</div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
-      {/* Founders Section */}
-      <section className="py-20 bg-white relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-600 to-blue-800"></div>
-        <MedicalPattern />
-        <div className="container mx-auto px-4">
+      {/* Services Section */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-6 lg:px-12">
           <div className="text-center mb-16">
-            <div className="inline-flex items-center px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold mb-4">
-              <FaUserMd className="w-4 h-4 mr-2" />
-              Meet Our Founders
-            </div>
-            <h2 className="text-4xl font-bold text-gray-900 mb-4 font-poppins">The Visionaries Behind Our Success</h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Dedicated leadership that built Ghana's trusted healthcare partner
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-4xl lg:text-5xl font-bold text-gray-800 mb-4"
+            >
+              Comprehensive
+              <span className="block text-transparent bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text">
+                Healthcare Services
+              </span>
+            </motion.h2>
+            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+              From hospitals to homes, we provide complete healthcare solutions across Ghana
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
-            <div className="relative">
-              {/* Founders Photo - Replace with actual founders photo */}
-              <div className="bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl p-8 text-center h-96 flex items-center justify-center">
-                <div className="text-center">
-                  <FaUserMd className="w-16 h-16 text-blue-600 mx-auto mb-4" />
-                  <p className="text-blue-700 font-semibold">Founders Photo</p>
-                  <p className="text-blue-600 text-sm">Mr. Nana Abekah Twentoh & Mrs. Joyce Baaba Twentoh</p>
-                </div>
-                {/* Replace above div with: */}
-                {/* <img 
-                  src="/images/founders/founders-photo.jpg" 
-                  alt="Mr. Nana Abekah Twentoh and Mrs. Joyce Baaba Twentoh"
-                  className="w-full h-full object-cover rounded-2xl"
-                /> */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {services.map((service, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                whileHover={{ y: -10 }}
+                className="group"
+              >
+                <Link to={service.link}>
+                  <div className={`bg-gradient-to-br ${service.color} p-8 rounded-2xl text-white text-center h-full group-hover:shadow-2xl transition-all duration-300`}>
+                    <div className="text-4xl mb-4 flex justify-center">
+                      {service.icon}
+                    </div>
+                    <h3 className="text-xl font-bold mb-3">{service.title}</h3>
+                    <p className="opacity-90">{service.description}</p>
+                    <div className="mt-6 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <div className="inline-flex items-center text-sm font-medium">
+                        Learn more
+                        <FaArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Categories */}
+      <section className="py-20 bg-gradient-to-b from-blue-50 to-white">
+        <div className="container mx-auto px-6 lg:px-12">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-bold text-gray-800 mb-4">
+              Featured
+              <span className="block text-transparent bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text">
+                Categories
+              </span>
+            </h2>
+            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+              Explore our wide range of healthcare products and services
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {categories.map((category, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                whileHover={{ scale: 1.05 }}
+                className="group"
+              >
+                <Link to={category.link}>
+                  <div className="relative overflow-hidden rounded-2xl bg-white shadow-lg group-hover:shadow-2xl transition-all duration-300">
+                    <div className="h-48 overflow-hidden">
+                      <img 
+                        src={category.image}
+                        alt={category.title}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                    </div>
+                    <div className="p-6 relative z-10 bg-white">
+                      <div className="flex items-center justify-between mb-4">
+                        <div className={`text-3xl ${index === 0 ? 'text-blue-500' : index === 1 ? 'text-purple-500' : index === 2 ? 'text-green-500' : 'text-pink-500'}`}>
+                          {category.icon}
+                        </div>
+                        <div className="text-2xl font-bold text-gray-800">{category.count}</div>
+                      </div>
+                      <h3 className="text-xl font-bold text-gray-800 mb-2">{category.title}</h3>
+                      <div className="flex items-center text-blue-600 font-medium">
+                        <span>Browse products</span>
+                        <FaArrowRight className="ml-2 group-hover:translate-x-2 transition-transform" />
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-6 lg:px-12">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <div className="inline-flex items-center bg-blue-100 text-blue-600 px-4 py-2 rounded-full font-bold mb-6">
+                <FaAward className="mr-2" />
+                <span>Our Story</span>
               </div>
-            </div>
-            
-            <div>
-              <h3 className="text-3xl font-bold text-gray-900 mb-6 font-poppins">
-                Building Healthcare Excellence Since 1999
-              </h3>
-              <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-                Under the visionary leadership of <strong className="text-blue-700">Mr. Nana Abekah Twentoh</strong> and 
-                <strong className="text-blue-700"> Mrs. Joyce Baaba Twentoh</strong>, Nat & Sons Pharmacy has grown from 
-                a single store in Abura to a trusted healthcare network serving communities across Ghana.
+              
+              <h2 className="text-4xl font-bold text-gray-800 mb-6">
+                Pioneering Healthcare in Ghana Since 1999
+              </h2>
+              
+              <p className="text-gray-600 text-lg mb-8">
+                Founded by Mr. Nana Abekah Twentoh and Mrs. Joyce Baaba Twentoh, Nat & Sons Pharmacy 
+                started as the first pharmacy in Abura, Cape Coast. Today, we serve communities across 
+                Ghana with three locations, providing quality healthcare to hospitals, retailers, and families.
               </p>
               
-              <div className="space-y-4">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
-                    <FaAward className="w-6 h-6 text-blue-600" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900 mb-1">Pioneering Spirit</h4>
-                    <p className="text-gray-600">First pharmacy established in Abura, Cape Coast in 1999</p>
-                  </div>
+              <div className="space-y-4 mb-8">
+                <div className="flex items-start">
+                  <FaCheckCircle className="text-green-500 mt-1 mr-3 flex-shrink-0" />
+                  <span className="text-gray-700">First pharmacy established in Abura, Cape Coast</span>
                 </div>
-                
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
-                    <FaHeart className="w-6 h-6 text-blue-600" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900 mb-1">Community Focus</h4>
-                    <p className="text-gray-600">Dedicated to serving local communities with compassion</p>
-                  </div>
+                <div className="flex items-start">
+                  <FaCheckCircle className="text-green-500 mt-1 mr-3 flex-shrink-0" />
+                  <span className="text-gray-700">Trusted supplier to hospitals and healthcare facilities</span>
+                </div>
+                <div className="flex items-start">
+                  <FaCheckCircle className="text-green-500 mt-1 mr-3 flex-shrink-0" />
+                  <span className="text-gray-700">Expert pharmacists providing personalized care</span>
                 </div>
               </div>
-            </div>
-          </div>
-
-          {/* Timeline Gallery */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              {
-                year: "1999",
-                title: "Abura Branch Opening",
-                description: "Our first pharmacy opens in Cape Coast",
-                image: "/images/timeline/abura-opening.jpg" // Add historical photo
-              },
-              {
-                year: "2005",
-                title: "Elmina Expansion",
-                description: "Second branch opens to serve Elmina community",
-                image: "/images/timeline/elmina-opening.jpg"
-              },
-              {
-                year: "2010",
-                title: "Twifo Praso Branch",
-                description: "Third location opens in Twifo Praso",
-                image: "/images/timeline/twifo-opening.jpg"
-              }
-            ].map((milestone, index) => (
-              <div key={index} className="bg-gradient-to-br from-blue-50 to-white rounded-2xl p-6 border border-blue-100 group hover:shadow-lg transition-all duration-300">
-                <div className="w-full h-48 bg-blue-100 rounded-xl mb-4 flex items-center justify-center">
-                  <FaClinicMedical className="w-12 h-12 text-blue-600" />
-                  {/* Replace with: <img src={milestone.image} alt={milestone.title} className="w-full h-full object-cover rounded-xl" /> */}
-                </div>
-                <div className="text-blue-600 font-bold text-lg mb-2">{milestone.year}</div>
-                <h4 className="font-semibold text-gray-900 mb-2">{milestone.title}</h4>
-                <p className="text-gray-600 text-sm">{milestone.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Store Showcase Section */}
-      <section className="py-20 bg-gradient-to-br from-blue-50 to-white relative">
-        <MedicalPattern />
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold mb-4">
-              <HiBuildingStorefront className="w-4 h-4 mr-2" />
-              Store Tour
-            </div>
-            <h2 className="text-4xl font-bold text-gray-900 mb-4 font-poppins">Experience Our Pharmacy</h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Take a virtual tour of our modern, well-stocked pharmacies
-            </p>
-          </div>
-
-          {/* Store Video Tour */}
-          <div className="bg-white rounded-2xl shadow-xl overflow-hidden mb-16">
-            <div className="aspect-w-16 aspect-h-9 bg-gradient-to-br from-blue-100 to-blue-200 h-96 flex items-center justify-center">
-              <div className="text-center">
-                <FaPlay className="w-16 h-16 text-blue-600 mx-auto mb-4" />
-                <p className="text-blue-700 font-semibold">Store Tour Video</p>
-                <p className="text-blue-600">Virtual walkthrough of our facilities</p>
-              </div>
-              {/* Replace with: */}
-              {/* <video 
-                className="w-full h-full object-cover"
-                controls
-                poster="/images/store-tour-poster.jpg"
+              
+              <Link 
+                to="/about" 
+                className="inline-flex items-center bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white px-6 py-3 rounded-lg font-bold transition-all"
               >
-                <source src="/videos/store-tour.mp4" type="video/mp4" />
-              </video> */}
-            </div>
-            <div className="p-8">
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Modern Healthcare Facilities</h3>
-              <p className="text-gray-600 mb-6">
-                Explore our state-of-the-art pharmacies equipped with the latest healthcare technology 
-                and maintained to the highest standards of cleanliness and organization.
-              </p>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-                {['Clean Environment', 'Organized Shelves', 'Modern Equipment', 'Friendly Staff'].map((feature, index) => (
-                  <div key={index} className="bg-blue-50 rounded-lg p-3">
-                    <div className="text-blue-600 font-semibold text-sm">{feature}</div>
+                <span>Our Journey</span>
+                <FaArrowRight className="ml-3" />
+              </Link>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="relative"
+            >
+              <div className="grid grid-cols-2 gap-6">
+                <div className="space-y-6">
+                  <div className="bg-gradient-to-br from-blue-100 to-cyan-100 rounded-2xl p-8 text-center">
+                    <div className="text-4xl font-bold text-blue-600 mb-2">1999</div>
+                    <div className="text-gray-800 font-bold">Founded</div>
                   </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Store Photo Gallery */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              {
-                title: "Pharmacy Interior",
-                description: "Spacious and well-organized medicine shelves",
-                image: "/images/stores/interior-1.jpg"
-              },
-              {
-                title: "Consultation Area",
-                description: "Private space for patient consultations",
-                image: "/images/stores/consultation-area.jpg"
-              },
-              {
-                title: "Medicine Storage",
-                description: "Temperature-controlled storage facilities",
-                image: "/images/stores/storage-area.jpg"
-              }
-            ].map((photo, index) => (
-              <div key={index} className="group cursor-pointer">
-                <div className="bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl h-64 flex items-center justify-center mb-4 group-hover:shadow-lg transition-all duration-300">
-                  <FaClinicMedical className="w-12 h-12 text-blue-600" />
-                  {/* Replace with: <img src={photo.image} alt={photo.title} className="w-full h-full object-cover rounded-2xl group-hover:scale-105 transition-transform duration-300" /> */}
-                </div>
-                <h4 className="font-semibold text-gray-900 mb-1">{photo.title}</h4>
-                <p className="text-gray-600 text-sm">{photo.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Team Section */}
-      <section className="py-20 bg-white relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-600 to-blue-800"></div>
-        <MedicalPattern />
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold mb-4">
-              <FaUsers className="w-4 h-4 mr-2" />
-              Our Team
-            </div>
-            <h2 className="text-4xl font-bold text-gray-900 mb-4 font-poppins">Meet Our Healthcare Professionals</h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Dedicated experts committed to your health and wellbeing
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              {
-                name: "Pharmacy Manager",
-                role: "Lead Pharmacist",
-                image: "/images/team/pharmacy-manager.jpg",
-                description: "Ensuring quality medication and patient care"
-              },
-              {
-                name: "Healthcare Assistant",
-                role: "Patient Support",
-                image: "/images/team/healthcare-assistant.jpg",
-                description: "Providing personalized customer service"
-              },
-              {
-                name: "Dispensing Technician",
-                role: "Medicine Expert",
-                image: "/images/team/technician.jpg",
-                description: "Accurate medicine preparation and dispensing"
-              },
-              {
-                name: "Customer Care",
-                role: "Support Specialist",
-                image: "/images/team/customer-care.jpg",
-                description: "Assisting with inquiries and orders"
-              }
-            ].map((member, index) => (
-              <div key={index} className="text-center group">
-                <div className="w-32 h-32 bg-gradient-to-br from-blue-200 to-blue-300 rounded-full mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                  <FaUserMd className="w-12 h-12 text-blue-600" />
-                  {/* Replace with: <img src={member.image} alt={member.name} className="w-full h-full object-cover rounded-full" /> */}
-                </div>
-                <h3 className="font-semibold text-gray-900 mb-1">{member.name}</h3>
-                <div className="text-blue-600 font-medium mb-2">{member.role}</div>
-                <p className="text-gray-600 text-sm">{member.description}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* Team Video */}
-          <div className="mt-16 bg-gradient-to-br from-blue-50 to-white rounded-2xl p-8 border border-blue-100">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-              <div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Behind the Scenes</h3>
-                <p className="text-gray-600 mb-6">
-                  Get to know our team and see how we work together to provide the best healthcare 
-                  services to our community. Our staff are trained professionals dedicated to 
-                  excellence in pharmaceutical care.
-                </p>
-                <div className="flex items-center gap-2 text-blue-600 font-semibold">
-                  <FaPlay className="w-4 h-4" />
-                  Watch Team Introduction
-                </div>
-              </div>
-              <div className="bg-blue-100 rounded-2xl h-64 flex items-center justify-center">
-                <div className="text-center">
-                  <FaPlay className="w-12 h-12 text-blue-600 mx-auto mb-4" />
-                  <p className="text-blue-700 font-semibold">Team Introduction Video</p>
-                </div>
-                {/* Replace with video component */}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Customer Testimonials with Photos */}
-      <section className="py-20 bg-gradient-to-br from-blue-50 to-white relative">
-        <MedicalPattern />
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold mb-4">
-              <FaQuoteLeft className="w-4 h-4 mr-2" />
-              Customer Stories
-            </div>
-            <h2 className="text-4xl font-bold text-gray-900 mb-4 font-poppins">What Our Customers Say</h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Real stories from people who trust us with their healthcare needs
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                name: "Hospital Administrator",
-                organization: "Regional Hospital",
-                testimonial: "Nat & Sons has been our reliable partner for medical supplies for over 10 years.",
-                image: "/images/testimonials/hospital-admin.jpg",
-                video: "/videos/testimonials/hospital.mp4"
-              },
-              {
-                name: "Local Retailer",
-                organization: "Community Shop",
-                testimonial: "Their wholesale service makes it easy to stock quality healthcare products.",
-                image: "/images/testimonials/retailer.jpg",
-                video: "/videos/testimonials/retailer.mp4"
-              },
-              {
-                name: "Regular Customer",
-                organization: "Abura Community",
-                testimonial: "Friendly service and expert advice every time I visit.",
-                image: "/images/testimonials/customer.jpg",
-                video: "/videos/testimonials/customer.mp4"
-              }
-            ].map((testimonial, index) => (
-              <div key={index} className="bg-white rounded-2xl p-6 shadow-lg border border-blue-100">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
-                    <FaUserMd className="w-8 h-8 text-blue-600" />
-                    {/* Replace with: <img src={testimonial.image} alt={testimonial.name} className="w-full h-full object-cover rounded-full" /> */}
+                  <div className="bg-gradient-to-br from-purple-100 to-pink-100 rounded-2xl p-8 text-center">
+                    <div className="text-4xl font-bold text-purple-600 mb-2">3</div>
+                    <div className="text-gray-800 font-bold">Branches</div>
                   </div>
+                </div>
+                <div className="space-y-6 mt-12">
+                  <div className="bg-gradient-to-br from-green-100 to-emerald-100 rounded-2xl p-8 text-center">
+                    <div className="text-4xl font-bold text-green-600 mb-2">50+</div>
+                    <div className="text-gray-800 font-bold">Team Members</div>
+                  </div>
+                  <div className="bg-gradient-to-br from-orange-100 to-yellow-100 rounded-2xl p-8 text-center">
+                    <div className="text-4xl font-bold text-orange-600 mb-2">24/7</div>
+                    <div className="text-gray-800 font-bold">Emergency Service</div>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Floating element */}
+              <motion.div
+                animate={{ y: [0, -20, 0] }}
+                transition={{ duration: 4, repeat: Infinity }}
+                className="absolute -bottom-6 -right-6 bg-white p-6 rounded-2xl shadow-2xl max-w-xs"
+              >
+                <div className="flex items-center">
+                  <FaMapMarkerAlt className="text-blue-500 text-2xl mr-3" />
                   <div>
-                    <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
-                    <p className="text-blue-600 text-sm">{testimonial.organization}</p>
+                    <div className="font-bold text-gray-800">Find Us</div>
+                    <div className="text-sm text-gray-600">3 locations across Ghana</div>
                   </div>
                 </div>
-                <p className="text-gray-600 mb-4 italic">"{testimonial.testimonial}"</p>
-                <div className="flex items-center gap-2 text-blue-600 text-sm cursor-pointer">
-                  <FaPlay className="w-3 h-3" />
-                  Watch video testimonial
-                </div>
-              </div>
-            ))}
+              </motion.div>
+            </motion.div>
           </div>
         </div>
       </section>
 
+      {/* Testimonials */}
+      <section className="py-20 bg-gradient-to-br from-blue-50 to-cyan-50">
+        <div className="container mx-auto px-6 lg:px-12">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-bold text-gray-800 mb-4">
+              Trusted by
+              <span className="block text-transparent bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text">
+                Healthcare Professionals
+              </span>
+            </h2>
+            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+              What hospitals, retailers, and customers say about our services
+            </p>
+          </div>
+
+          <Swiper
+            modules={[Navigation, Pagination, Autoplay]}
+            spaceBetween={30}
+            slidesPerView={1}
+            navigation
+            pagination={{ clickable: true }}
+            autoplay={{ delay: 5000 }}
+            breakpoints={{
+              768: { slidesPerView: 2 },
+              1024: { slidesPerView: 3 }
+            }}
+            className="!pb-12"
+          >
+            {testimonials.map((testimonial, index) => (
+              <SwiperSlide key={index}>
+                <div className="bg-white rounded-2xl p-8 shadow-lg h-full">
+                  <div className="flex items-center mb-6">
+                    <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-100 to-cyan-100 flex items-center justify-center text-2xl mr-4">
+                      {testimonial.image}
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-gray-800">{testimonial.name}</h4>
+                      <p className="text-blue-600 font-medium">{testimonial.role}</p>
+                    </div>
+                  </div>
+                  
+                  <div className="mb-6">
+                    <FaQuoteRight className="text-blue-200 text-3xl mb-4" />
+                    <p className="text-gray-600 italic">"{testimonial.content}"</p>
+                  </div>
+                  
+                  <div className="flex items-center">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <FaStar key={i} className="text-yellow-400" />
+                    ))}
+                  </div>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20">
+        <div className="container mx-auto px-6 lg:px-12">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="bg-gradient-to-r from-blue-600 to-cyan-600 rounded-3xl p-12 text-center relative overflow-hidden"
+          >
+            {/* Animated background elements */}
+            <div className="absolute inset-0 overflow-hidden">
+              {[...Array(15)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  className="absolute w-2 h-2 bg-white/20 rounded-full"
+                  style={{
+                    left: `${Math.random() * 100}%`,
+                    top: `${Math.random() * 100}%`,
+                  }}
+                  animate={{
+                    scale: [0, 1, 0],
+                    opacity: [0, 1, 0],
+                  }}
+                  transition={{
+                    duration: Math.random() * 3 + 2,
+                    repeat: Infinity,
+                    delay: Math.random() * 2
+                  }}
+                />
+              ))}
+            </div>
+
+            <div className="relative z-10">
+              <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6">
+                Ready to Experience
+                <span className="block">Better Healthcare?</span>
+              </h2>
+              
+              <p className="text-blue-100 text-xl mb-8 max-w-2xl mx-auto">
+                Visit any of our three locations or contact us for expert pharmaceutical advice and quality healthcare products.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link 
+                  to="/store-locator" 
+                  className="bg-white text-blue-600 hover:bg-blue-50 px-8 py-3 rounded-full font-bold text-lg transition-colors shadow-lg hover:shadow-xl flex items-center justify-center gap-3"
+                >
+                  <FaMapMarkerAlt />
+                  <span>Find a Pharmacy</span>
+                </Link>
+                
+                <a 
+                  href="https://wa.me/233551234567"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-transparent border-2 border-white text-white hover:bg-white/10 px-8 py-3 rounded-full font-bold text-lg transition-colors flex items-center justify-center gap-3"
+                >
+                  <FaWhatsapp />
+                  <span>Chat on WhatsApp</span>
+                </a>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* WhatsApp Float */}
+      <a
+        href="https://wa.me/233551234567"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-6 right-6 z-40 bg-gradient-to-r from-green-500 to-emerald-400 text-white p-4 rounded-full shadow-2xl hover:shadow-3xl transition-all flex items-center"
+      >
+        <FaWhatsapp className="text-2xl" />
+        <span className="ml-3 font-bold hidden sm:block">Need Help?</span>
+      </a>
     </div>
   );
 }
