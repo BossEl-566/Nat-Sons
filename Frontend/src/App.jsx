@@ -14,6 +14,7 @@ import MedicalEquipment from './pages/MedicalEquipment';
 import Article from './pages/Article';
 import StoreLocator from './pages/StoreLocator';
 import HealthTip from './pages/HealthTip';
+import SearchPage from './pages/SearchPage';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
     <Header />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/search" element={<SearchPage />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/vitamins" element={<Vitamin />} />

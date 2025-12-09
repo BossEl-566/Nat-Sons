@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'; // Add useNavigate
 import natlogo from '../assets/Original-logo.png';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate(); // Add this hook
 
   const handleMenuClick = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -11,6 +12,11 @@ export default function Header() {
 
   const handleMenuItemClick = () => {
     setIsMenuOpen(false);
+  };
+
+  const handleSearchClick = () => {
+    // Navigate to search page when input is clicked
+    navigate('/search');
   };
 
   return (
@@ -40,7 +46,9 @@ export default function Header() {
                 <input
                   type="text"
                   placeholder="Search products..."
-                  className="w-full px-4 py-2 pl-10 rounded-lg border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-transparent text-sm"
+                  className="w-full px-4 py-2 pl-10 rounded-lg border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-transparent text-sm cursor-pointer"
+                  onClick={() => { handleSearchClick(); handleMenuItemClick(); }} // Add onClick handler
+                  readOnly // Make it read-only so keyboard doesn't open on mobile
                 />
                 <div className="absolute left-3 top-1/2 transform -translate-y-1/2">
                   <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -160,7 +168,9 @@ export default function Header() {
                   <input
                     type="text"
                     placeholder="Search products..."
-                    className="w-full px-3 py-2 pl-9 rounded-lg border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-transparent text-sm"
+                    className="w-full px-3 py-2 pl-9 rounded-lg border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-transparent text-sm cursor-pointer"
+                    onClick={() => { handleSearchClick(); handleMenuItemClick(); }} // Add onClick handler
+                    readOnly // Make it read-only
                   />
                   <div className="absolute left-3 top-1/2 transform -translate-y-1/2">
                     <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
