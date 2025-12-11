@@ -28,13 +28,20 @@ import {
   FaShoppingBag,
   FaClipboardCheck,
   FaUserMd,
-  FaShippingFast
+  FaShippingFast,
+  FaCogs,
+  FaTools,
+  FaIndustry,
+  FaSortAmountDown
 } from 'react-icons/fa';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+
+// Import equipment image - Update this path to your actual image location
+import equipmentImage from '../assets/medicalequipment.jpg';
 
 export default function MedicalEquipment() {
   const [products, setProducts] = useState([]);
@@ -410,9 +417,23 @@ export default function MedicalEquipment() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
-      {/* Hero Section */}
-      <section className="relative py-16 lg:py-24 bg-gradient-to-r from-blue-700 to-indigo-800 overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
+      {/* Hero Section with Equipment Image */}
+      <section className="relative py-16 lg:py-24 overflow-hidden">
+        {/* Background Image with Overlay */}
+        <div className="absolute inset-0">
+          <img 
+            src={equipmentImage} 
+            alt="Medical Equipment Solutions - Nat and Sons Pharmacy"
+            className="w-full h-full object-cover"
+          />
+          {/* Gradient Overlay for better text readability */}
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-indigo-900/70"></div>
+          {/* Secondary Overlay for depth */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+        </div>
+
+        {/* Pattern Overlay */}
+        <div className="absolute inset-0 opacity-20">
           <div className="absolute inset-0" style={{
             backgroundImage: `radial-gradient(circle at 2px 2px, rgba(255,255,255,0.3) 1px, transparent 1px)`,
             backgroundSize: '40px 40px'
@@ -424,12 +445,12 @@ export default function MedicalEquipment() {
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="text-4xl lg:text-6xl font-bold text-white mb-6 leading-tight"
+              className="text-4xl lg:text-6xl font-bold text-white mb-6 leading-tight drop-shadow-lg"
             >
               Medical Equipment Solutions
-              <span className="block text-blue-200">For Healthcare Professionals & Home Use</span>
+              <span className="block text-blue-200 mt-2">For Healthcare Professionals & Home Use</span>
             </motion.h1>
-            <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+            <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto drop-shadow-lg">
               Premium medical devices from trusted brands. From glucometers to hospital beds, we have it all.
             </p>
             
@@ -441,45 +462,92 @@ export default function MedicalEquipment() {
                   placeholder="Search medical equipment, brands, or models..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full px-6 py-4 pl-14 rounded-full bg-white/10 backdrop-blur-sm border-2 border-white/20 text-white placeholder-blue-200 focus:outline-none focus:border-white/40 text-lg"
+                  className="w-full px-6 py-4 pl-14 rounded-full bg-white/20 backdrop-blur-sm border-2 border-white/30 text-white placeholder-white/80 focus:outline-none focus:border-white/50 text-lg shadow-2xl"
                 />
-                <FaSearch className="absolute left-6 top-1/2 transform -translate-y-1/2 text-blue-200 text-xl" />
-                <button className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-cyan-400 to-blue-400 text-white px-6 py-2 rounded-full font-bold hover:opacity-90 transition-opacity">
+                <FaSearch className="absolute left-6 top-1/2 transform -translate-y-1/2 text-white/90 text-xl" />
+                <button className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-cyan-500 to-blue-500 text-white px-6 py-2 rounded-full font-bold hover:opacity-90 transition-opacity shadow-lg hover:shadow-xl">
                   Search
                 </button>
               </div>
             </div>
+
+            {/* Quick Stats */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.8 }}
+              className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12"
+            >
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                <div className="text-3xl text-white mb-2 font-bold">
+                  {categories.length}
+                </div>
+                <h3 className="text-lg font-bold text-white">Categories</h3>
+                <p className="text-white/80 text-sm">Equipment types</p>
+              </div>
+
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                <div className="text-3xl text-white mb-2 font-bold">
+                  {brands.filter(b => b.premium).length}
+                </div>
+                <h3 className="text-lg font-bold text-white">Premium Brands</h3>
+                <p className="text-white/80 text-sm">Trusted quality</p>
+              </div>
+
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                <div className="text-3xl text-white mb-2 font-bold">
+                  5+
+                </div>
+                <h3 className="text-lg font-bold text-white">Years Warranty</h3>
+                <p className="text-white/80 text-sm">Peace of mind</p>
+              </div>
+
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                <div className="text-3xl text-white mb-2 font-bold">
+                  24/7
+                </div>
+                <h3 className="text-lg font-bold text-white">Support</h3>
+                <p className="text-white/80 text-sm">Technical assistance</p>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Stats Bar */}
-      <div className="bg-white border-b">
+      {/* Quick Action Buttons */}
+      <div className="bg-white border-b border-gray-200">
         <div className="container mx-auto px-6 lg:px-12 py-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-            <div>
-              <div className="text-2xl font-bold text-blue-600">50+</div>
-              <div className="text-sm text-gray-600">Equipment Types</div>
-            </div>
-            <div>
-              <div className="text-2xl font-bold text-blue-600">10+</div>
-              <div className="text-sm text-gray-600">Premium Brands</div>
-            </div>
-            <div>
-              <div className="text-2xl font-bold text-blue-600">5+</div>
-              <div className="text-sm text-gray-600">Years Warranty</div>
-            </div>
-            <div>
-              <div className="text-2xl font-bold text-blue-600">24/7</div>
-              <div className="text-sm text-gray-600">Technical Support</div>
-            </div>
+          <div className="flex flex-wrap justify-center gap-4">
+            <a 
+              href="#categories" 
+              className="flex items-center bg-gradient-to-r from-blue-600 to-cyan-500 text-white px-6 py-2 rounded-full hover:shadow-lg transition-all"
+            >
+              <FaIndustry className="mr-2" />
+              Browse Categories
+            </a>
+            <a 
+              href="https://wa.me/233551234567" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center bg-gradient-to-r from-green-500 to-emerald-500 text-white px-6 py-2 rounded-full hover:shadow-lg transition-all"
+            >
+              <FaWhatsapp className="mr-2" />
+              Technical Support
+            </a>
+            <button className="flex items-center bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 py-2 rounded-full hover:shadow-lg transition-all">
+              <FaTools className="mr-2" />
+              Maintenance Services
+            </button>
           </div>
         </div>
       </div>
 
       {/* Featured Categories */}
-      <section className="py-12">
+      <section id="categories" className="py-12">
         <div className="container mx-auto px-6 lg:px-12">
+          <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">
+            Browse Equipment Categories
+          </h2>
           <Swiper
             modules={[Navigation, Pagination]}
             spaceBetween={20}
@@ -501,10 +569,10 @@ export default function MedicalEquipment() {
                   onClick={() => {
                     setSelectedCategory(category.id);
                   }}
-                  className={`w-full text-center p-6 rounded-2xl transition-all ${
+                  className={`w-full text-center p-6 rounded-2xl transition-all shadow-lg hover:shadow-xl ${
                     selectedCategory === category.id
-                      ? `bg-gradient-to-br ${category.color} text-white shadow-xl`
-                      : 'bg-white text-gray-700 hover:bg-blue-50 shadow-lg'
+                      ? `bg-gradient-to-br ${category.color} text-white`
+                      : 'bg-white text-gray-700 hover:bg-blue-50 border border-gray-100'
                   }`}
                 >
                   <div className="text-4xl mb-3">{category.icon}</div>
@@ -525,11 +593,11 @@ export default function MedicalEquipment() {
             <div className="lg:sticky lg:top-24 space-y-6">
               <button
                 onClick={() => setShowFilters(!showFilters)}
-                className="lg:hidden flex items-center justify-between w-full bg-white p-4 rounded-xl shadow-lg"
+                className="lg:hidden flex items-center justify-between w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-4 rounded-xl shadow-lg"
               >
                 <div className="flex items-center">
-                  <FaFilter className="mr-3 text-blue-600" />
-                  <span className="font-bold">Filters</span>
+                  <FaFilter className="mr-3" />
+                  <span className="font-bold">Equipment Filters</span>
                 </div>
                 <FaChevronDown className={`transition-transform ${showFilters ? 'rotate-180' : ''}`} />
               </button>
@@ -540,11 +608,14 @@ export default function MedicalEquipment() {
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: 'auto' }}
                     exit={{ opacity: 0, height: 0 }}
-                    className="bg-white rounded-2xl shadow-xl p-6 space-y-6 overflow-hidden"
+                    className="bg-white rounded-2xl shadow-xl p-6 space-y-6 overflow-hidden border border-gray-200"
                   >
                     {/* Price Range */}
                     <div>
-                      <h3 className="font-bold text-gray-800 mb-4">Price Range (GHS)</h3>
+                      <div className="flex items-center justify-between mb-4">
+                        <h3 className="font-bold text-gray-800">Price Range (GHS)</h3>
+                        <FaTag className="text-blue-600" />
+                      </div>
                       <div className="space-y-4">
                         <input
                           type="range"
@@ -553,9 +624,9 @@ export default function MedicalEquipment() {
                           step="100"
                           value={priceRange[1]}
                           onChange={(e) => setPriceRange([priceRange[0], parseInt(e.target.value)])}
-                          className="w-full"
+                          className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
                         />
-                        <div className="flex justify-between text-sm text-gray-600">
+                        <div className="flex justify-between text-sm text-gray-600 font-medium">
                           <span>{formatPrice(priceRange[0])}</span>
                           <span>{formatPrice(priceRange[1])}</span>
                         </div>
@@ -564,16 +635,19 @@ export default function MedicalEquipment() {
 
                     {/* Use Case */}
                     <div>
-                      <h3 className="font-bold text-gray-800 mb-4">Medical Use Case</h3>
+                      <div className="flex items-center justify-between mb-4">
+                        <h3 className="font-bold text-gray-800">Medical Use Case</h3>
+                        <FaStethoscope className="text-blue-600" />
+                      </div>
                       <div className="grid grid-cols-2 gap-2">
                         {useCases.map((useCase) => (
                           <button
                             key={useCase.id}
                             onClick={() => setSelectedUseCase(useCase.id)}
-                            className={`flex flex-col items-center p-3 rounded-lg transition-colors ${
+                            className={`flex flex-col items-center p-3 rounded-lg transition-all ${
                               selectedUseCase === useCase.id
-                                ? 'bg-blue-50 text-blue-600 border border-blue-200'
-                                : 'bg-gray-50 text-gray-700 hover:bg-gray-100'
+                                ? 'bg-gradient-to-r from-blue-50 to-cyan-50 text-blue-600 border border-blue-200'
+                                : 'bg-gradient-to-r from-gray-50 to-gray-100 text-gray-700 hover:bg-gray-100 hover:border hover:border-gray-200'
                             }`}
                           >
                             <div className="text-2xl mb-1">{useCase.icon}</div>
@@ -585,19 +659,24 @@ export default function MedicalEquipment() {
 
                     {/* Brands */}
                     <div>
-                      <h3 className="font-bold text-gray-800 mb-4">Brands</h3>
+                      <div className="flex items-center justify-between mb-4">
+                        <h3 className="font-bold text-gray-800">Brands</h3>
+                        <FaShieldAlt className="text-blue-600" />
+                      </div>
                       <div className="space-y-2">
                         {brands.map((brand) => (
                           <button
                             key={brand.id}
-                            className="flex items-center justify-between w-full p-2 rounded hover:bg-gray-50 text-left"
+                            className="flex items-center justify-between w-full p-3 rounded-lg hover:bg-gray-50 text-left transition-colors"
                           >
                             <div className="flex items-center">
                               <div className={`w-3 h-3 rounded-full mr-3 ${brand.premium ? 'bg-blue-500' : 'bg-gray-300'}`}></div>
                               <span className="text-sm text-gray-700">{brand.name}</span>
                             </div>
                             {brand.premium && (
-                              <span className="text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded">Premium</span>
+                              <span className="text-xs bg-gradient-to-r from-blue-100 to-cyan-100 text-blue-600 px-2 py-1 rounded font-bold">
+                                Premium
+                              </span>
                             )}
                           </button>
                         ))}
@@ -606,11 +685,14 @@ export default function MedicalEquipment() {
 
                     {/* Sort By */}
                     <div>
-                      <h3 className="font-bold text-gray-800 mb-4">Sort By</h3>
+                      <div className="flex items-center justify-between mb-4">
+                        <h3 className="font-bold text-gray-800">Sort By</h3>
+                        <FaSortAmountDown className="text-blue-600" />
+                      </div>
                       <select
                         value={sortBy}
                         onChange={(e) => setSortBy(e.target.value)}
-                        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gradient-to-r from-gray-50 to-white"
                       >
                         <option value="featured">Featured First</option>
                         <option value="price-low">Price: Low to High</option>
@@ -629,7 +711,7 @@ export default function MedicalEquipment() {
                         setSortBy('featured');
                         setSearchTerm('');
                       }}
-                      className="w-full py-3 bg-gradient-to-r from-gray-100 to-gray-200 text-gray-700 rounded-lg font-bold hover:opacity-90 transition-opacity"
+                      className="w-full py-3 bg-gradient-to-r from-gray-100 to-gray-200 text-gray-700 rounded-lg font-bold hover:from-gray-200 hover:to-gray-300 transition-all shadow-md hover:shadow-lg"
                     >
                       Clear All Filters
                     </button>
@@ -639,7 +721,7 @@ export default function MedicalEquipment() {
 
               {/* Services Sidebar */}
               <div className="hidden lg:block space-y-4">
-                <div className="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-2xl p-6">
+                <div className="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-2xl p-6 border border-blue-100">
                   <div className="flex items-center mb-4">
                     <FaWrench className="text-blue-500 text-2xl mr-3" />
                     <div>
@@ -647,8 +729,11 @@ export default function MedicalEquipment() {
                       <div className="text-sm text-gray-600">Professional setup available</div>
                     </div>
                   </div>
+                  <button className="w-full mt-2 text-blue-600 hover:text-blue-700 text-sm font-medium">
+                    Learn more →
+                  </button>
                 </div>
-                <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl p-6">
+                <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl p-6 border border-green-100">
                   <div className="flex items-center mb-4">
                     <FaClipboardCheck className="text-green-500 text-2xl mr-3" />
                     <div>
@@ -656,8 +741,11 @@ export default function MedicalEquipment() {
                       <div className="text-sm text-gray-600">Free training for complex equipment</div>
                     </div>
                   </div>
+                  <button className="w-full mt-2 text-green-600 hover:text-green-700 text-sm font-medium">
+                    Learn more →
+                  </button>
                 </div>
-                <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-2xl p-6">
+                <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-2xl p-6 border border-purple-100">
                   <div className="flex items-center mb-4">
                     <FaUserMd className="text-purple-500 text-2xl mr-3" />
                     <div>
@@ -665,6 +753,9 @@ export default function MedicalEquipment() {
                       <div className="text-sm text-gray-600">Free consultation with purchase</div>
                     </div>
                   </div>
+                  <button className="w-full mt-2 text-purple-600 hover:text-purple-700 text-sm font-medium">
+                    Learn more →
+                  </button>
                 </div>
               </div>
             </div>
@@ -688,25 +779,41 @@ export default function MedicalEquipment() {
               
               <div className="flex items-center gap-4">
                 {/* View Toggle */}
-                <div className="flex bg-gray-100 rounded-lg p-1">
+                <div className="flex bg-gray-100 rounded-lg p-1 shadow-inner">
                   <button
                     onClick={() => setViewMode('grid')}
-                    className={`p-2 rounded ${viewMode === 'grid' ? 'bg-white shadow' : ''}`}
+                    className={`p-2 rounded transition-all ${
+                      viewMode === 'grid' 
+                        ? 'bg-gradient-to-r from-blue-500 to-cyan-400 text-white shadow-md' 
+                        : 'hover:bg-gray-200'
+                    }`}
                   >
                     <div className="grid grid-cols-2 gap-1 w-6 h-6">
                       {[...Array(4)].map((_, i) => (
-                        <div key={i} className="bg-gray-400 rounded"></div>
+                        <div key={i} className={`rounded ${
+                          viewMode === 'grid' ? 'bg-white' : 'bg-gray-400'
+                        }`}></div>
                       ))}
                     </div>
                   </button>
                   <button
                     onClick={() => setViewMode('list')}
-                    className={`p-2 rounded ${viewMode === 'list' ? 'bg-white shadow' : ''}`}
+                    className={`p-2 rounded transition-all ${
+                      viewMode === 'list' 
+                        ? 'bg-gradient-to-r from-blue-500 to-cyan-400 text-white shadow-md' 
+                        : 'hover:bg-gray-200'
+                    }`}
                   >
                     <div className="space-y-1 w-6 h-6">
-                      <div className="bg-gray-400 h-1 rounded"></div>
-                      <div className="bg-gray-400 h-1 rounded"></div>
-                      <div className="bg-gray-400 h-1 rounded"></div>
+                      <div className={`h-1 rounded ${
+                        viewMode === 'list' ? 'bg-white' : 'bg-gray-400'
+                      }`}></div>
+                      <div className={`h-1 rounded ${
+                        viewMode === 'list' ? 'bg-white' : 'bg-gray-400'
+                      }`}></div>
+                      <div className={`h-1 rounded ${
+                        viewMode === 'list' ? 'bg-white' : 'bg-gray-400'
+                      }`}></div>
                     </div>
                   </button>
                 </div>
@@ -717,8 +824,8 @@ export default function MedicalEquipment() {
             {loading ? (
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {[...Array(6)].map((_, i) => (
-                  <div key={i} className="bg-white rounded-2xl shadow-lg p-6 animate-pulse">
-                    <div className="h-48 bg-gray-200 rounded-xl mb-4"></div>
+                  <div key={i} className="bg-white rounded-2xl shadow-lg p-6 animate-pulse border border-gray-200">
+                    <div className="h-48 bg-gradient-to-r from-gray-200 to-gray-300 rounded-xl mb-4"></div>
                     <div className="h-4 bg-gray-200 rounded mb-2"></div>
                     <div className="h-4 bg-gray-200 rounded mb-4 w-3/4"></div>
                     <div className="h-8 bg-gray-200 rounded"></div>
@@ -726,7 +833,7 @@ export default function MedicalEquipment() {
                 ))}
               </div>
             ) : filteredProducts.length === 0 ? (
-              <div className="text-center py-16 bg-white rounded-2xl shadow-lg">
+              <div className="text-center py-16 bg-white rounded-2xl shadow-lg border border-gray-200">
                 <div className="text-6xl mb-4">🏥</div>
                 <h3 className="text-2xl font-bold text-gray-800 mb-2">No equipment found</h3>
                 <p className="text-gray-600 mb-6">Try adjusting your filters or search terms</p>
@@ -737,7 +844,7 @@ export default function MedicalEquipment() {
                     setPriceRange([0, 5000]);
                     setSearchTerm('');
                   }}
-                  className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-3 rounded-lg font-bold hover:opacity-90 transition-opacity"
+                  className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-3 rounded-lg font-bold hover:opacity-90 transition-all shadow-md hover:shadow-lg"
                 >
                   Clear Filters
                 </button>
@@ -777,17 +884,17 @@ export default function MedicalEquipment() {
                         {/* Badges */}
                         <div className="absolute top-3 left-3 space-y-2">
                           {product.isFeatured && (
-                            <span className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+                            <span className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
                               Featured
                             </span>
                           )}
                           {product.isPremium && (
-                            <span className="bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+                            <span className="bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
                               Premium
                             </span>
                           )}
                           {product.originalPrice > product.price && (
-                            <span className="bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+                            <span className="bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
                               Save {formatPrice(product.originalPrice - product.price)}
                             </span>
                           )}
@@ -800,17 +907,9 @@ export default function MedicalEquipment() {
                         >
                           <FaHeart className={`${
                             wishlist.some(item => item.id === product.id)
-                              ? 'text-red-500 fill-current'
+                              ? 'text-red-500 fill-current animate-pulse'
                               : 'text-gray-400'
                           }`} />
-                        </button>
-
-                        {/* Quick View */}
-                        <button
-                          onClick={() => handleWhatsAppInquiry(product)}
-                          className="absolute bottom-3 right-3 w-10 h-10 bg-gradient-to-r from-blue-500 to-cyan-400 text-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all opacity-0 group-hover:opacity-100"
-                        >
-                          <FaEye />
                         </button>
                       </div>
 
@@ -818,7 +917,7 @@ export default function MedicalEquipment() {
                       <div className={`p-6 flex-1 ${viewMode === 'list' ? 'md:w-2/3' : ''}`}>
                         <div className="flex justify-between items-start mb-2">
                           <div className="flex-1">
-                            <h3 className="font-bold text-gray-800 text-lg mb-1">
+                            <h3 className="font-bold text-gray-800 text-lg mb-1 group-hover:text-blue-600 transition-colors">
                               {product.name}
                             </h3>
                             <div className="flex items-center gap-2 mb-2">
@@ -868,13 +967,13 @@ export default function MedicalEquipment() {
                           {product.features.slice(0, 3).map((feature, index) => (
                             <span
                               key={index}
-                              className="inline-block bg-blue-50 text-blue-600 text-xs px-3 py-1 rounded-full"
+                              className="inline-block bg-gradient-to-r from-blue-50 to-cyan-50 text-blue-600 text-xs px-3 py-1 rounded-full border border-blue-100"
                             >
                               {feature}
                             </span>
                           ))}
                           {product.features.length > 3 && (
-                            <span className="inline-block bg-gray-100 text-gray-600 text-xs px-3 py-1 rounded-full">
+                            <span className="inline-block bg-gradient-to-r from-gray-50 to-gray-100 text-gray-600 text-xs px-3 py-1 rounded-full border border-gray-200">
                               +{product.features.length - 3} more
                             </span>
                           )}
@@ -901,7 +1000,7 @@ export default function MedicalEquipment() {
                         {/* WhatsApp Inquiry Button */}
                         <button
                           onClick={() => handleWhatsAppInquiry(product)}
-                          className="w-full bg-gradient-to-r from-green-500 to-emerald-400 hover:from-green-600 hover:to-emerald-500 text-white py-3 rounded-lg font-bold flex items-center justify-center transition-all group/inquiry"
+                          className="w-full bg-gradient-to-r from-green-500 to-emerald-400 hover:from-green-600 hover:to-emerald-500 text-white py-3 rounded-lg font-bold flex items-center justify-center transition-all group/inquiry shadow-md hover:shadow-lg"
                         >
                           <FaWhatsapp className="mr-2 text-lg" />
                           <span>Inquire on WhatsApp</span>
@@ -913,10 +1012,12 @@ export default function MedicalEquipment() {
                 </div>
 
                 {/* Bulk Purchase Notice */}
-                <div className="mt-12 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-8">
+                <div className="mt-12 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-8 border border-blue-100 shadow-lg">
                   <div className="flex items-center">
-                    <FaHospital className="text-4xl text-blue-600 mr-6" />
-                    <div>
+                    <div className="bg-gradient-to-r from-blue-500 to-indigo-500 p-4 rounded-xl text-white mr-6">
+                      <FaHospital className="text-3xl" />
+                    </div>
+                    <div className="flex-1">
                       <h3 className="text-xl font-bold text-gray-800 mb-2">
                         Bulk Purchase for Hospitals & Clinics?
                       </h3>
@@ -929,7 +1030,7 @@ export default function MedicalEquipment() {
                           const message = encodeURIComponent("Hi, I'm interested in bulk purchase of medical equipment for my healthcare facility. Can you provide more information?");
                           window.open(`https://wa.me/233551234567?text=${message}`, '_blank');
                         }}
-                        className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-3 rounded-lg font-bold hover:opacity-90 transition-opacity"
+                        className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-3 rounded-lg font-bold hover:opacity-90 transition-all shadow-md hover:shadow-lg"
                       >
                         Request Bulk Quote
                       </button>
@@ -955,34 +1056,46 @@ export default function MedicalEquipment() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="bg-white p-8 rounded-2xl shadow-lg text-center">
-              <div className="w-16 h-16 bg-gradient-to-r from-blue-100 to-cyan-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <motion.div 
+              whileHover={{ y: -5 }}
+              className="bg-white p-8 rounded-2xl shadow-lg text-center border border-gray-100 hover:border-blue-200 transition-all"
+            >
+              <div className="w-16 h-16 bg-gradient-to-r from-blue-100 to-cyan-100 rounded-full flex items-center justify-center mx-auto mb-4 shadow-md">
                 <FaTruck className="text-blue-500 text-2xl" />
               </div>
               <h3 className="text-xl font-bold text-gray-800 mb-3">Delivery & Setup</h3>
               <p className="text-gray-600">Professional delivery and installation service nationwide</p>
-            </div>
-            <div className="bg-white p-8 rounded-2xl shadow-lg text-center">
-              <div className="w-16 h-16 bg-gradient-to-r from-green-100 to-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            </motion.div>
+            <motion.div 
+              whileHover={{ y: -5 }}
+              className="bg-white p-8 rounded-2xl shadow-lg text-center border border-gray-100 hover:border-green-200 transition-all"
+            >
+              <div className="w-16 h-16 bg-gradient-to-r from-green-100 to-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4 shadow-md">
                 <FaWrench className="text-green-500 text-2xl" />
               </div>
               <h3 className="text-xl font-bold text-gray-800 mb-3">Maintenance</h3>
               <p className="text-gray-600">Regular maintenance and calibration services</p>
-            </div>
-            <div className="bg-white p-8 rounded-2xl shadow-lg text-center">
-              <div className="w-16 h-16 bg-gradient-to-r from-purple-100 to-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            </motion.div>
+            <motion.div 
+              whileHover={{ y: -5 }}
+              className="bg-white p-8 rounded-2xl shadow-lg text-center border border-gray-100 hover:border-purple-200 transition-all"
+            >
+              <div className="w-16 h-16 bg-gradient-to-r from-purple-100 to-pink-100 rounded-full flex items-center justify-center mx-auto mb-4 shadow-md">
                 <FaClipboardCheck className="text-purple-500 text-2xl" />
               </div>
               <h3 className="text-xl font-bold text-gray-800 mb-3">Training</h3>
               <p className="text-gray-600">Comprehensive training for equipment operation</p>
-            </div>
-            <div className="bg-white p-8 rounded-2xl shadow-lg text-center">
-              <div className="w-16 h-16 bg-gradient-to-r from-orange-100 to-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            </motion.div>
+            <motion.div 
+              whileHover={{ y: -5 }}
+              className="bg-white p-8 rounded-2xl shadow-lg text-center border border-gray-100 hover:border-orange-200 transition-all"
+            >
+              <div className="w-16 h-16 bg-gradient-to-r from-orange-100 to-amber-100 rounded-full flex items-center justify-center mx-auto mb-4 shadow-md">
                 <FaShieldAlt className="text-orange-500 text-2xl" />
               </div>
               <h3 className="text-xl font-bold text-gray-800 mb-3">Warranty</h3>
               <p className="text-gray-600">Extended warranty options available</p>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -995,9 +1108,10 @@ export default function MedicalEquipment() {
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
             {['Omron', 'ResMed', 'Philips', 'Accu-Chek', 'Microlife', 'Drive Medical'].map((brand) => (
-              <div key={brand} className="bg-gray-50 p-8 rounded-xl flex items-center justify-center hover:bg-gray-100 transition-colors">
+              <div key={brand} className="bg-gradient-to-r from-gray-50 to-gray-100 p-8 rounded-xl flex items-center justify-center hover:from-gray-100 hover:to-gray-200 transition-all border border-gray-200 hover:border-blue-200">
                 <div className="text-center">
                   <div className="text-xl font-bold text-gray-700">{brand}</div>
+                  <div className="text-xs text-gray-500 mt-1">Premium Brand</div>
                 </div>
               </div>
             ))}
@@ -1020,7 +1134,7 @@ export default function MedicalEquipment() {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
-              className="bg-white rounded-2xl max-w-md w-full p-6"
+              className="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl"
             >
               <div className="flex justify-between items-center mb-6">
                 <h3 className="text-xl font-bold text-gray-800">Inquire About Equipment</h3>
@@ -1048,7 +1162,7 @@ export default function MedicalEquipment() {
                   </div>
                 </div>
 
-                <div className="bg-blue-50 rounded-lg p-4 mb-6">
+                <div className="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-lg p-4 mb-6 border border-blue-100">
                   <div className="flex items-start">
                     <FaInfoCircle className="text-blue-500 mr-3 mt-1" />
                     <div>
@@ -1066,7 +1180,7 @@ export default function MedicalEquipment() {
                     href={getWhatsAppUrl(selectedProduct)}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block w-full bg-gradient-to-r from-green-500 to-emerald-400 hover:from-green-600 hover:to-emerald-500 text-white py-3 rounded-lg font-bold text-center transition-all"
+                    className="block w-full bg-gradient-to-r from-green-500 to-emerald-400 hover:from-green-600 hover:to-emerald-500 text-white py-3 rounded-lg font-bold text-center transition-all shadow-md hover:shadow-lg"
                   >
                     <div className="flex items-center justify-center">
                       <FaWhatsapp className="mr-2 text-xl" />
@@ -1078,7 +1192,7 @@ export default function MedicalEquipment() {
                     onClick={() => {
                       window.location.href = `tel:+233551234567`;
                     }}
-                    className="block w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white py-3 rounded-lg font-bold text-center transition-all"
+                    className="block w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white py-3 rounded-lg font-bold text-center transition-all shadow-md hover:shadow-lg"
                   >
                     <div className="flex items-center justify-center">
                       <FaPhoneAlt className="mr-2" />
@@ -1109,7 +1223,7 @@ export default function MedicalEquipment() {
         href="https://wa.me/233551234567"
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 z-40 bg-gradient-to-r from-green-500 to-emerald-400 text-white p-4 rounded-full shadow-2xl hover:shadow-3xl transition-all flex items-center"
+        className="fixed bottom-6 right-6 z-40 bg-gradient-to-r from-green-500 to-emerald-400 text-white p-4 rounded-full shadow-2xl hover:shadow-3xl transition-all flex items-center animate-bounce"
       >
         <FaWhatsapp className="text-2xl" />
         <span className="ml-3 font-bold hidden sm:block">Equipment Inquiry</span>

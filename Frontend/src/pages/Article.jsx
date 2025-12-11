@@ -36,6 +36,10 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
+
+import articleImage from '../assets/articles.jpg'; // Change this to your image path
+
+
 export default function Article() {
   const [articles, setArticles] = useState([]);
   const [featuredArticles, setFeaturedArticles] = useState([]);
@@ -399,11 +403,25 @@ export default function Article() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
-      {/* Hero Section */}
-      <section className="relative py-16 lg:py-24 bg-gradient-to-r from-blue-600 to-teal-600 overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
+      {/* Hero Section with Article Image */}
+      <section className="relative py-16 lg:py-24 overflow-hidden">
+        {/* Background Image with Overlay */}
+        <div className="absolute inset-0">
+          <img 
+            src={articleImage} 
+            alt="Health Articles & Guides - Nat and Sons Pharmacy"
+            className="w-full h-full object-cover"
+          />
+          {/* Gradient Overlay for better text readability */}
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-teal-900/70"></div>
+          {/* Secondary Overlay for depth */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+        </div>
+
+        {/* Pattern Overlay */}
+        <div className="absolute inset-0 opacity-20">
           <div className="absolute inset-0" style={{
-            backgroundImage: `radial-gradient(circle at 2px 2px, rgba(255,255,255,0.3) 1px, transparent 1px)`,
+            backgroundImage: `radial-gradient(circle at 2px 2px, rgba(255,255,255,0.2) 1px, transparent 1px)`,
             backgroundSize: '40px 40px'
           }}></div>
         </div>
@@ -413,12 +431,12 @@ export default function Article() {
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="text-4xl lg:text-6xl font-bold text-white mb-6 leading-tight"
+              className="text-4xl lg:text-6xl font-bold text-white mb-6 leading-tight drop-shadow-lg"
             >
               Health Articles & Guides
-              <span className="block text-teal-200">Expert Advice for Your Wellness Journey</span>
+              <span className="block text-teal-200 mt-2">Expert Advice for Your Wellness Journey</span>
             </motion.h1>
-            <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+            <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto drop-shadow-lg">
               Evidence-based health information, wellness tips, and medical insights from our expert team.
             </p>
             
@@ -430,14 +448,46 @@ export default function Article() {
                   placeholder="Search health topics, conditions, or symptoms..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full px-6 py-4 pl-14 rounded-full bg-white/10 backdrop-blur-sm border-2 border-white/20 text-white placeholder-blue-200 focus:outline-none focus:border-white/40 text-lg"
+                  className="w-full px-6 py-4 pl-14 rounded-full bg-white/20 backdrop-blur-sm border-2 border-white/30 text-white placeholder-white/80 focus:outline-none focus:border-white/50 text-lg shadow-2xl"
                 />
-                <FaSearch className="absolute left-6 top-1/2 transform -translate-y-1/2 text-blue-200 text-xl" />
-                <button className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-teal-400 to-blue-400 text-white px-6 py-2 rounded-full font-bold hover:opacity-90 transition-opacity">
+                <FaSearch className="absolute left-6 top-1/2 transform -translate-y-1/2 text-white/90 text-xl" />
+                <button className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-teal-500 to-blue-500 text-white px-6 py-2 rounded-full font-bold hover:opacity-90 transition-opacity shadow-lg hover:shadow-xl">
                   Search
                 </button>
               </div>
             </div>
+
+            {/* Stats Cards */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.8 }}
+              className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12"
+            >
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                <div className="text-3xl text-white mb-2 font-bold">
+                  {articles.length}+
+                </div>
+                <h3 className="text-lg font-bold text-white">Articles</h3>
+                <p className="text-white/80 text-sm">Evidence-based content</p>
+              </div>
+
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                <div className="text-3xl text-white mb-2 font-bold">
+                  {categories.length}
+                </div>
+                <h3 className="text-lg font-bold text-white">Categories</h3>
+                <p className="text-white/80 text-sm">Health topics covered</p>
+              </div>
+
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                <div className="text-3xl text-white mb-2 font-bold">
+                  {authors.length}
+                </div>
+                <h3 className="text-lg font-bold text-white">Experts</h3>
+                <p className="text-white/80 text-sm">Qualified professionals</p>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -470,7 +520,7 @@ export default function Article() {
               <SwiperSlide key={article.id}>
                 <motion.div
                   whileHover={{ y: -10 }}
-                  className="bg-white rounded-2xl shadow-xl overflow-hidden group cursor-pointer"
+                  className="bg-white rounded-2xl shadow-xl overflow-hidden group cursor-pointer border border-gray-100 hover:border-blue-200 transition-all"
                 >
                   <div className="relative h-48 overflow-hidden">
                     <img
@@ -480,7 +530,7 @@ export default function Article() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                     <div className="absolute top-4 left-4">
-                      <span className="bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+                      <span className="bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
                         Featured
                       </span>
                     </div>
@@ -495,7 +545,7 @@ export default function Article() {
                       {article.readTime} min read
                     </div>
                     
-                    <h3 className="text-xl font-bold text-gray-800 mb-3 line-clamp-2">
+                    <h3 className="text-xl font-bold text-gray-800 mb-3 line-clamp-2 hover:text-blue-600 transition-colors">
                       {article.title}
                     </h3>
                     
@@ -505,7 +555,7 @@ export default function Article() {
                     
                     <div className="flex items-center justify-between">
                       <div className="flex items-center">
-                        <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center mr-3">
+                        <div className="w-8 h-8 rounded-full bg-gradient-to-r from-blue-100 to-teal-100 flex items-center justify-center mr-3">
                           {article.author.avatar}
                         </div>
                         <div>
@@ -533,17 +583,17 @@ export default function Article() {
           <div className="lg:w-1/4">
             <div className="lg:sticky lg:top-24 space-y-6">
               {/* Categories */}
-              <div className="bg-white rounded-2xl shadow-lg p-6">
+              <div className="bg-white rounded-2xl shadow-lg p-6 border border-gray-100">
                 <h3 className="font-bold text-gray-800 mb-4 text-lg">Categories</h3>
                 <div className="space-y-2">
                   {categories.map((category) => (
                     <button
                       key={category.id}
                       onClick={() => setSelectedCategory(category.id)}
-                      className={`flex items-center justify-between w-full p-3 rounded-lg transition-colors ${
+                      className={`flex items-center justify-between w-full p-3 rounded-lg transition-all ${
                         selectedCategory === category.id
-                          ? 'bg-blue-50 text-blue-600 border border-blue-200'
-                          : 'text-gray-700 hover:bg-gray-50'
+                          ? 'bg-gradient-to-r from-blue-50 to-cyan-50 text-blue-600 border border-blue-200'
+                          : 'text-gray-700 hover:bg-gray-50 hover:border hover:border-gray-200'
                       }`}
                     >
                       <div className="flex items-center">
@@ -552,7 +602,7 @@ export default function Article() {
                         </div>
                         <span className="font-medium">{category.name}</span>
                       </div>
-                      <span className={`text-sm ${selectedCategory === category.id ? 'text-blue-600' : 'text-gray-500'}`}>
+                      <span className={`text-sm font-bold ${selectedCategory === category.id ? 'text-blue-600' : 'text-gray-500'}`}>
                         {category.count}
                       </span>
                     </button>
@@ -561,17 +611,17 @@ export default function Article() {
               </div>
 
               {/* Popular Tags */}
-              <div className="bg-white rounded-2xl shadow-lg p-6">
+              <div className="bg-white rounded-2xl shadow-lg p-6 border border-gray-100">
                 <h3 className="font-bold text-gray-800 mb-4 text-lg">Popular Tags</h3>
                 <div className="flex flex-wrap gap-2">
                   {tags.map((tag) => (
                     <button
                       key={tag.id}
                       onClick={() => setSelectedTag(tag.id)}
-                      className={`px-3 py-1 rounded-full text-sm transition-colors ${
+                      className={`px-3 py-1 rounded-full text-sm transition-all ${
                         selectedTag === tag.id
-                          ? 'bg-blue-600 text-white'
-                          : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                          ? 'bg-gradient-to-r from-blue-600 to-teal-500 text-white shadow-md'
+                          : 'bg-gray-100 text-gray-700 hover:bg-gray-200 hover:shadow-sm'
                       }`}
                     >
                       {tag.name}
@@ -581,46 +631,55 @@ export default function Article() {
               </div>
 
               {/* Newsletter */}
-              <div className="bg-gradient-to-r from-blue-500 to-cyan-400 rounded-2xl p-6 text-white">
-                <h3 className="font-bold text-lg mb-3">Health Insights Newsletter</h3>
-                <p className="text-blue-100 text-sm mb-4">
+              <div className="bg-gradient-to-r from-blue-500 to-cyan-400 rounded-2xl p-6 text-white shadow-lg">
+                <div className="text-4xl mb-3 text-center">📚</div>
+                <h3 className="font-bold text-lg mb-3 text-center">Health Insights Newsletter</h3>
+                <p className="text-blue-100 text-sm mb-4 text-center">
                   Get weekly health tips and articles delivered to your inbox.
                 </p>
                 <div className="space-y-3">
                   <input
                     type="email"
                     placeholder="Your email address"
-                    className="w-full px-4 py-2 rounded-lg text-gray-800"
+                    className="w-full px-4 py-3 rounded-lg text-gray-800 focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-500"
                   />
-                  <button className="w-full bg-white text-blue-600 py-2 rounded-lg font-bold hover:bg-blue-50 transition-colors">
-                    Subscribe
+                  <button className="w-full bg-white text-blue-600 py-3 rounded-lg font-bold hover:bg-blue-50 transition-all shadow-md hover:shadow-lg">
+                    Subscribe Now
                   </button>
                 </div>
               </div>
 
               {/* Trending Articles */}
-              <div className="bg-white rounded-2xl shadow-lg p-6">
-                <h3 className="font-bold text-gray-800 mb-4 text-lg">Trending Now</h3>
+              <div className="bg-white rounded-2xl shadow-lg p-6 border border-gray-100">
+                <div className="flex items-center mb-4">
+                  <h3 className="font-bold text-gray-800 text-lg">Trending Now</h3>
+                  <span className="ml-2 bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+                    HOT
+                  </span>
+                </div>
                 <div className="space-y-4">
                   {articles
                     .filter(article => article.isTrending)
                     .slice(0, 3)
                     .map((article) => (
-                      <div key={article.id} className="flex items-start space-x-3">
-                        <div className="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0">
+                      <div key={article.id} className="flex items-start space-x-3 p-2 rounded-lg hover:bg-gray-50 transition-colors">
+                        <div className="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0 shadow-md">
                           <img
                             src={article.image}
                             alt={article.title}
                             className="w-full h-full object-cover"
                           />
                         </div>
-                        <div>
-                          <h4 className="font-bold text-gray-800 text-sm line-clamp-2">
+                        <div className="flex-1">
+                          <h4 className="font-bold text-gray-800 text-sm line-clamp-2 hover:text-blue-600 cursor-pointer">
                             {article.title}
                           </h4>
                           <div className="flex items-center text-xs text-gray-500 mt-1">
                             <FaEye className="mr-1" />
                             {article.views.toLocaleString()} views
+                            <span className="mx-2">•</span>
+                            <FaHeart className="mr-1" />
+                            {article.likes}
                           </div>
                         </div>
                       </div>
@@ -651,7 +710,7 @@ export default function Article() {
                   <select
                     value={sortBy}
                     onChange={(e) => setSortBy(e.target.value)}
-                    className="appearance-none bg-white border border-gray-300 rounded-lg pl-4 pr-10 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="appearance-none bg-white border border-gray-300 rounded-lg pl-4 pr-10 py-3 focus:ring-2 focus:ring-blue-500 focus:border-transparent shadow-sm"
                   >
                     <option value="newest">Newest First</option>
                     <option value="popular">Most Popular</option>
@@ -668,8 +727,8 @@ export default function Article() {
             {loading ? (
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {[...Array(6)].map((_, i) => (
-                  <div key={i} className="bg-white rounded-2xl shadow-lg p-6 animate-pulse">
-                    <div className="h-48 bg-gray-200 rounded-xl mb-4"></div>
+                  <div key={i} className="bg-white rounded-2xl shadow-lg p-6 animate-pulse border border-gray-200">
+                    <div className="h-48 bg-gradient-to-r from-gray-200 to-gray-300 rounded-xl mb-4"></div>
                     <div className="h-4 bg-gray-200 rounded mb-2"></div>
                     <div className="h-4 bg-gray-200 rounded mb-4 w-3/4"></div>
                     <div className="h-8 bg-gray-200 rounded"></div>
@@ -677,7 +736,7 @@ export default function Article() {
                 ))}
               </div>
             ) : currentArticles.length === 0 ? (
-              <div className="text-center py-16 bg-white rounded-2xl shadow-lg">
+              <div className="text-center py-16 bg-white rounded-2xl shadow-lg border border-gray-200">
                 <div className="text-6xl mb-4">📚</div>
                 <h3 className="text-2xl font-bold text-gray-800 mb-2">No articles found</h3>
                 <p className="text-gray-600 mb-6">Try adjusting your filters or search terms</p>
@@ -688,7 +747,7 @@ export default function Article() {
                     setSearchTerm('');
                     setSortBy('newest');
                   }}
-                  className="bg-gradient-to-r from-blue-500 to-teal-400 text-white px-6 py-3 rounded-lg font-bold hover:opacity-90 transition-opacity"
+                  className="bg-gradient-to-r from-blue-500 to-teal-400 text-white px-6 py-3 rounded-lg font-bold hover:opacity-90 transition-all shadow-md hover:shadow-lg"
                 >
                   Clear Filters
                 </button>
@@ -705,7 +764,7 @@ export default function Article() {
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
                       whileHover={{ y: -5 }}
-                      className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group"
+                      className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group border border-gray-100"
                     >
                       {/* Article Image */}
                       <div className="relative h-48 overflow-hidden">
@@ -718,7 +777,7 @@ export default function Article() {
                         
                         {/* Category Badge */}
                         <div className="absolute top-4 left-4">
-                          <span className="bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold px-3 py-1 rounded-full">
+                          <span className="bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold px-3 py-1 rounded-full shadow-sm">
                             {categories.find(c => c.id === article.category)?.name}
                           </span>
                         </div>
@@ -768,13 +827,13 @@ export default function Article() {
                           {article.tags.slice(0, 2).map((tag) => (
                             <span
                               key={tag}
-                              className="inline-block bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded"
+                              className="inline-block bg-gradient-to-r from-gray-50 to-gray-100 text-gray-600 text-xs px-2 py-1 rounded border border-gray-200"
                             >
                               #{tag}
                             </span>
                           ))}
                           {article.tags.length > 2 && (
-                            <span className="inline-block bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded">
+                            <span className="inline-block bg-gradient-to-r from-gray-50 to-gray-100 text-gray-600 text-xs px-2 py-1 rounded border border-gray-200">
                               +{article.tags.length - 2} more
                             </span>
                           )}
@@ -785,31 +844,31 @@ export default function Article() {
                           <div className="flex items-center space-x-4">
                             <button
                               onClick={() => handleLikeArticle(article.id)}
-                              className="flex items-center text-gray-500 hover:text-red-500"
+                              className="flex items-center text-gray-500 hover:text-red-500 group/like"
                             >
-                              <FaHeart className={`mr-1 ${
-                                likedArticles.includes(article.id) ? 'text-red-500 fill-current' : ''
+                              <FaHeart className={`mr-1 group-hover/like:scale-110 transition-transform ${
+                                likedArticles.includes(article.id) ? 'text-red-500 fill-current animate-pulse' : ''
                               }`} />
                               <span className="text-sm">{article.likes}</span>
                             </button>
                             
-                            <button className="flex items-center text-gray-500 hover:text-blue-500">
-                              <FaComment className="mr-1" />
+                            <button className="flex items-center text-gray-500 hover:text-blue-500 group/comment">
+                              <FaComment className="mr-1 group-hover/comment:scale-110 transition-transform" />
                               <span className="text-sm">{article.comments}</span>
                             </button>
                             
                             <button
                               onClick={() => handleShareArticle(article)}
-                              className="flex items-center text-gray-500 hover:text-green-500"
+                              className="flex items-center text-gray-500 hover:text-green-500 group/share"
                             >
-                              <FaShareAlt className="mr-1" />
+                              <FaShareAlt className="mr-1 group-hover/share:scale-110 transition-transform" />
                               <span className="text-sm">Share</span>
                             </button>
                           </div>
 
-                          <button className="flex items-center text-blue-600 hover:text-blue-700 font-medium">
+                          <button className="flex items-center text-blue-600 hover:text-blue-700 font-medium group/readmore">
                             Read More
-                            <FaChevronRight className="ml-1" />
+                            <FaChevronRight className="ml-1 group-hover/readmore:translate-x-1 transition-transform" />
                           </button>
                         </div>
                       </div>
@@ -824,7 +883,7 @@ export default function Article() {
                       <button
                         onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
                         disabled={currentPage === 1}
-                        className="px-4 py-2 rounded-lg border border-gray-300 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+                        className="px-4 py-2 rounded-lg border border-gray-300 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors"
                       >
                         Previous
                       </button>
@@ -833,9 +892,9 @@ export default function Article() {
                         <button
                           key={i}
                           onClick={() => setCurrentPage(i + 1)}
-                          className={`w-10 h-10 rounded-lg ${
+                          className={`w-10 h-10 rounded-lg transition-all ${
                             currentPage === i + 1
-                              ? 'bg-blue-600 text-white'
+                              ? 'bg-gradient-to-r from-blue-600 to-teal-500 text-white shadow-md'
                               : 'border border-gray-300 hover:bg-gray-50'
                           }`}
                         >
@@ -846,7 +905,7 @@ export default function Article() {
                       <button
                         onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
                         disabled={currentPage === totalPages}
-                        className="px-4 py-2 rounded-lg border border-gray-300 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+                        className="px-4 py-2 rounded-lg border border-gray-300 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors"
                       >
                         Next
                       </button>
@@ -873,16 +932,20 @@ export default function Article() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {authors.map((author) => (
-              <div key={author.id} className="bg-white rounded-2xl p-6 text-center shadow-lg hover:shadow-xl transition-shadow">
-                <div className="w-20 h-20 rounded-full bg-gradient-to-r from-blue-100 to-cyan-100 flex items-center justify-center text-3xl mx-auto mb-4">
+              <motion.div 
+                key={author.id} 
+                whileHover={{ y: -5 }}
+                className="bg-white rounded-2xl p-6 text-center shadow-lg hover:shadow-xl transition-all border border-gray-100"
+              >
+                <div className="w-20 h-20 rounded-full bg-gradient-to-r from-blue-100 to-cyan-100 flex items-center justify-center text-3xl mx-auto mb-4 shadow-md">
                   {author.avatar}
                 </div>
                 <h3 className="text-xl font-bold text-gray-800 mb-2">{author.name}</h3>
                 <p className="text-gray-600 mb-4">{author.role}</p>
-                <div className="text-sm text-gray-500">
+                <div className="text-sm font-medium text-blue-600">
                   {articles.filter(a => a.author.id === author.id).length} articles
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -891,7 +954,7 @@ export default function Article() {
       {/* CTA Section */}
       <section className="py-16">
         <div className="container mx-auto px-6 lg:px-12">
-          <div className="bg-gradient-to-r from-blue-600 to-teal-600 rounded-3xl p-12 text-center">
+          <div className="bg-gradient-to-r from-blue-600 to-teal-600 rounded-3xl p-12 text-center shadow-2xl">
             <h2 className="text-4xl font-bold text-white mb-6">
               Have a Health Question?
             </h2>
@@ -903,11 +966,11 @@ export default function Article() {
                 href="https://wa.me/233551234567"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-white text-blue-600 hover:bg-blue-50 px-8 py-3 rounded-full font-bold text-lg transition-colors"
+                className="bg-white text-blue-600 hover:bg-blue-50 px-8 py-3 rounded-full font-bold text-lg transition-all shadow-lg hover:shadow-xl"
               >
                 Ask a Pharmacist
               </a>
-              <button className="bg-transparent border-2 border-white text-white hover:bg-white/10 px-8 py-3 rounded-full font-bold text-lg transition-colors">
+              <button className="bg-transparent border-2 border-white text-white hover:bg-white/10 px-8 py-3 rounded-full font-bold text-lg transition-all shadow-lg hover:shadow-xl">
                 Browse FAQs
               </button>
             </div>
@@ -917,21 +980,21 @@ export default function Article() {
 
       {/* Share Options */}
       <div className="fixed bottom-6 left-6 z-40 hidden lg:block">
-        <div className="bg-white rounded-2xl shadow-xl p-4">
+        <div className="bg-white rounded-2xl shadow-xl p-4 border border-gray-200">
           <div className="text-center mb-4">
             <span className="text-sm font-bold text-gray-700">Share</span>
           </div>
           <div className="space-y-3">
-            <a href="#" className="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center hover:bg-blue-700">
+            <a href="#" className="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors shadow-md hover:shadow-lg">
               <FaFacebook />
             </a>
-            <a href="#" className="w-10 h-10 bg-sky-500 text-white rounded-full flex items-center justify-center hover:bg-sky-600">
+            <a href="#" className="w-10 h-10 bg-sky-500 text-white rounded-full flex items-center justify-center hover:bg-sky-600 transition-colors shadow-md hover:shadow-lg">
               <FaTwitter />
             </a>
-            <a href="#" className="w-10 h-10 bg-green-500 text-white rounded-full flex items-center justify-center hover:bg-green-600">
+            <a href="#" className="w-10 h-10 bg-green-500 text-white rounded-full flex items-center justify-center hover:bg-green-600 transition-colors shadow-md hover:shadow-lg">
               <FaWhatsapp />
             </a>
-            <a href="#" className="w-10 h-10 bg-blue-700 text-white rounded-full flex items-center justify-center hover:bg-blue-800">
+            <a href="#" className="w-10 h-10 bg-blue-700 text-white rounded-full flex items-center justify-center hover:bg-blue-800 transition-colors shadow-md hover:shadow-lg">
               <FaLinkedin />
             </a>
           </div>

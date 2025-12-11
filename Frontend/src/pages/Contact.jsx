@@ -16,6 +16,7 @@ import {
   FaEnvelopeOpen,
   FaComment
 } from 'react-icons/fa';
+import contactImage from '../assets/contact.jpg'; // Update this path according to your folder structure
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -61,29 +62,29 @@ export default function Contact() {
   const branches = [
     {
       id: 1,
-      name: "Accra Central Branch",
-      address: "123 Liberation Road, Accra Central, GA-100-1234",
-      phone: "+233 55 123 4567",
-      whatsapp: "+233551234567",
-      email: "accra@natandsonspharmacy.com",
+      name: "Abura Branch",
+      address: "Abura, Central Region, Cape Coast",
+      phone: "+233 50 345 8772",
+      whatsapp: "+233209468565",
+      email: "natandsons@yahoo.com",
       hours: "Mon-Fri: 8:00 AM - 8:00 PM\nSat: 9:00 AM - 6:00 PM\nSun: 10:00 AM - 4:00 PM"
     },
     {
       id: 2,
-      name: "East Legon Branch",
-      address: "45 Legon Street, East Legon, GA-200-5678",
-      phone: "+233 30 987 6543",
-      whatsapp: "+233309876543",
-      email: "eastlegon@natandsonspharmacy.com",
+      name: "Elmina Branch",
+      address: "Elmina, Central Region, Cape Coast",
+      phone: "+233 50 345 8772",
+      whatsapp: "+233209468565",
+      email: " natandsons@yahoo.com",
       hours: "Mon-Fri: 7:30 AM - 9:00 PM\nSat: 8:00 AM - 7:00 PM\nSun: 10:00 AM - 5:00 PM"
     },
     {
       id: 3,
-      name: "Tema Branch",
-      address: "78 Community 1, Tema, GA-300-9012",
-      phone: "+233 24 567 8901",
-      whatsapp: "+233245678901",
-      email: "tema@natandsonspharmacy.com",
+      name: "Twifo Praso Branch",
+      address: "Twifo Praso, Central Region, Cape Coast",
+      phone: "+233 50 345 8772",
+      whatsapp: "+233209468565",
+      email: " natandsons@yahoo.com",
       hours: "Mon-Fri: 8:00 AM - 8:00 PM\nSat: 9:00 AM - 6:00 PM\nSun: 11:00 AM - 3:00 PM"
     }
   ];
@@ -92,31 +93,44 @@ export default function Contact() {
     {
       icon: <FaEnvelopeOpen className="w-6 h-6" />,
       title: "General Inquiries",
-      email: "info@natandsonspharmacy.com",
+      email: " natandsons@yahoo.com",
       description: "For general questions about our services and products"
     },
     {
       icon: <FaUser className="w-6 h-6" />,
       title: "Customer Support",
-      email: "support@natandsonspharmacy.com",
+      email: "natandsons@yahoo.com",
       description: "Assistance with orders, deliveries, and account issues"
     },
     {
       icon: <FaComment className="w-6 h-6" />,
       title: "Medical Questions",
-      email: "pharmacist@natandsonspharmacy.com",
+      email: "natandsons@yahoo.com",
       description: "Consult our pharmacists for medication-related questions"
     }
   ];
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
-      {/* Hero Section */}
-      <section className="relative py-20 lg:py-28 bg-gradient-to-r from-blue-600 to-cyan-600 overflow-hidden">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-10">
+      {/* Hero Section with Contact Image */}
+      <section className="relative py-20 lg:py-28 overflow-hidden">
+        {/* Background Image with Overlay */}
+        <div className="absolute inset-0">
+          <img 
+            src={contactImage} 
+            alt="Contact Us Background - Nat and Sons Pharmacy"
+            className="w-full h-full object-cover"
+          />
+          {/* Gradient Overlay for better text readability */}
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-cyan-900/70"></div>
+          {/* Secondary Overlay for depth */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+        </div>
+
+        {/* Pattern Overlay */}
+        <div className="absolute inset-0 opacity-20">
           <div className="absolute inset-0" style={{
-            backgroundImage: `radial-gradient(circle at 2px 2px, rgba(255,255,255,0.3) 1px, transparent 1px)`,
+            backgroundImage: `radial-gradient(circle at 2px 2px, rgba(255,255,255,0.2) 1px, transparent 1px)`,
             backgroundSize: '40px 40px'
           }}></div>
         </div>
@@ -128,23 +142,24 @@ export default function Contact() {
             transition={{ duration: 0.8 }}
             className="max-w-4xl mx-auto text-center"
           >
-            <h1 className="text-4xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+            <h1 className="text-4xl lg:text-6xl font-bold text-white mb-6 leading-tight drop-shadow-lg">
               Get in Touch With Us
-              <span className="block text-cyan-200">We're Here to Help</span>
+              <span className="block text-cyan-200 mt-2">We're Here to Help</span>
             </h1>
-            <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-              Reach out to any of our three locations across Ghana. Our team is ready to assist with your healthcare needs.
+            <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto drop-shadow-lg">
+              Reach out to any of our three locations across Ghana. 
+              <br />Our team is ready to assist with your healthcare needs.
             </p>
             
             {/* Quick Contact Buttons */}
             <div className="flex flex-wrap justify-center gap-4 mb-12">
               <motion.a
-                href="https://wa.me/233551234567"
+                href="https://wa.me/233209468565"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-full font-bold transition-colors"
+                className="inline-flex items-center bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-full font-bold transition-all shadow-lg hover:shadow-xl"
               >
                 <FaWhatsapp className="mr-3 text-xl" />
                 Chat on WhatsApp
@@ -154,12 +169,68 @@ export default function Contact() {
                 href="tel:+233551234567"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center bg-white text-blue-600 hover:bg-blue-50 px-6 py-3 rounded-full font-bold transition-colors"
+                className="inline-flex items-center bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white px-6 py-3 rounded-full font-bold transition-all border border-white/30 hover:border-white/50 shadow-lg hover:shadow-xl"
               >
                 <FaPhoneAlt className="mr-3 text-xl" />
                 Call Now
               </motion.a>
+
+              <motion.a
+                href="#contact-form"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="inline-flex items-center bg-gradient-to-r from-blue-500 to-cyan-400 hover:from-blue-600 hover:to-cyan-500 text-white px-6 py-3 rounded-full font-bold transition-all shadow-lg hover:shadow-xl"
+              >
+                <FaEnvelope className="mr-3 text-xl" />
+                Send Email
+              </motion.a>
             </div>
+
+            {/* Contact Info Cards */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.8 }}
+              className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12"
+            >
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                <div className="text-3xl text-white mb-3">
+                  <FaPhoneAlt />
+                </div>
+                <h3 className="text-lg font-bold text-white mb-2">Phone Support</h3>
+                <p className="text-white/80">24/7 Available</p>
+                <a href="tel:+233209468565" className="text-cyan-200 font-bold hover:text-cyan-100">
+                +233 50 345 8772
+                </a>
+              </div>
+
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                <div className="text-3xl text-white mb-3">
+                  <FaWhatsapp />
+                </div>
+                <h3 className="text-lg font-bold text-white mb-2">WhatsApp</h3>
+                <p className="text-white/80">Instant Response</p>
+                <a 
+                  href="https://wa.me/233209468565" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-cyan-200 font-bold hover:text-cyan-100"
+                >
+                  Start Chat
+                </a>
+              </div>
+
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                <div className="text-3xl text-white mb-3">
+                  <FaEnvelope />
+                </div>
+                <h3 className="text-lg font-bold text-white mb-2">Email</h3>
+                <p className="text-white/80">Within 24 Hours</p>
+                <a href="mailto:info@natandsonspharmacy.com" className="text-cyan-200 font-bold hover:text-cyan-100">
+                natandsons@yahoo.com 
+                </a>
+              </div>
+            </motion.div>
           </motion.div>
         </div>
       </section>
@@ -261,7 +332,7 @@ export default function Contact() {
                     target="_blank"
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.05 }}
-                    className="block w-full bg-gradient-to-r from-blue-500 to-cyan-400 hover:from-blue-600 hover:to-cyan-500 text-white text-center py-3 rounded-lg font-bold transition-all"
+                    className="block w-full bg-gradient-to-r from-blue-500 to-cyan-400 hover:from-blue-600 hover:to-cyan-500 text-white text-center py-3 rounded-lg font-bold transition-all shadow-md hover:shadow-lg"
                   >
                     Get Directions
                   </motion.a>
@@ -273,7 +344,7 @@ export default function Contact() {
       </section>
 
       {/* Contact Form & Departments */}
-      <section className="py-16 lg:py-24 bg-white">
+      <section id="contact-form" className="py-16 lg:py-24 bg-white">
         <div className="container mx-auto px-6 lg:px-12">
           <div className="grid lg:grid-cols-2 gap-16">
             {/* Contact Form */}
@@ -300,7 +371,7 @@ export default function Contact() {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all hover:border-blue-300"
                       placeholder="John Mensah"
                     />
                   </div>
@@ -316,7 +387,7 @@ export default function Contact() {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all hover:border-blue-300"
                       placeholder="john@example.com"
                     />
                   </div>
@@ -334,7 +405,7 @@ export default function Contact() {
                       value={formData.phone}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all hover:border-blue-300"
                       placeholder="+233 55 123 4567"
                     />
                   </div>
@@ -349,7 +420,7 @@ export default function Contact() {
                       value={formData.subject}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all hover:border-blue-300 bg-white"
                     >
                       <option value="">Select a subject</option>
                       <option value="prescription">Prescription Inquiry</option>
@@ -372,7 +443,7 @@ export default function Contact() {
                     onChange={handleChange}
                     required
                     rows="6"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none hover:border-blue-300"
                     placeholder="Please describe your inquiry in detail..."
                   />
                 </div>
@@ -396,7 +467,7 @@ export default function Contact() {
                   disabled={isSubmitting}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className={`w-full bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white py-4 rounded-lg font-bold text-lg transition-all flex items-center justify-center ${
+                  className={`w-full bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white py-4 rounded-lg font-bold text-lg transition-all flex items-center justify-center shadow-md hover:shadow-lg ${
                     isSubmitting ? 'opacity-75 cursor-not-allowed' : ''
                   }`}
                 >
@@ -435,10 +506,10 @@ export default function Contact() {
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
                     whileHover={{ x: 5 }}
-                    className="bg-gray-50 hover:bg-blue-50 rounded-xl p-6 transition-colors border border-gray-100"
+                    className="bg-gradient-to-r from-gray-50 to-blue-50 hover:from-blue-50 hover:to-cyan-50 rounded-xl p-6 transition-all border border-gray-100 hover:border-blue-200"
                   >
                     <div className="flex items-start">
-                      <div className="bg-white p-3 rounded-lg mr-4 shadow-sm">
+                      <div className="bg-gradient-to-br from-blue-100 to-cyan-100 p-3 rounded-lg mr-4 shadow-sm">
                         <div className="text-blue-600">{dept.icon}</div>
                       </div>
                       <div className="flex-1">
@@ -447,9 +518,9 @@ export default function Contact() {
                         <motion.a
                           href={`mailto:${dept.email}`}
                           whileHover={{ scale: 1.05 }}
-                          className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium"
+                          className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium group"
                         >
-                          <FaEnvelope className="mr-2" />
+                          <FaEnvelope className="mr-2 transition-transform group-hover:scale-110" />
                           {dept.email}
                         </motion.a>
                       </div>
@@ -459,9 +530,11 @@ export default function Contact() {
               </div>
 
               {/* Emergency Information */}
-              <div className="bg-gradient-to-r from-red-50 to-orange-50 rounded-2xl p-8 border border-red-100">
+              <div className="bg-gradient-to-r from-red-50 to-orange-50 rounded-2xl p-8 border border-red-100 shadow-lg">
                 <div className="flex items-start mb-4">
-                  <FaExclamationCircle className="text-red-500 text-2xl mr-4 flex-shrink-0" />
+                  <div className="bg-gradient-to-br from-red-500 to-orange-400 p-3 rounded-full text-white mr-4">
+                    <FaExclamationCircle className="text-xl" />
+                  </div>
                   <div>
                     <h3 className="text-xl font-bold text-gray-800 mb-2">Emergency Contact</h3>
                     <p className="text-gray-600 mb-4">
@@ -471,17 +544,17 @@ export default function Contact() {
                 </div>
                 
                 <div className="space-y-3">
-                  <div className="flex items-center justify-between bg-white p-4 rounded-lg">
+                  <div className="flex items-center justify-between bg-white p-4 rounded-lg border border-red-100 hover:border-red-200 transition-colors">
                     <div className="font-medium text-gray-800">Ghana Emergency Services</div>
                     <a href="tel:999" className="text-red-600 font-bold hover:text-red-700">
                       999 / 112
                     </a>
                   </div>
                   
-                  <div className="flex items-center justify-between bg-white p-4 rounded-lg">
+                  <div className="flex items-center justify-between bg-white p-4 rounded-lg border border-blue-100 hover:border-blue-200 transition-colors">
                     <div className="font-medium text-gray-800">24/7 Pharmacy Hotline</div>
                     <a href="tel:+233302000000" className="text-blue-600 font-bold hover:text-blue-700">
-                      +233 30 200 0000
+                    +233 50 345 8772
                     </a>
                   </div>
                 </div>
@@ -504,17 +577,19 @@ export default function Contact() {
               
               <div className="flex space-x-4">
                 {[
-                  { icon: <FaFacebookF />, color: 'bg-blue-600 hover:bg-blue-700', label: 'Facebook' },
-                  { icon: <FaTwitter />, color: 'bg-sky-500 hover:bg-sky-600', label: 'Twitter' },
-                  { icon: <FaInstagram />, color: 'bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600', label: 'Instagram' },
-                  { icon: <FaWhatsapp />, color: 'bg-green-500 hover:bg-green-600', label: 'WhatsApp' }
+                  { icon: <FaFacebookF />, color: 'bg-blue-600 hover:bg-blue-700', label: 'Facebook', href: '#' },
+                  { icon: <FaTwitter />, color: 'bg-sky-500 hover:bg-sky-600', label: 'Twitter', href: '#' },
+                  { icon: <FaInstagram />, color: 'bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600', label: 'Instagram', href: '#' },
+                  { icon: <FaWhatsapp />, color: 'bg-green-500 hover:bg-green-600', label: 'WhatsApp', href: 'https://wa.me/233209468565' }
                 ].map((social, index) => (
                   <motion.a
                     key={index}
-                    href="#"
+                    href={social.href}
+                    target={social.href.includes('wa.me') ? '_blank' : '_self'}
+                    rel="noopener noreferrer"
                     whileHover={{ scale: 1.1, rotate: 5 }}
                     whileTap={{ scale: 0.9 }}
-                    className={`${social.color} text-white w-12 h-12 rounded-full flex items-center justify-center transition-all`}
+                    className={`${social.color} text-white w-12 h-12 rounded-full flex items-center justify-center transition-all shadow-lg hover:shadow-xl`}
                     aria-label={social.label}
                   >
                     {social.icon}
@@ -534,13 +609,13 @@ export default function Contact() {
                 <input
                   type="email"
                   placeholder="Your email address"
-                  className="flex-1 px-4 py-3 border border-gray-300 rounded-l-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="flex-1 px-4 py-3 border border-gray-300 rounded-l-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent hover:border-blue-300"
                 />
                 <motion.button
                   type="submit"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white px-6 py-3 rounded-r-lg font-bold transition-all"
+                  className="bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white px-6 py-3 rounded-r-lg font-bold transition-all shadow-md hover:shadow-lg"
                 >
                   Subscribe
                 </motion.button>
@@ -562,7 +637,7 @@ export default function Contact() {
             </p>
           </div>
 
-          <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-8">
+          <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-8 shadow-lg">
             {/* Map Placeholder - In reality, you'd embed Google Maps */}
             <div className="h-[400px] bg-gradient-to-r from-blue-100 to-cyan-100 rounded-xl flex items-center justify-center relative overflow-hidden">
               {/* Map marker animations */}
@@ -612,10 +687,10 @@ export default function Contact() {
             <div>
               <div className="text-2xl font-bold mb-2">WhatsApp Support</div>
               <a 
-                href="https://wa.me/233551234567" 
+                href="https://wa.me/233209468565" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="inline-flex items-center bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-full transition-colors"
+                className="inline-flex items-center bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-full transition-colors shadow-md hover:shadow-lg"
               >
                 <FaWhatsapp className="mr-2" />
                 Start Chat
@@ -624,7 +699,7 @@ export default function Contact() {
             
             <div>
               <div className="text-2xl font-bold mb-2">Email Response Time</div>
-              <div className="text-cyan-200">Within 24 Hours</div>
+              <div className="text-cyan-200 font-bold">Within 24 Hours</div>
             </div>
           </div>
         </div>
