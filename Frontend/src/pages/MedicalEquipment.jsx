@@ -402,7 +402,7 @@ export default function MedicalEquipment() {
   };
 
   const getWhatsAppUrl = (product) => {
-    const phoneNumber = "233551234567"; // Your WhatsApp number
+    const phoneNumber = "233209468565"; 
     const message = encodeURIComponent(product.whatsappMessage);
     return `https://wa.me/${phoneNumber}?text=${message}`;
   };
@@ -526,7 +526,7 @@ export default function MedicalEquipment() {
               Browse Categories
             </a>
             <a 
-              href="https://wa.me/233551234567" 
+              href="https://wa.me/233209468565" 
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center bg-gradient-to-r from-green-500 to-emerald-500 text-white px-6 py-2 rounded-full hover:shadow-lg transition-all"
@@ -1028,7 +1028,7 @@ export default function MedicalEquipment() {
                       <button
                         onClick={() => {
                           const message = encodeURIComponent("Hi, I'm interested in bulk purchase of medical equipment for my healthcare facility. Can you provide more information?");
-                          window.open(`https://wa.me/233551234567?text=${message}`, '_blank');
+                          window.open(`https://wa.me/233209468565?text=${message}`, '_blank');
                         }}
                         className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-3 rounded-lg font-bold hover:opacity-90 transition-all shadow-md hover:shadow-lg"
                       >
@@ -1190,7 +1190,7 @@ export default function MedicalEquipment() {
 
                   <button
                     onClick={() => {
-                      window.location.href = `tel:+233551234567`;
+                      window.location.href = `tel:+233503458772`;
                     }}
                     className="block w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white py-3 rounded-lg font-bold text-center transition-all shadow-md hover:shadow-lg"
                   >
@@ -1220,7 +1220,7 @@ export default function MedicalEquipment() {
 
       {/* Quick WhatsApp Button */}
       <a
-        href="https://wa.me/233551234567"
+        href="https://wa.me/233209468565"
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-6 right-6 z-40 bg-gradient-to-r from-green-500 to-emerald-400 text-white p-4 rounded-full shadow-2xl hover:shadow-3xl transition-all flex items-center animate-bounce"

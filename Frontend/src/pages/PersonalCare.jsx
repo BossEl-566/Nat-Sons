@@ -31,6 +31,7 @@ import {
   FaSmile,
   FaHandsWash,
   FaUsers,
+  FaSortAmountDown,
   FaHandSparkles,
   FaHeart as FaHeartRegular
 } from 'react-icons/fa';
@@ -354,7 +355,7 @@ export default function PersonalCare() {
   };
 
   const getWhatsAppUrl = (product) => {
-    const phoneNumber = "233551234567"; // Your WhatsApp number
+    const phoneNumber = "233209468565"; // Your WhatsApp number
     const message = encodeURIComponent(product.whatsappMessage);
     return `https://wa.me/${phoneNumber}?text=${message}`;
   };
@@ -1049,7 +1050,7 @@ export default function PersonalCare() {
 
                   <button
                     onClick={() => {
-                      window.location.href = `tel:+233551234567`;
+                      window.location.href = `tel:+233503458772`;
                     }}
                     className="block w-full bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white py-3 rounded-lg font-bold text-center transition-all shadow-md hover:shadow-lg"
                   >
@@ -1070,7 +1071,7 @@ export default function PersonalCare() {
 
               <div className="text-center text-sm text-gray-500">
                 <p>Response time: Usually within 15 minutes during business hours</p>
-                <p>Business hours: Mon-Sat 8:00 AM - 8:00 PM</p>
+                <p>Business hours: Mon-Sat 8:00 AM - 10:00 PM</p>
               </div>
             </motion.div>
           </motion.div>
@@ -1079,7 +1080,7 @@ export default function PersonalCare() {
 
       {/* Quick WhatsApp Button */}
       <a
-        href="https://wa.me/233551234567"
+        href="https://wa.me/233209468565"
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-6 right-6 z-40 bg-gradient-to-r from-green-500 to-emerald-400 text-white p-4 rounded-full shadow-2xl hover:shadow-3xl transition-all flex items-center animate-bounce"

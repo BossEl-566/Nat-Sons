@@ -10,7 +10,7 @@ export default function SearchPage() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const whatsappNumber = '594538949';
+  const whatsappNumber = '209468565';
   const countryCode = '233'; // Ghana country code
 
   // Mock results - this is where you add more categories and products

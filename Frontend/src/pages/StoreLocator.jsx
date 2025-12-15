@@ -149,8 +149,8 @@ export default function StoreLocator() {
       type: "flagship",
       address: "Main Street, Abura, Cape Coast, Central Region, Ghana",
       phone: "+233 50 345 8772",
-      whatsapp: "+233503458772",
-      email: "abura@natandsonspharmacy.com",
+      whatsapp: "233209468565",
+      email: "natandsons@yahoo.com",
       hours: {
         monday: "8:00 AM - 10:00 PM",
         tuesday: "8:00 AM - 10:00 PM",
@@ -187,8 +187,8 @@ export default function StoreLocator() {
       type: "premium",
       address: "Coastal Road, Elmina, Central Region, Ghana",
       phone: "+233 50 345 8772",
-      whatsapp: "+233503458772",
-      email: "elmina@natandsonspharmacy.com",
+      whatsapp: "233209468565",
+      email: "natandsons@yahoo.com",
       hours: {
         monday: "8:00 AM - 10:00 PM",
         tuesday: "8:00 AM - 10:00 PM",
@@ -225,8 +225,8 @@ export default function StoreLocator() {
       type: "community",
       address: "Market Square, Twifo Praso, Central Region, Ghana",
       phone: "+233 50 345 8772",
-      whatsapp: "+233503458772",
-      email: "twifopraso@natandsonspharmacy.com",
+      whatsapp: "233209468565",
+      email: "natandsons@yahoo.com",
       hours: {
         monday: "8:00 AM - 10:00 PM",
         tuesday: "8:00 AM - 10:00 PM",
@@ -254,7 +254,7 @@ export default function StoreLocator() {
       },
       description: "Community-focused pharmacy providing essential healthcare services to Twifo Praso and surrounding areas. Active in community health education.",
       established: "2023",
-      manager: "Pharm. Kwame Asante"
+      manager: "Pharm. Misheal Twentoh"
     }
   ];
 

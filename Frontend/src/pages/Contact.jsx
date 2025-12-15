@@ -547,7 +547,7 @@ export default function Contact() {
                   <div className="flex items-center justify-between bg-white p-4 rounded-lg border border-red-100 hover:border-red-200 transition-colors">
                     <div className="font-medium text-gray-800">Ghana Emergency Services</div>
                     <a href="tel:999" className="text-red-600 font-bold hover:text-red-700">
-                      999 / 112
+                      911
                     </a>
                   </div>
                   

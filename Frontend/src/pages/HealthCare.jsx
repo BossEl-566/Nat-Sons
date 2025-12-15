@@ -31,7 +31,7 @@ import {
   FaShoppingCart,
   FaUserFriends,
   FaSortAmountDown,
-  
+
 } from 'react-icons/fa';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
@@ -383,7 +383,7 @@ export default function HealthCare() {
   };
 
   const getWhatsAppUrl = (product) => {
-    const phoneNumber = "233551234567"; // Your WhatsApp number
+    const phoneNumber = "233209468565"; // Your WhatsApp number
     const message = encodeURIComponent(product.whatsappMessage);
     return `https://wa.me/${phoneNumber}?text=${message}`;
   };
@@ -976,7 +976,7 @@ export default function HealthCare() {
 
       {/* Quick WhatsApp Button */}
       <a
-        href="https://wa.me/233551234567"
+        href="https://wa.me/233209468565"
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-6 right-6 z-40 bg-gradient-to-r from-green-500 to-teal-400 text-white p-4 rounded-full shadow-2xl hover:shadow-3xl transition-all flex items-center animate-bounce"
