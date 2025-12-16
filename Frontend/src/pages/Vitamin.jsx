@@ -3,7 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   FaSearch, 
   FaFilter, 
-  FaShoppingCart, 
+  FaWhatsapp, 
+  FaPhoneAlt, 
   FaStar, 
   FaHeart,
   FaTruck,
@@ -31,7 +32,9 @@ import {
   FaClock,
   FaShippingFast,
   FaTag,
-  FaSortAmountDown
+  FaSortAmountDown,
+  FaInfoCircle,
+  FaExclamationTriangle
 } from 'react-icons/fa';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -40,6 +43,16 @@ import 'swiper/css/pagination';
 
 // Import vitamin image - Update this path to your actual image location
 import vitaminImage from '../assets/vitamin.jpg'; 
+// Import all supplement product images from assets
+import PremiumMultivitamin from "../assets/Multivitamin.jpeg";
+import Omega3FishOil from "../assets/Omega3-Fish-Oil.jpeg";
+import VitaminDK2 from "../assets/Vitamin-D-K2.jpeg";
+import Probiotics from "../assets/Probiotic.jpeg";
+import KidsGummyVitamins from "../assets/Kids-Gummy-Vitamins.jpeg";
+import Ashwagandha from "../assets/Ashwagandha.jpeg";
+import WeightManagement from "../assets/Weight-Management.jpeg";
+import VisionSupport from "../assets/Vision-Support.jpeg";
+import SeniorFormula from "../assets/Senior-Formula.jpeg";
 
 export default function Vitamin() {
   const [products, setProducts] = useState([]);
@@ -48,11 +61,11 @@ export default function Vitamin() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedBenefits, setSelectedBenefits] = useState([]);
-  const [priceRange, setPriceRange] = useState([0, 500]);
   const [sortBy, setSortBy] = useState('featured');
-  const [cart, setCart] = useState([]);
   const [wishlist, setWishlist] = useState([]);
   const [showFilters, setShowFilters] = useState(false);
+  const [showWhatsAppModal, setShowWhatsAppModal] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   // Categories with icons
   const categories = [
@@ -95,6 +108,25 @@ export default function Vitamin() {
     { name: 'BioEssence', rating: 4.7, specialty: 'Natural Extracts' }
   ];
 
+  // Service Info Cards
+  const services = [
+    { 
+      icon: <FaClock />, 
+      title: '24/7 Support', 
+      description: 'Round-the-clock assistance via WhatsApp'
+    },
+    { 
+      icon: <FaShippingFast />, 
+      title: 'Nationwide Delivery', 
+      description: 'Fast delivery across all regions'
+    },
+    { 
+      icon: <FaShieldAlt />, 
+      title: 'Certified Products', 
+      description: 'Authentic & FDA-approved items'
+    }
+  ];
+
   // Dummy products data
   const dummyProducts = [
     {
@@ -102,11 +134,9 @@ export default function Vitamin() {
       name: "Premium Multivitamin Complex",
       brand: "HealthPlus",
       description: "Complete daily nutrition with essential vitamins and minerals for optimal health and energy",
-      price: 45.99,
-      originalPrice: 59.99,
       rating: 4.8,
       reviewCount: 1245,
-      image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      image: PremiumMultivitamin, // Changed from URL to imported image
       category: "multivitamins",
       benefits: ["energy", "immunity", "skin"],
       ageGroup: "adults",
@@ -115,18 +145,17 @@ export default function Vitamin() {
       isBestSeller: true,
       deliveryTime: "1-2 days",
       dosage: "1 capsule daily",
-      ingredients: ["Vitamin A", "Vitamin C", "Vitamin D", "Vitamin E", "B-Complex", "Zinc", "Selenium"]
+      ingredients: ["Vitamin A", "Vitamin C", "Vitamin D", "Vitamin E", "B-Complex", "Zinc", "Selenium"],
+      whatsappMessage: "Hi, I'm interested in the Premium Multivitamin Complex. Can you provide more details and pricing?"
     },
     {
       id: 2,
       name: "Omega-3 Fish Oil Capsules",
       brand: "NatureWell",
       description: "High potency fish oil with 1000mg EPA and DHA for heart and brain health",
-      price: 29.99,
-      originalPrice: 39.99,
       rating: 4.7,
       reviewCount: 892,
-      image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      image: Omega3FishOil, // Changed from URL to imported image
       category: "heart-health",
       benefits: ["heart-health", "brain-health", "skin"],
       ageGroup: "adults",
@@ -135,18 +164,17 @@ export default function Vitamin() {
       isBestSeller: false,
       deliveryTime: "2-3 days",
       dosage: "2 capsules daily",
-      ingredients: ["Fish Oil", "EPA", "DHA", "Vitamin E"]
+      ingredients: ["Fish Oil", "EPA", "DHA", "Vitamin E"],
+      whatsappMessage: "Hello, I'd like to inquire about Omega-3 Fish Oil Capsules. Is it available?"
     },
     {
       id: 3,
       name: "Vitamin D3 + K2",
       brand: "PureForm",
       description: "Advanced bone support formula with high absorption vitamin D3 and K2",
-      price: 32.99,
-      originalPrice: 45.99,
       rating: 4.6,
       reviewCount: 567,
-      image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      image: VitaminDK2, // Changed from URL to imported image
       category: "bone-joint",
       benefits: ["bone-joint", "immunity"],
       ageGroup: "seniors",
@@ -155,18 +183,17 @@ export default function Vitamin() {
       isBestSeller: true,
       deliveryTime: "1-2 days",
       dosage: "1 softgel daily",
-      ingredients: ["Vitamin D3", "Vitamin K2", "Coconut Oil"]
+      ingredients: ["Vitamin D3", "Vitamin K2", "Coconut Oil"],
+      whatsappMessage: "Hi, I need information about Vitamin D3 + K2. What are the dosage options?"
     },
     {
       id: 4,
       name: "Probiotic Digestive Support",
       brand: "BioEssence",
       description: "30 billion CFU probiotic blend for optimal digestive and immune health",
-      price: 39.99,
-      originalPrice: 52.99,
       rating: 4.9,
       reviewCount: 1234,
-      image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      image: Probiotics, // Changed from URL to imported image
       category: "immune",
       benefits: ["digestive", "immunity", "skin"],
       ageGroup: "adults",
@@ -175,18 +202,17 @@ export default function Vitamin() {
       isBestSeller: false,
       deliveryTime: "2-3 days",
       dosage: "1 capsule daily",
-      ingredients: ["Lactobacillus", "Bifidobacterium", "Prebiotic Fiber"]
+      ingredients: ["Lactobacillus", "Bifidobacterium", "Prebiotic Fiber"],
+      whatsappMessage: "Hello, I want to buy Probiotic Digestive Support. Do you have different CFU options?"
     },
     {
       id: 5,
       name: "Kids Gummy Multivitamin",
       brand: "VitaCare",
       description: "Delicious gummy vitamins with essential nutrients for growing children",
-      price: 24.99,
-      originalPrice: 34.99,
       rating: 4.8,
       reviewCount: 678,
-      image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      image: KidsGummyVitamins, // Changed from URL to imported image
       category: "multivitamins",
       benefits: ["immunity", "energy", "bone-joint"],
       ageGroup: "kids",
@@ -195,18 +221,17 @@ export default function Vitamin() {
       isBestSeller: true,
       deliveryTime: "1-2 days",
       dosage: "2 gummies daily",
-      ingredients: ["Vitamin C", "Vitamin D", "Zinc", "Natural Fruit Flavors"]
+      ingredients: ["Vitamin C", "Vitamin D", "Zinc", "Natural Fruit Flavors"],
+      whatsappMessage: "Hi, I'm looking for Kids Gummy Multivitamin. What flavors do you have?"
     },
     {
       id: 6,
       name: "Ashwagandha Stress Support",
       brand: "WellnessPro",
       description: "Adaptogenic herb formula for stress relief and mental clarity",
-      price: 28.99,
-      originalPrice: 38.99,
       rating: 4.7,
       reviewCount: 456,
-      image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      image: Ashwagandha, // Changed from URL to imported image
       category: "brain-health",
       benefits: ["stress", "sleep", "energy"],
       ageGroup: "adults",
@@ -215,18 +240,17 @@ export default function Vitamin() {
       isBestSeller: false,
       deliveryTime: "2-4 days",
       dosage: "2 capsules daily",
-      ingredients: ["Ashwagandha Extract", "Black Pepper", "Vegetable Capsule"]
+      ingredients: ["Ashwagandha Extract", "Black Pepper", "Vegetable Capsule"],
+      whatsappMessage: "Hello, I need Ashwagandha Stress Support. Is it suitable for anxiety?"
     },
     {
       id: 7,
       name: "Weight Management Formula",
       brand: "HealthPlus",
       description: "Advanced thermogenic formula to support healthy weight management",
-      price: 49.99,
-      originalPrice: 69.99,
       rating: 4.5,
       reviewCount: 789,
-      image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      image: WeightManagement, // Changed from URL to imported image
       category: "weight-loss",
       benefits: ["weight-loss", "energy", "detox"],
       ageGroup: "adults",
@@ -235,18 +259,17 @@ export default function Vitamin() {
       isBestSeller: true,
       deliveryTime: "1-3 days",
       dosage: "2 capsules before meals",
-      ingredients: ["Green Tea Extract", "Garcinia Cambogia", "Caffeine"]
+      ingredients: ["Green Tea Extract", "Garcinia Cambogia", "Caffeine"],
+      whatsappMessage: "Hi, I'm interested in Weight Management Formula. Are there side effects?"
     },
     {
       id: 8,
       name: "Vision Support Lutein",
       brand: "NatureWell",
       description: "Lutein and zeaxanthin formula for optimal eye health and vision protection",
-      price: 36.99,
-      originalPrice: 49.99,
       rating: 4.6,
       reviewCount: 345,
-      image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      image: VisionSupport, // Changed from URL to imported image
       category: "eye-health",
       benefits: ["eye-health", "skin"],
       ageGroup: "seniors",
@@ -255,18 +278,17 @@ export default function Vitamin() {
       isBestSeller: false,
       deliveryTime: "2-3 days",
       dosage: "1 softgel daily",
-      ingredients: ["Lutein", "Zeaxanthin", "Vitamin C", "Vitamin E"]
+      ingredients: ["Lutein", "Zeaxanthin", "Vitamin C", "Vitamin E"],
+      whatsappMessage: "Hello, I need Vision Support Lutein. Is it for macular degeneration?"
     },
     {
       id: 9,
       name: "Senior Complete Formula",
       brand: "VitaCare",
       description: "Comprehensive vitamin and mineral formula specially designed for seniors",
-      price: 52.99,
-      originalPrice: 69.99,
       rating: 4.8,
       reviewCount: 432,
-      image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      image: SeniorFormula, // Changed from URL to imported image
       category: "multivitamins",
       benefits: ["bone-joint", "heart-health", "brain-health"],
       ageGroup: "seniors",
@@ -275,10 +297,10 @@ export default function Vitamin() {
       isBestSeller: true,
       deliveryTime: "1-2 days",
       dosage: "2 tablets daily",
-      ingredients: ["Vitamin B12", "Vitamin D3", "Calcium", "Magnesium", "CoQ10"]
+      ingredients: ["Vitamin B12", "Vitamin D3", "Calcium", "Magnesium", "CoQ10"],
+      whatsappMessage: "Hi, I'm looking for Senior Complete Formula. Can you advise on dosage?"
     }
   ];
-
   useEffect(() => {
     // Simulate API loading with dummy data
     setTimeout(() => {
@@ -313,19 +335,8 @@ export default function Vitamin() {
       );
     }
 
-    // Price range filter
-    filtered = filtered.filter(product =>
-      product.price >= priceRange[0] && product.price <= priceRange[1]
-    );
-
     // Sorting
     switch (sortBy) {
-      case 'price-low':
-        filtered.sort((a, b) => a.price - b.price);
-        break;
-      case 'price-high':
-        filtered.sort((a, b) => b.price - a.price);
-        break;
       case 'rating':
         filtered.sort((a, b) => b.rating - a.rating);
         break;
@@ -344,15 +355,11 @@ export default function Vitamin() {
     }
 
     setFilteredProducts(filtered);
-  }, [searchTerm, selectedCategory, selectedBenefits, priceRange, sortBy, products]);
+  }, [searchTerm, selectedCategory, selectedBenefits, sortBy, products]);
 
-  const handleAddToCart = (product) => {
-    setCart(prev => [...prev, { ...product, quantity: 1 }]);
-    // Show notification
-    const event = new CustomEvent('notification', {
-      detail: { message: `${product.name} added to cart!`, type: 'success' }
-    });
-    window.dispatchEvent(event);
+  const handleWhatsAppInquiry = (product) => {
+    setSelectedProduct(product);
+    setShowWhatsAppModal(true);
   };
 
   const handleAddToWishlist = (product) => {
@@ -371,12 +378,10 @@ export default function Vitamin() {
     );
   };
 
-  const formatPrice = (price) => {
-    return new Intl.NumberFormat('en-GH', {
-      style: 'currency',
-      currency: 'GHS',
-      minimumFractionDigits: 2
-    }).format(price);
+  const getWhatsAppUrl = (product) => {
+    const phoneNumber = "233209468565"; // Your WhatsApp number
+    const message = encodeURIComponent(product.whatsappMessage);
+    return `https://wa.me/${phoneNumber}?text=${message}`;
   };
 
   return (
@@ -435,71 +440,41 @@ export default function Vitamin() {
               </div>
             </div>
 
-            {/* Quick Stats */}
-            <motion.div 
+            {/* Service Cards */}
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.8 }}
-              className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12"
+              transition={{ delay: 0.3 }}
+              className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6"
             >
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-                <div className="text-3xl text-white mb-2 font-bold">
-                  {dummyProducts.length}+
+              {services.map((service, index) => (
+                <div key={index} className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                  <div className="flex items-center justify-center mb-4">
+                    <div className="text-3xl text-white">
+                      {service.icon}
+                    </div>
+                  </div>
+                  <h3 className="text-lg font-bold text-white text-center mb-2">
+                    {service.title}
+                  </h3>
+                  <p className="text-white/80 text-center text-sm">
+                    {service.description}
+                  </p>
                 </div>
-                <h3 className="text-lg font-bold text-white">Products</h3>
-                <p className="text-white/80 text-sm">High-quality formulas</p>
-              </div>
-
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-                <div className="text-3xl text-white mb-2 font-bold">
-                  {popularBrands.length}
-                </div>
-                <h3 className="text-lg font-bold text-white">Premium Brands</h3>
-                <p className="text-white/80 text-sm">Trusted quality</p>
-              </div>
-
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-                <div className="text-3xl text-white mb-2 font-bold">
-                  4.8+
-                </div>
-                <h3 className="text-lg font-bold text-white">Average Rating</h3>
-                <p className="text-white/80 text-sm">Customer satisfaction</p>
-              </div>
-
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-                <div className="text-3xl text-white mb-2 font-bold">
-                  24/7
-                </div>
-                <h3 className="text-lg font-bold text-white">Expert Support</h3>
-                <p className="text-white/80 text-sm">Pharmacist advice</p>
-              </div>
+              ))}
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Quick Action Buttons */}
-      <div className="bg-white border-b border-gray-200">
+      {/* Info Banner */}
+      <div className="bg-gradient-to-r from-amber-50 to-orange-50 border-b border-amber-200">
         <div className="container mx-auto px-6 lg:px-12 py-4">
-          <div className="flex flex-wrap justify-center gap-4">
-            <a 
-              href="#categories" 
-              className="flex items-center bg-gradient-to-r from-blue-600 to-cyan-500 text-white px-6 py-2 rounded-full hover:shadow-lg transition-all"
-            >
-              <FaCapsules className="mr-2" />
-              Browse Categories
-            </a>
-            <a 
-              href="#best-sellers" 
-              className="flex items-center bg-gradient-to-r from-red-500 to-pink-500 text-white px-6 py-2 rounded-full hover:shadow-lg transition-all"
-            >
-              <FaStar className="mr-2" />
-              Best Sellers
-            </a>
-            <button className="flex items-center bg-gradient-to-r from-green-500 to-emerald-500 text-white px-6 py-2 rounded-full hover:shadow-lg transition-all">
-              <FaLeaf className="mr-2" />
-              Natural Products
-            </button>
+          <div className="flex flex-col md:flex-row items-center justify-center text-center md:text-left">
+            <FaExclamationTriangle className="text-amber-600 mr-3 mb-2 md:mb-0" />
+            <span className="text-amber-800 font-medium">
+              Note: Due to Ghana pharmacy regulations, all purchases must be made via WhatsApp or in-store consultation.
+            </span>
           </div>
         </div>
       </div>
@@ -569,29 +544,6 @@ export default function Vitamin() {
                     exit={{ opacity: 0, height: 0 }}
                     className="bg-white rounded-2xl shadow-xl p-6 space-y-6 overflow-hidden border border-gray-200"
                   >
-                    {/* Price Range */}
-                    <div>
-                      <div className="flex items-center justify-between mb-4">
-                        <h3 className="font-bold text-gray-800">Price Range (GHS)</h3>
-                        <FaTag className="text-blue-600" />
-                      </div>
-                      <div className="space-y-4">
-                        <input
-                          type="range"
-                          min="0"
-                          max="500"
-                          step="10"
-                          value={priceRange[1]}
-                          onChange={(e) => setPriceRange([priceRange[0], parseInt(e.target.value)])}
-                          className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
-                        />
-                        <div className="flex justify-between text-sm text-gray-600 font-medium">
-                          <span>{formatPrice(priceRange[0])}</span>
-                          <span>{formatPrice(priceRange[1])}</span>
-                        </div>
-                      </div>
-                    </div>
-
                     {/* Benefits */}
                     <div>
                       <div className="flex items-center justify-between mb-4">
@@ -651,8 +603,6 @@ export default function Vitamin() {
                         className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gradient-to-r from-gray-50 to-white"
                       >
                         <option value="featured">Featured First</option>
-                        <option value="price-low">Price: Low to High</option>
-                        <option value="price-high">Price: High to Low</option>
                         <option value="rating">Highest Rated</option>
                         <option value="popular">Most Popular</option>
                       </select>
@@ -663,7 +613,6 @@ export default function Vitamin() {
                       onClick={() => {
                         setSelectedCategory('all');
                         setSelectedBenefits([]);
-                        setPriceRange([0, 500]);
                         setSortBy('featured');
                         setSearchTerm('');
                       }}
@@ -700,7 +649,7 @@ export default function Vitamin() {
                     <FaShippingFast className="text-purple-500 text-2xl mr-3" />
                     <div>
                       <div className="font-bold text-gray-800">Fast Delivery</div>
-                      <div className="text-sm text-gray-600">Free over GHS 200</div>
+                      <div className="text-sm text-gray-600">Contact for shipping details</div>
                     </div>
                   </div>
                 </div>
@@ -731,8 +680,6 @@ export default function Vitamin() {
                     className="appearance-none bg-white border border-gray-300 rounded-lg pl-4 pr-10 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent shadow-sm"
                   >
                     <option value="featured">Featured First</option>
-                    <option value="price-low">Price: Low to High</option>
-                    <option value="price-high">Price: High to Low</option>
                     <option value="rating">Highest Rated</option>
                     <option value="popular">Most Popular</option>
                   </select>
@@ -762,7 +709,6 @@ export default function Vitamin() {
                   onClick={() => {
                     setSelectedCategory('all');
                     setSelectedBenefits([]);
-                    setPriceRange([0, 500]);
                     setSearchTerm('');
                   }}
                   className="bg-gradient-to-r from-blue-500 to-cyan-400 text-white px-6 py-3 rounded-lg font-bold hover:opacity-90 transition-all shadow-md hover:shadow-lg"
@@ -880,46 +826,35 @@ export default function Vitamin() {
                         </div>
 
                         {/* Age Group */}
-                        <div className="flex items-center mb-4">
+                        <div className="flex items-center mb-6">
                           <span className="text-xs bg-gradient-to-r from-gray-50 to-gray-100 text-gray-600 px-2 py-1 rounded border border-gray-200">
                             {ageGroups.find(g => g.id === product.ageGroup)?.name}
                           </span>
                         </div>
 
-                        {/* Price & Action */}
-                        <div className="flex items-center justify-between">
-                          <div>
-                            <div className="flex items-center">
-                              <span className="text-2xl font-bold text-blue-600">
-                                {formatPrice(product.price)}
-                              </span>
-                              {product.originalPrice > product.price && (
-                                <span className="ml-2 text-sm text-gray-500 line-through">
-                                  {formatPrice(product.originalPrice)}
-                                </span>
-                              )}
-                            </div>
-                            {product.originalPrice > product.price && (
-                              <div className="mt-1">
-                                <span className="text-xs text-green-600 font-bold">
-                                  Save {formatPrice(product.originalPrice - product.price)}!
-                                </span>
-                              </div>
-                            )}
-                          </div>
+                        {/* WhatsApp Inquiry Button */}
+                        <button
+                          onClick={() => handleWhatsAppInquiry(product)}
+                          disabled={!product.inStock}
+                          className={`w-full bg-gradient-to-r from-green-500 to-teal-400 hover:from-green-600 hover:to-teal-500 text-white py-3 rounded-lg font-bold flex items-center justify-center transition-all group/inquiry shadow-md hover:shadow-lg ${
+                            !product.inStock ? 'opacity-50 cursor-not-allowed' : ''
+                          }`}
+                        >
+                          <FaWhatsapp className="mr-2 text-lg" />
+                          <span>{product.inStock ? 'Inquire on WhatsApp' : 'Out of Stock'}</span>
+                          <FaChevronDown className="ml-2 transform group-hover/inquiry:translate-y-1 transition-transform" />
+                        </button>
 
-                          <button
-                            onClick={() => handleAddToCart(product)}
-                            disabled={!product.inStock}
-                            className={`flex items-center px-4 py-3 rounded-lg font-bold transition-all shadow-md hover:shadow-lg ${
-                              product.inStock
-                                ? 'bg-gradient-to-r from-blue-500 to-cyan-400 text-white hover:from-blue-600 hover:to-cyan-500'
-                                : 'bg-gray-200 text-gray-500 cursor-not-allowed'
-                            }`}
-                          >
-                            <FaShoppingCart className="mr-2" />
-                            {product.inStock ? 'Add to Cart' : 'Out of Stock'}
-                          </button>
+                        {/* Quick Info */}
+                        <div className="mt-3 flex items-center justify-between text-xs text-gray-500">
+                          <div className="flex items-center">
+                            <FaTruck className="mr-1" />
+                            <span>Free shipping available</span>
+                          </div>
+                          <div className="flex items-center">
+                            <FaClock className="mr-1" />
+                            <span>24/7 support</span>
+                          </div>
                         </div>
                       </div>
                     </motion.div>
@@ -931,14 +866,112 @@ export default function Vitamin() {
         </div>
       </div>
 
+      {/* WhatsApp Modal */}
+      <AnimatePresence>
+        {showWhatsAppModal && selectedProduct && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
+            onClick={() => setShowWhatsAppModal(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+              className="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl"
+            >
+              <div className="flex justify-between items-center mb-6">
+                <h3 className="text-xl font-bold text-gray-800">Inquire About Product</h3>
+                <button
+                  onClick={() => setShowWhatsAppModal(false)}
+                  className="text-gray-400 hover:text-gray-600"
+                >
+                  <FaTimes />
+                </button>
+              </div>
+
+              <div className="mb-6">
+                <div className="flex items-start mb-4">
+                  <img
+                    src={selectedProduct.image}
+                    alt={selectedProduct.name}
+                    className="w-20 h-20 object-contain rounded-lg mr-4"
+                  />
+                  <div>
+                    <h4 className="font-bold text-gray-800">{selectedProduct.name}</h4>
+                    <p className="text-gray-600 text-sm">{selectedProduct.brand}</p>
+                    <div className="text-sm text-blue-600 mt-1">
+                      Contact us for pricing details
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-gradient-to-r from-blue-50 to-teal-50 rounded-lg p-4 mb-6 border border-blue-100">
+                  <div className="flex items-start">
+                    <FaInfoCircle className="text-blue-500 mr-3 mt-1" />
+                    <div>
+                      <p className="text-sm text-blue-700">
+                        You'll be redirected to WhatsApp with a pre-filled message about this product. 
+                        Our team will assist you with availability, pricing, and delivery options.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <a
+                    href={getWhatsAppUrl(selectedProduct)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block w-full bg-gradient-to-r from-green-500 to-teal-400 hover:from-green-600 hover:to-teal-500 text-white py-3 rounded-lg font-bold text-center transition-all shadow-md hover:shadow-lg"
+                  >
+                    <div className="flex items-center justify-center">
+                      <FaWhatsapp className="mr-2 text-xl" />
+                      Open WhatsApp
+                    </div>
+                  </a>
+
+                  <button
+                    onClick={() => {
+                      window.location.href = `tel:+233551234567`;
+                    }}
+                    className="block w-full bg-gradient-to-r from-blue-500 to-teal-400 hover:from-blue-600 hover:to-teal-500 text-white py-3 rounded-lg font-bold text-center transition-all shadow-md hover:shadow-lg"
+                  >
+                    <div className="flex items-center justify-center">
+                      <FaPhoneAlt className="mr-2" />
+                      Call Instead
+                    </div>
+                  </button>
+
+                  <button
+                    onClick={() => setShowWhatsAppModal(false)}
+                    className="block w-full bg-gray-100 hover:bg-gray-200 text-gray-700 py-3 rounded-lg font-bold transition-colors"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
+
+              <div className="text-center text-sm text-gray-500">
+                <p>Response time: Usually within 15 minutes during business hours</p>
+                <p>Business hours: Mon-Sat 8:00 AM - 8:00 PM</p>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Trust Indicators */}
       <section className="py-16 bg-gradient-to-r from-blue-50 to-cyan-50">
         <div className="container mx-auto px-6 lg:px-12">
           <div className="grid md:grid-cols-4 gap-8 text-center">
             <motion.div whileHover={{ y: -5 }} className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
               <FaTruck className="text-4xl text-blue-600 mx-auto mb-4" />
-              <h3 className="font-bold text-gray-800 mb-2">Free Delivery</h3>
-              <p className="text-gray-600 text-sm">On orders over GHS 200 in Accra</p>
+              <h3 className="font-bold text-gray-800 mb-2">Nationwide Delivery</h3>
+              <p className="text-gray-600 text-sm">Fast shipping across Ghana</p>
             </motion.div>
             <motion.div whileHover={{ y: -5 }} className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
               <FaShieldAlt className="text-4xl text-blue-600 mx-auto mb-4" />
@@ -998,9 +1031,14 @@ export default function Vitamin() {
               Our pharmacists are available for free consultations to help you find the right supplements.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-white text-blue-600 hover:bg-blue-50 px-8 py-3 rounded-full font-bold text-lg transition-all shadow-lg hover:shadow-xl">
-                Book Consultation
-              </button>
+              <a
+                href="https://wa.me/233209468565"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white text-blue-600 hover:bg-blue-50 px-8 py-3 rounded-full font-bold text-lg transition-all shadow-lg hover:shadow-xl text-center"
+              >
+                WhatsApp Consultation
+              </a>
               <button className="bg-transparent border-2 border-white text-white hover:bg-white/10 px-8 py-3 rounded-full font-bold text-lg transition-all shadow-lg hover:shadow-xl">
                 View Supplement Guide
               </button>
@@ -1009,29 +1047,16 @@ export default function Vitamin() {
         </div>
       </section>
 
-      {/* Floating Cart */}
-      {cart.length > 0 && (
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="fixed bottom-6 right-6 z-50"
-        >
-          <button
-            onClick={() => {
-              // In production, this would open cart modal
-              const event = new CustomEvent('cart-open');
-              window.dispatchEvent(event);
-            }}
-            className="bg-gradient-to-r from-blue-500 to-cyan-400 text-white px-6 py-3 rounded-full font-bold shadow-2xl hover:shadow-3xl transition-all flex items-center"
-          >
-            <FaShoppingBag className="mr-2" />
-            <span>Cart ({cart.length})</span>
-            <div className="ml-3 bg-white text-blue-600 px-2 py-1 rounded-full text-sm font-bold">
-              {formatPrice(cart.reduce((total, item) => total + item.price, 0))}
-            </div>
-          </button>
-        </motion.div>
-      )}
+      {/* Quick WhatsApp Button */}
+      <a
+        href="https://wa.me/233209468565"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-6 right-6 z-40 bg-gradient-to-r from-green-500 to-teal-400 text-white p-4 rounded-full shadow-2xl hover:shadow-3xl transition-all flex items-center animate-bounce"
+      >
+        <FaWhatsapp className="text-2xl" />
+        <span className="ml-3 font-bold hidden sm:block">Need Help?</span>
+      </a>
     </div>
   );
 }

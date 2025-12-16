@@ -43,6 +43,15 @@ import 'swiper/css/pagination';
 
 // Import personal care image - Update this path to your actual image location
 import personalCareImage from '../assets/personalcare.jpg'; 
+// Import all skincare product images from assets
+import CocoaButterLotion from "../assets/Cocoa-Butter-Formula.jpeg";
+import DoveShampoo from "../assets/Intensive-Moisture.jpeg";
+import SensitiveToothpaste from "../assets/Sensitive-Toothpaste.jpeg";
+import SheaButterBodyWash from "../assets/Shea-Butter-Body-Wash.jpeg";
+import DoveDeodorant from "../assets/Dove-Deodorant.jpeg";
+import BabySoapShampoo from "../assets/Baby-Soap-&-Shampoo.jpeg";
+import MensFaceWash from "../assets/Mens-Face-Wash.jpeg";
+import Vaseline from "../assets/Vaseline-Petroleum-Jelly.jpeg";
 
 
 export default function PersonalCare() {
@@ -140,7 +149,6 @@ export default function PersonalCare() {
     { id: 'local', name: 'Local Brands' }
   ];
 
-  // Sample products data - REMOVED ALL PRICES
   const sampleProducts = [
     {
       id: 1,
@@ -149,7 +157,7 @@ export default function PersonalCare() {
       description: "Deeply moisturizing cocoa butter formula for dry skin, 400ml",
       rating: 4.7,
       reviewCount: 456,
-      image: "https://images.unsplash.com/photo-1556228578-9c360e1d8d34?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      image: CocoaButterLotion, // Changed from URL to imported image
       category: "skin-care",
       skinType: ["dry", "normal"],
       brandId: "palmers",
@@ -166,7 +174,7 @@ export default function PersonalCare() {
       description: "Repairing shampoo for dry and damaged hair, 350ml",
       rating: 4.5,
       reviewCount: 312,
-      image: "https://images.unsplash.com/photo-1560743173-567a3b5658b1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      image: DoveShampoo, // Changed from URL to imported image
       category: "hair-care",
       skinType: ["all"],
       brandId: "dove",
@@ -183,7 +191,7 @@ export default function PersonalCare() {
       description: "Toothpaste for sensitive teeth, provides relief and protection, 100g",
       rating: 4.8,
       reviewCount: 234,
-      image: "https://images.unsplash.com/photo-1583947215259-38e31be8751f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      image: SensitiveToothpaste, // Changed from URL to imported image
       category: "oral-care",
       skinType: ["sensitive"],
       brandId: "neutrogena",
@@ -200,7 +208,7 @@ export default function PersonalCare() {
       description: "Nourishing body wash with shea butter, 500ml",
       rating: 4.4,
       reviewCount: 189,
-      image: "https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      image: SheaButterBodyWash, // Changed from URL to imported image
       category: "bath-body",
       skinType: ["dry", "normal"],
       brandId: "nivea",
@@ -217,7 +225,7 @@ export default function PersonalCare() {
       description: "48-hour protection deodorant, 45ml",
       rating: 4.6,
       reviewCount: 278,
-      image: "https://images.unsplash.com/photo-1595425922309-6c6d2186d13f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      image: DoveDeodorant, // Changed from URL to imported image
       category: "deodorants",
       skinType: ["sensitive", "normal"],
       brandId: "dove",
@@ -234,7 +242,7 @@ export default function PersonalCare() {
       description: "Gentle 2-in-1 soap and shampoo for babies, 200ml",
       rating: 4.9,
       reviewCount: 412,
-      image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      image: BabySoapShampoo, // Changed from URL to imported image
       category: "baby-care",
       skinType: ["sensitive"],
       brandId: "local",
@@ -251,7 +259,7 @@ export default function PersonalCare() {
       description: "Deep cleansing face wash for men, 100ml",
       rating: 4.3,
       reviewCount: 156,
-      image: "https://images.unsplash.com/photo-1591088398331-02e8959b47d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      image: MensFaceWash, // Changed from URL to imported image
       category: "men-care",
       skinType: ["oily", "combination"],
       brandId: "nivea",
@@ -268,7 +276,7 @@ export default function PersonalCare() {
       description: "Original petroleum jelly for multi-purpose skin care, 100g",
       rating: 4.7,
       reviewCount: 567,
-      image: "https://images.unsplash.com/photo-1556228578-9c360e1d8d34?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      image: Vaseline, // Changed from URL to imported image
       category: "skin-care",
       skinType: ["dry", "normal", "sensitive"],
       brandId: "vaseline",

@@ -31,7 +31,6 @@ import {
   FaShoppingCart,
   FaUserFriends,
   FaSortAmountDown,
-
 } from 'react-icons/fa';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
@@ -39,9 +38,16 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-
 import healthcareImage from '../assets/healthcare.jpg';
-
+// Import all product images from assets
+import PremiumFirstAidKit from "../assets/Premium-First-Aid-Kit.jpeg";
+import DigitalBloodPressureMonitor from "../assets/Digital-Blood-Pressure-Monitor.jpeg";
+import HandSanitizer from "../assets/Alcohol-Based-Hand.jpeg";
+import AdultDiapers from "../assets/Adult-Diapers.jpeg";
+import BabyThermometer from "../assets/Baby-Thermometer.png";
+import PainReliefGel from "../assets/Pain-Relief-Gel.jpeg";
+import WalkingCane from "../assets/Walking-Cane-with-Seat.png";
+import CPAPMachine from "../assets/CPAP-Machine.jpeg";
 
 export default function HealthCare() {
   const [products, setProducts] = useState([]);
@@ -57,7 +63,7 @@ export default function HealthCare() {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [wishlist, setWishlist] = useState([]);
 
-  // Main Categories with Icons - UPDATED: Removed prices from here
+  // Main Categories with Icons
   const categories = [
     { 
       id: 'all', 
@@ -147,7 +153,7 @@ export default function HealthCare() {
     { id: 'seniors', name: 'Seniors', icon: <FaFemale /> }
   ];
 
-  // NEW: Service Info Cards
+  // Service Info Cards
   const services = [
     { 
       icon: <FaClock />, 
@@ -166,18 +172,16 @@ export default function HealthCare() {
     }
   ];
 
-  // Sample products data (in production, this would come from your CMS/API)
+  // Sample products data
   const sampleProducts = [
     {
       id: 1,
       name: "Premium First Aid Kit",
       brand: "MediCare",
       description: "Complete emergency first aid kit with 100+ pieces for home and travel",
-      price: 89.99,
-      originalPrice: 120.00,
       rating: 4.8,
       reviewCount: 342,
-      image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      image: PremiumFirstAidKit, // Changed from URL to imported image
       category: "first-aid",
       subcategory: "emergency-kits",
       ageGroup: "all-ages",
@@ -190,11 +194,9 @@ export default function HealthCare() {
       name: "Digital Blood Pressure Monitor",
       brand: "Omron",
       description: "Automatic upper arm blood pressure monitor with large display",
-      price: 45.99,
-      originalPrice: 59.99,
       rating: 4.6,
       reviewCount: 189,
-      image: "https://images.unsplash.com/photo-1551601651-2a8555f1a136?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      image: DigitalBloodPressureMonitor, // Changed from URL to imported image
       category: "medical-equipment",
       subcategory: "monitoring",
       ageGroup: "adults",
@@ -207,11 +209,9 @@ export default function HealthCare() {
       name: "Alcohol-Based Hand Sanitizer",
       brand: "Dettol",
       description: "70% alcohol hand sanitizer with moisturizer, 500ml bottle",
-      price: 8.99,
-      originalPrice: 12.99,
       rating: 4.4,
       reviewCount: 567,
-      image: "https://images.unsplash.com/photo-1583947581924-860bda6a26df?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      image: HandSanitizer, // Changed from URL to imported image
       category: "personal-care",
       subcategory: "hygiene",
       ageGroup: "all-ages",
@@ -224,11 +224,9 @@ export default function HealthCare() {
       name: "Adult Diapers",
       brand: "Tena",
       description: "Super absorbent adult diapers for maximum protection, pack of 30",
-      price: 25.99,
-      originalPrice: 35.99,
       rating: 4.7,
       reviewCount: 234,
-      image: "https://images.unsplash.com/photo-1586773860418-dc22f8b874bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      image: AdultDiapers, // Changed from URL to imported image
       category: "senior-care",
       subcategory: "continence",
       ageGroup: "seniors",
@@ -241,11 +239,9 @@ export default function HealthCare() {
       name: "Baby Thermometer",
       brand: "Braun",
       description: "Digital infrared forehead thermometer for babies and kids",
-      price: 32.99,
-      originalPrice: 45.99,
       rating: 4.5,
       reviewCount: 156,
-      image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      image: BabyThermometer, // Changed from URL to imported image
       category: "baby-care",
       subcategory: "baby-care",
       ageGroup: "kids",
@@ -258,11 +254,9 @@ export default function HealthCare() {
       name: "Pain Relief Gel",
       brand: "Voltaren",
       description: "Diclofenac diethylamine gel for muscle and joint pain relief, 100g",
-      price: 12.99,
-      originalPrice: 18.99,
       rating: 4.3,
       reviewCount: 289,
-      image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      image: PainReliefGel, // Changed from URL to imported image
       category: "otc-medications",
       subcategory: "pain-relief",
       ageGroup: "adults",
@@ -275,11 +269,9 @@ export default function HealthCare() {
       name: "Walking Cane with Seat",
       brand: "Drive Medical",
       description: "Adjustable walking cane with built-in foldable seat",
-      price: 65.99,
-      originalPrice: 89.99,
       rating: 4.6,
       reviewCount: 123,
-      image: "https://images.unsplash.com/photo-1582719508461-905c673771fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      image: WalkingCane, // Changed from URL to imported image
       category: "senior-care",
       subcategory: "mobility",
       ageGroup: "seniors",
@@ -292,11 +284,9 @@ export default function HealthCare() {
       name: "CPAP Machine",
       brand: "ResMed",
       description: "Automatic CPAP machine for sleep apnea with humidifier",
-      price: 899.99,
-      originalPrice: 1200.00,
       rating: 4.9,
       reviewCount: 89,
-      image: "https://images.unsplash.com/photo-1586773860418-dc22f8b874bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      image: CPAPMachine, // Changed from URL to imported image
       category: "medical-equipment",
       subcategory: "therapeutic",
       ageGroup: "adults",
@@ -338,19 +328,8 @@ export default function HealthCare() {
       }
     }
 
-    // Price range filter
-    filtered = filtered.filter(product =>
-      product.price >= priceRange[0] && product.price <= priceRange[1]
-    );
-
     // Sorting
     switch (sortBy) {
-      case 'price-low':
-        filtered.sort((a, b) => a.price - b.price);
-        break;
-      case 'price-high':
-        filtered.sort((a, b) => b.price - a.price);
-        break;
       case 'rating':
         filtered.sort((a, b) => b.rating - a.rating);
         break;
@@ -367,7 +346,7 @@ export default function HealthCare() {
     }
 
     setFilteredProducts(filtered);
-  }, [searchTerm, selectedCategory, selectedSubCategory, priceRange, sortBy, products]);
+  }, [searchTerm, selectedCategory, selectedSubCategory, sortBy, products]);
 
   const handleWhatsAppInquiry = (product) => {
     setSelectedProduct(product);
@@ -559,7 +538,7 @@ export default function HealthCare() {
                     selectedSubCategory === subcat.id
                       ? 'bg-gradient-to-r from-blue-600 to-teal-500 text-white'
                       : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                  }`}
+                }`}
                 >
                   {subcat.name}
                 </button>
@@ -594,29 +573,6 @@ export default function HealthCare() {
                     exit={{ opacity: 0, height: 0 }}
                     className="bg-white rounded-2xl shadow-xl p-6 space-y-6 overflow-hidden border border-gray-200"
                   >
-                    {/* Price Range - MOVED TO FILTERS SECTION */}
-                    <div>
-                      <div className="flex items-center justify-between mb-4">
-                        <h3 className="font-bold text-gray-800">Price Range (GHS)</h3>
-                        <FaTag className="text-blue-600" />
-                      </div>
-                      <div className="space-y-4">
-                        <input
-                          type="range"
-                          min="0"
-                          max="1000"
-                          step="10"
-                          value={priceRange[1]}
-                          onChange={(e) => setPriceRange([priceRange[0], parseInt(e.target.value)])}
-                          className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
-                        />
-                        <div className="flex justify-between text-sm text-gray-600 font-medium">
-                          <span>GHS {priceRange[0]}</span>
-                          <span>GHS {priceRange[1]}</span>
-                        </div>
-                      </div>
-                    </div>
-
                     {/* Age Group */}
                     <div>
                       <div className="flex items-center justify-between mb-4">
@@ -648,8 +604,6 @@ export default function HealthCare() {
                         className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gradient-to-r from-gray-50 to-white"
                       >
                         <option value="featured">Featured First</option>
-                        <option value="price-low">Price: Low to High</option>
-                        <option value="price-high">Price: High to Low</option>
                         <option value="rating">Highest Rated</option>
                         <option value="name">Name (A-Z)</option>
                       </select>
@@ -660,7 +614,6 @@ export default function HealthCare() {
                       onClick={() => {
                         setSelectedCategory('all');
                         setSelectedSubCategory('all');
-                        setPriceRange([0, 1000]);
                         setSortBy('featured');
                         setSearchTerm('');
                       }}
@@ -694,7 +647,7 @@ export default function HealthCare() {
               {filteredProducts.length > 0 && (
                 <div className="hidden md:block bg-gradient-to-r from-blue-100 to-teal-100 px-4 py-2 rounded-lg">
                   <p className="text-blue-800 font-medium">
-                    💰 All prices shown include VAT
+                    💬 Contact us via WhatsApp for pricing and availability
                   </p>
                 </div>
               )}
@@ -721,7 +674,6 @@ export default function HealthCare() {
                   onClick={() => {
                     setSelectedCategory('all');
                     setSelectedSubCategory('all');
-                    setPriceRange([0, 1000]);
                     setSearchTerm('');
                   }}
                   className="bg-gradient-to-r from-blue-500 to-teal-400 text-white px-6 py-3 rounded-lg font-bold hover:opacity-90 transition-all shadow-md hover:shadow-lg"
@@ -756,11 +708,6 @@ export default function HealthCare() {
                           {product.isFeatured && (
                             <span className="bg-gradient-to-r from-blue-500 to-teal-400 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
                               Featured
-                            </span>
-                          )}
-                          {product.originalPrice > product.price && (
-                            <span className="bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
-                              Save GHS {(product.originalPrice - product.price).toFixed(2)}
                             </span>
                           )}
                         </div>
@@ -814,35 +761,10 @@ export default function HealthCare() {
                         </p>
 
                         {/* Age Group */}
-                        <div className="flex items-center mb-4">
+                        <div className="flex items-center mb-6">
                           <span className="text-xs bg-gradient-to-r from-gray-100 to-gray-200 text-gray-600 px-3 py-1 rounded-full border border-gray-300">
                             {ageGroups.find(g => g.id === product.ageGroup)?.name}
                           </span>
-                        </div>
-
-                        {/* Price Section - ALL PRICES SHOWN HERE */}
-                        <div className="mb-4">
-                          <div className="flex items-center justify-between">
-                            <div>
-                              <div className="flex items-baseline">
-                                <span className="text-2xl font-bold text-blue-600">
-                                  GHS {product.price.toFixed(2)}
-                                </span>
-                                {product.originalPrice > product.price && (
-                                  <span className="ml-3 text-sm text-gray-500 line-through">
-                                    GHS {product.originalPrice.toFixed(2)}
-                                  </span>
-                                )}
-                              </div>
-                              {product.originalPrice > product.price && (
-                                <div className="mt-1">
-                                  <span className="text-xs text-green-600 font-bold">
-                                    You save GHS {(product.originalPrice - product.price).toFixed(2)}!
-                                  </span>
-                                </div>
-                              )}
-                            </div>
-                          </div>
                         </div>
 
                         {/* WhatsApp Inquiry Button */}
@@ -913,8 +835,8 @@ export default function HealthCare() {
                   <div>
                     <h4 className="font-bold text-gray-800">{selectedProduct.name}</h4>
                     <p className="text-gray-600 text-sm">{selectedProduct.brand}</p>
-                    <div className="text-lg font-bold text-blue-600">
-                      GHS {selectedProduct.price.toFixed(2)}
+                    <div className="text-sm text-blue-600 mt-1">
+                      Contact us for pricing details
                     </div>
                   </div>
                 </div>
@@ -946,7 +868,7 @@ export default function HealthCare() {
 
                   <button
                     onClick={() => {
-                      window.location.href = `tel:+233551234567`;
+                      window.location.href = `tel:+233209468565`;
                     }}
                     className="block w-full bg-gradient-to-r from-blue-500 to-teal-400 hover:from-blue-600 hover:to-teal-500 text-white py-3 rounded-lg font-bold text-center transition-all shadow-md hover:shadow-lg"
                   >

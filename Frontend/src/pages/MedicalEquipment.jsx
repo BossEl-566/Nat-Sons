@@ -24,7 +24,7 @@ import {
   FaChevronDown,
   FaTimes,
   FaInfoCircle,
-  FaTag,
+  FaExclamationTriangle,
   FaShoppingBag,
   FaClipboardCheck,
   FaUserMd,
@@ -32,6 +32,7 @@ import {
   FaCogs,
   FaTools,
   FaIndustry,
+  FaClock,
   FaSortAmountDown
 } from 'react-icons/fa';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -42,6 +43,15 @@ import 'swiper/css/pagination';
 
 // Import equipment image - Update this path to your actual image location
 import equipmentImage from '../assets/medicalequipment.jpg';
+import DigitalBloodPressure from "../assets/Digital-Blood-Pressure-Monitor.jpeg";
+import BloodGlucoseMonitor from "../assets/Blood-Glucose-Monitoring-System.jpeg";
+import HospitalBed from "../assets/Automatic-Hospital-Bed.jpeg";
+import CPAPMachine from "../assets/CPAP-Machine-with-Humidifier.jpeg";
+import OxygenConcentrator from "../assets/Portable-Oxygen-Concentrator.jpeg";
+import DigitalThermometer from "../assets/Digital-Thermometer.jpeg";
+import Wheelchair from "../assets/download.jpeg";
+import PatientMonitor from "../assets/Patient-Monitor-5-Parameter.jpeg";
+// Add more imports as needed
 
 export default function MedicalEquipment() {
   const [products, setProducts] = useState([]);
@@ -50,7 +60,6 @@ export default function MedicalEquipment() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedUseCase, setSelectedUseCase] = useState('all');
-  const [priceRange, setPriceRange] = useState([0, 5000]);
   const [sortBy, setSortBy] = useState('featured');
   const [showFilters, setShowFilters] = useState(false);
   const [showWhatsAppModal, setShowWhatsAppModal] = useState(false);
@@ -143,185 +152,187 @@ export default function MedicalEquipment() {
     { id: 'local', name: 'Local Brands', premium: false }
   ];
 
-  // Sample medical equipment data
-  const sampleProducts = [
-    {
-      id: 1,
-      name: "Digital Blood Pressure Monitor",
-      brand: "Omron",
-      model: "M3 Comfort",
-      description: "Automatic upper arm blood pressure monitor with Intelli Wrap Cuff, 90 memory storage",
-      price: 89.99,
-      originalPrice: 120.00,
-      rating: 4.8,
-      reviewCount: 342,
-      image: "https://images.unsplash.com/photo-1551601651-2a8555f1a136?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      category: "monitoring",
-      useCase: ["cardiac", "home", "elderly"],
-      brandId: "omron",
-      features: ["Memory Storage", "Irregular Heartbeat Detection", "Large Display"],
-      warranty: "3 Years",
-      deliveryTime: "1-2 Days",
-      inStock: true,
-      isFeatured: true,
-      isPremium: true,
-      whatsappMessage: "Hi, I'm interested in the Omron M3 Comfort Blood Pressure Monitor. Can you provide more details?"
+  // Service Info Cards
+  const services = [
+    { 
+      icon: <FaClock />, 
+      title: '24/7 Support', 
+      description: 'Technical assistance via WhatsApp'
     },
-    {
-      id: 2,
-      name: "Blood Glucose Monitoring System",
-      brand: "Accu-Chek",
-      model: "Active",
-      description: "Complete diabetes monitoring kit with meter, lancet device, test strips, and control solution",
-      price: 45.99,
-      originalPrice: 65.00,
-      rating: 4.7,
-      reviewCount: 456,
-      image: "https://images.unsplash.com/photo-1582719508461-905c673771fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      category: "monitoring",
-      useCase: ["diabetes", "home"],
-      brandId: "accucheck",
-      features: ["500 Memory Storage", "Alternative Site Testing", "Fast Results"],
-      warranty: "5 Years",
-      deliveryTime: "1-3 Days",
-      inStock: true,
-      isFeatured: true,
-      isPremium: true,
-      whatsappMessage: "Hello, I need the Accu-Chek Active Glucose Monitoring System. Is it available?"
+    { 
+      icon: <FaShippingFast />, 
+      title: 'Nationwide Delivery', 
+      description: 'Equipment delivery across Ghana'
     },
-    {
-      id: 3,
-      name: "Automatic Hospital Bed",
-      brand: "Invacare",
-      model: "8900P",
-      description: "Full electric hospital bed with adjustable height, backrest, and knee break",
-      price: 2499.99,
-      originalPrice: 3200.00,
-      rating: 4.9,
-      reviewCount: 89,
-      image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      category: "hospital",
-      useCase: ["elderly", "clinical"],
-      brandId: "invacare",
-      features: ["Electric Adjustments", "Trendelenburg Position", "Side Rails"],
-      warranty: "2 Years",
-      deliveryTime: "5-7 Days",
-      inStock: true,
-      isFeatured: true,
-      isPremium: true,
-      whatsappMessage: "Hi, I'm interested in the Invacare 8900P Hospital Bed. Can you provide pricing and delivery details?"
-    },
-    {
-      id: 4,
-      name: "CPAP Machine with Humidifier",
-      brand: "ResMed",
-      model: "AirSense 10",
-      description: "Automatic CPAP machine with integrated humidifier for sleep apnea treatment",
-      price: 899.99,
-      originalPrice: 1200.00,
-      rating: 4.8,
-      reviewCount: 234,
-      image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      category: "therapeutic",
-      useCase: ["respiratory", "home"],
-      brandId: "resmed",
-      features: ["AutoRamp", "Climate Control", "Advanced Data Tracking"],
-      warranty: "2 Years",
-      deliveryTime: "3-5 Days",
-      inStock: true,
-      isFeatured: false,
-      isPremium: true,
-      whatsappMessage: "Hello, I need information about the ResMed AirSense 10 CPAP Machine. Is prescription required?"
-    },
-    {
-      id: 5,
-      name: "Portable Oxygen Concentrator",
-      brand: "Philips",
-      model: "SimplyGo",
-      description: "Lightweight portable oxygen concentrator with pulse and continuous flow settings",
-      price: 1899.99,
-      originalPrice: 2500.00,
-      rating: 4.7,
-      reviewCount: 156,
-      image: "https://images.unsplash.com/photo-1586773860418-dc22f8b874bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      category: "therapeutic",
-      useCase: ["respiratory", "elderly"],
-      brandId: "philips",
-      features: ["Portable Design", "Battery Operated", "Multiple Flow Settings"],
-      warranty: "3 Years",
-      deliveryTime: "4-6 Days",
-      inStock: true,
-      isFeatured: true,
-      isPremium: true,
-      whatsappMessage: "Hi, I want to inquire about the Philips SimplyGo Oxygen Concentrator. What's the delivery time?"
-    },
-    {
-      id: 6,
-      name: "Digital Thermometer",
-      brand: "Microlife",
-      model: "MT 16C1",
-      description: "Fast and accurate digital thermometer with flexible tip and fever alarm",
-      price: 12.99,
-      originalPrice: 19.99,
-      rating: 4.5,
-      reviewCount: 567,
-      image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      category: "diagnostic",
-      useCase: ["pediatric", "home"],
-      brandId: "microlife",
-      features: ["Flexible Tip", "Fever Alarm", "Water Resistant"],
-      warranty: "2 Years",
-      deliveryTime: "1-2 Days",
-      inStock: true,
-      isFeatured: false,
-      isPremium: false,
-      whatsappMessage: "Hello, I need the Microlife MT 16C1 Digital Thermometer. Do you have it in stock?"
-    },
-    {
-      id: 7,
-      name: "Folding Wheelchair",
-      brand: "Drive Medical",
-      model: "Cruiser III",
-      description: "Lightweight folding wheelchair with removable desk arms and swing-away footrests",
-      price: 299.99,
-      originalPrice: 399.99,
-      rating: 4.6,
-      reviewCount: 189,
-      image: "https://images.unsplash.com/photo-1551601651-2a8555f1a136?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      category: "mobility",
-      useCase: ["elderly", "home"],
-      brandId: "drive",
-      features: ["Folding Design", "Removable Arms", "Adjustable Footrests"],
-      warranty: "1 Year",
-      deliveryTime: "2-4 Days",
-      inStock: true,
-      isFeatured: true,
-      isPremium: false,
-      whatsappMessage: "Hi, I'm interested in the Drive Medical Cruiser III Wheelchair. What colors are available?"
-    },
-    {
-      id: 8,
-      name: "Patient Monitor 5-Parameter",
-      brand: "Mindray",
-      model: "PM-9000",
-      description: "Multi-parameter patient monitor for ECG, SpO2, NIBP, RESP, and temperature",
-      price: 3299.99,
-      originalPrice: 4500.00,
-      rating: 4.9,
-      reviewCount: 78,
-      image: "https://images.unsplash.com/photo-1582719508461-905c673771fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      category: "hospital",
-      useCase: ["clinical", "cardiac"],
-      brandId: "local",
-      features: ["5 Parameters", "Large Color Display", "Alarm System"],
-      warranty: "2 Years",
-      deliveryTime: "7-10 Days",
-      inStock: true,
-      isFeatured: false,
-      isPremium: true,
-      whatsappMessage: "Hello, I need the Mindray PM-9000 Patient Monitor for our clinic. Can you arrange installation?"
+    { 
+      icon: <FaWrench />, 
+      title: 'Installation Service', 
+      description: 'Professional setup available'
     }
   ];
+  // Sample Products Data
+const sampleProducts = [
+  {
+    id: 1,
+    name: "Digital Blood Pressure Monitor",
+    brand: "Omron",
+    model: "M3 Comfort",
+    description: "Automatic upper arm blood pressure monitor with Intelli Wrap Cuff, 90 memory storage",
+    rating: 4.8,
+    reviewCount: 342,
+    image: DigitalBloodPressure, // Using imported image
+    category: "monitoring",
+    useCase: ["cardiac", "home", "elderly"],
+    brandId: "omron",
+    features: ["Memory Storage", "Irregular Heartbeat Detection", "Large Display"],
+    warranty: "3 Years",
+    deliveryTime: "1-2 Days",
+    inStock: true,
+    isFeatured: true,
+    isPremium: true,
+    whatsappMessage: "Hi, I'm interested in the Omron M3 Comfort Blood Pressure Monitor. Can you provide more details?"
+  },
+  {
+    id: 2,
+    name: "Blood Glucose Monitoring System",
+    brand: "Accu-Chek",
+    model: "Active",
+    description: "Complete diabetes monitoring kit with meter, lancet device, test strips, and control solution",
+    rating: 4.7,
+    reviewCount: 456,
+    image: BloodGlucoseMonitor, // Using imported image
+    category: "monitoring",
+    useCase: ["diabetes", "home"],
+    brandId: "accucheck",
+    features: ["500 Memory Storage", "Alternative Site Testing", "Fast Results"],
+    warranty: "5 Years",
+    deliveryTime: "1-3 Days",
+    inStock: true,
+    isFeatured: true,
+    isPremium: true,
+    whatsappMessage: "Hello, I need the Accu-Chek Active Glucose Monitoring System. Is it available?"
+  },
+  {
+    id: 3,
+    name: "Automatic Hospital Bed",
+    brand: "Invacare",
+    model: "8900P",
+    description: "Full electric hospital bed with adjustable height, backrest, and knee break",
+    rating: 4.9,
+    reviewCount: 89,
+    image: HospitalBed, // Using imported image
+    category: "hospital",
+    useCase: ["elderly", "clinical"],
+    brandId: "invacare",
+    features: ["Electric Adjustments", "Trendelenburg Position", "Side Rails"],
+    warranty: "2 Years",
+    deliveryTime: "5-7 Days",
+    inStock: true,
+    isFeatured: true,
+    isPremium: true,
+    whatsappMessage: "Hi, I'm interested in the Invacare 8900P Hospital Bed. Can you provide pricing and delivery details?"
+  },
+  {
+    id: 4,
+    name: "CPAP Machine with Humidifier",
+    brand: "ResMed",
+    model: "AirSense 10",
+    description: "Automatic CPAP machine with integrated humidifier for sleep apnea treatment",
+    rating: 4.8,
+    reviewCount: 234,
+    image: CPAPMachine, // Using imported image
+    category: "therapeutic",
+    useCase: ["respiratory", "home"],
+    brandId: "resmed",
+    features: ["AutoRamp", "Climate Control", "Advanced Data Tracking"],
+    warranty: "2 Years",
+    deliveryTime: "3-5 Days",
+    inStock: true,
+    isFeatured: false,
+    isPremium: true,
+    whatsappMessage: "Hello, I need information about the ResMed AirSense 10 CPAP Machine. Is prescription required?"
+  },
+  {
+    id: 5,
+    name: "Portable Oxygen Concentrator",
+    brand: "Philips",
+    model: "SimplyGo",
+    description: "Lightweight portable oxygen concentrator with pulse and continuous flow settings",
+    rating: 4.7,
+    reviewCount: 156,
+    image: OxygenConcentrator, // Using imported image
+    category: "therapeutic",
+    useCase: ["respiratory", "elderly"],
+    brandId: "philips",
+    features: ["Portable Design", "Battery Operated", "Multiple Flow Settings"],
+    warranty: "3 Years",
+    deliveryTime: "4-6 Days",
+    inStock: true,
+    isFeatured: true,
+    isPremium: true,
+    whatsappMessage: "Hi, I want to inquire about the Philips SimplyGo Oxygen Concentrator. What's the delivery time?"
+  },
+  {
+    id: 6,
+    name: "Digital Thermometer",
+    brand: "Microlife",
+    model: "MT 16C1",
+    description: "Fast and accurate digital thermometer with flexible tip and fever alarm",
+    rating: 4.5,
+    reviewCount: 567,
+    image: DigitalThermometer, // Using imported image
+    category: "diagnostic",
+    useCase: ["pediatric", "home"],
+    brandId: "microlife",
+    features: ["Flexible Tip", "Fever Alarm", "Water Resistant"],
+    warranty: "2 Years",
+    deliveryTime: "1-2 Days",
+    inStock: true,
+    isFeatured: false,
+    isPremium: false,
+    whatsappMessage: "Hello, I need the Microlife MT 16C1 Digital Thermometer. Do you have it in stock?"
+  },
+  {
+    id: 7,
+    name: "Folding Wheelchair",
+    brand: "Drive Medical",
+    model: "Cruiser III",
+    description: "Lightweight folding wheelchair with removable desk arms and swing-away footrests",
+    rating: 4.6,
+    reviewCount: 189,
+    image: Wheelchair, // Using imported image
+    category: "mobility",
+    useCase: ["elderly", "home"],
+    brandId: "drive",
+    features: ["Folding Design", "Removable Arms", "Adjustable Footrests"],
+    warranty: "1 Year",
+    deliveryTime: "2-4 Days",
+    inStock: true,
+    isFeatured: true,
+    isPremium: false,
+    whatsappMessage: "Hi, I'm interested in the Drive Medical Cruiser III Wheelchair. What colors are available?"
+  },
+  {
+    id: 8,
+    name: "Patient Monitor 5-Parameter",
+    brand: "Mindray",
+    model: "PM-9000",
+    description: "Multi-parameter patient monitor for ECG, SpO2, NIBP, RESP, and temperature",
+    rating: 4.9,
+    reviewCount: 78,
+    image: PatientMonitor, // Using imported image
+    category: "hospital",
+    useCase: ["clinical", "cardiac"],
+    brandId: "local",
+    features: ["5 Parameters", "Large Color Display", "Alarm System"],
+    warranty: "2 Years",
+    deliveryTime: "7-10 Days",
+    inStock: true,
+    isFeatured: false,
+    isPremium: true,
+    whatsappMessage: "Hello, I need the Mindray PM-9000 Patient Monitor for our clinic. Can you arrange installation?"
+  }
+];
 
   useEffect(() => {
     // Simulate API loading
@@ -357,19 +368,8 @@ export default function MedicalEquipment() {
       );
     }
 
-    // Price range filter
-    filtered = filtered.filter(product =>
-      product.price >= priceRange[0] && product.price <= priceRange[1]
-    );
-
     // Sorting
     switch (sortBy) {
-      case 'price-low':
-        filtered.sort((a, b) => a.price - b.price);
-        break;
-      case 'price-high':
-        filtered.sort((a, b) => b.price - a.price);
-        break;
       case 'rating':
         filtered.sort((a, b) => b.rating - a.rating);
         break;
@@ -386,7 +386,7 @@ export default function MedicalEquipment() {
     }
 
     setFilteredProducts(filtered);
-  }, [searchTerm, selectedCategory, selectedUseCase, priceRange, sortBy, products]);
+  }, [searchTerm, selectedCategory, selectedUseCase, sortBy, products]);
 
   const handleWhatsAppInquiry = (product) => {
     setSelectedProduct(product);
@@ -405,14 +405,6 @@ export default function MedicalEquipment() {
     const phoneNumber = "233209468565"; 
     const message = encodeURIComponent(product.whatsappMessage);
     return `https://wa.me/${phoneNumber}?text=${message}`;
-  };
-
-  const formatPrice = (price) => {
-    return new Intl.NumberFormat('en-GH', {
-      style: 'currency',
-      currency: 'GHS',
-      minimumFractionDigits: 2
-    }).format(price);
   };
 
   return (
@@ -471,73 +463,41 @@ export default function MedicalEquipment() {
               </div>
             </div>
 
-            {/* Quick Stats */}
-            <motion.div 
+            {/* Service Cards */}
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.8 }}
-              className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12"
+              transition={{ delay: 0.3 }}
+              className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6"
             >
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-                <div className="text-3xl text-white mb-2 font-bold">
-                  {categories.length}
+              {services.map((service, index) => (
+                <div key={index} className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                  <div className="flex items-center justify-center mb-4">
+                    <div className="text-3xl text-white">
+                      {service.icon}
+                    </div>
+                  </div>
+                  <h3 className="text-lg font-bold text-white text-center mb-2">
+                    {service.title}
+                  </h3>
+                  <p className="text-white/80 text-center text-sm">
+                    {service.description}
+                  </p>
                 </div>
-                <h3 className="text-lg font-bold text-white">Categories</h3>
-                <p className="text-white/80 text-sm">Equipment types</p>
-              </div>
-
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-                <div className="text-3xl text-white mb-2 font-bold">
-                  {brands.filter(b => b.premium).length}
-                </div>
-                <h3 className="text-lg font-bold text-white">Premium Brands</h3>
-                <p className="text-white/80 text-sm">Trusted quality</p>
-              </div>
-
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-                <div className="text-3xl text-white mb-2 font-bold">
-                  5+
-                </div>
-                <h3 className="text-lg font-bold text-white">Years Warranty</h3>
-                <p className="text-white/80 text-sm">Peace of mind</p>
-              </div>
-
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-                <div className="text-3xl text-white mb-2 font-bold">
-                  24/7
-                </div>
-                <h3 className="text-lg font-bold text-white">Support</h3>
-                <p className="text-white/80 text-sm">Technical assistance</p>
-              </div>
+              ))}
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Quick Action Buttons */}
-      <div className="bg-white border-b border-gray-200">
+      {/* Info Banner */}
+      <div className="bg-gradient-to-r from-amber-50 to-orange-50 border-b border-amber-200">
         <div className="container mx-auto px-6 lg:px-12 py-4">
-          <div className="flex flex-wrap justify-center gap-4">
-            <a 
-              href="#categories" 
-              className="flex items-center bg-gradient-to-r from-blue-600 to-cyan-500 text-white px-6 py-2 rounded-full hover:shadow-lg transition-all"
-            >
-              <FaIndustry className="mr-2" />
-              Browse Categories
-            </a>
-            <a 
-              href="https://wa.me/233209468565" 
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center bg-gradient-to-r from-green-500 to-emerald-500 text-white px-6 py-2 rounded-full hover:shadow-lg transition-all"
-            >
-              <FaWhatsapp className="mr-2" />
-              Technical Support
-            </a>
-            <button className="flex items-center bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 py-2 rounded-full hover:shadow-lg transition-all">
-              <FaTools className="mr-2" />
-              Maintenance Services
-            </button>
+          <div className="flex flex-col md:flex-row items-center justify-center text-center md:text-left">
+            <FaExclamationTriangle className="text-amber-600 mr-3 mb-2 md:mb-0" />
+            <span className="text-amber-800 font-medium">
+              Note: Due to Ghana pharmacy regulations, all medical equipment purchases must be made via WhatsApp or in-store consultation.
+            </span>
           </div>
         </div>
       </div>
@@ -610,29 +570,6 @@ export default function MedicalEquipment() {
                     exit={{ opacity: 0, height: 0 }}
                     className="bg-white rounded-2xl shadow-xl p-6 space-y-6 overflow-hidden border border-gray-200"
                   >
-                    {/* Price Range */}
-                    <div>
-                      <div className="flex items-center justify-between mb-4">
-                        <h3 className="font-bold text-gray-800">Price Range (GHS)</h3>
-                        <FaTag className="text-blue-600" />
-                      </div>
-                      <div className="space-y-4">
-                        <input
-                          type="range"
-                          min="0"
-                          max="5000"
-                          step="100"
-                          value={priceRange[1]}
-                          onChange={(e) => setPriceRange([priceRange[0], parseInt(e.target.value)])}
-                          className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
-                        />
-                        <div className="flex justify-between text-sm text-gray-600 font-medium">
-                          <span>{formatPrice(priceRange[0])}</span>
-                          <span>{formatPrice(priceRange[1])}</span>
-                        </div>
-                      </div>
-                    </div>
-
                     {/* Use Case */}
                     <div>
                       <div className="flex items-center justify-between mb-4">
@@ -695,8 +632,6 @@ export default function MedicalEquipment() {
                         className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gradient-to-r from-gray-50 to-white"
                       >
                         <option value="featured">Featured First</option>
-                        <option value="price-low">Price: Low to High</option>
-                        <option value="price-high">Price: High to Low</option>
                         <option value="rating">Highest Rated</option>
                         <option value="name">Name (A-Z)</option>
                       </select>
@@ -707,7 +642,6 @@ export default function MedicalEquipment() {
                       onClick={() => {
                         setSelectedCategory('all');
                         setSelectedUseCase('all');
-                        setPriceRange([0, 5000]);
                         setSortBy('featured');
                         setSearchTerm('');
                       }}
@@ -841,7 +775,6 @@ export default function MedicalEquipment() {
                   onClick={() => {
                     setSelectedCategory('all');
                     setSelectedUseCase('all');
-                    setPriceRange([0, 5000]);
                     setSearchTerm('');
                   }}
                   className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-3 rounded-lg font-bold hover:opacity-90 transition-all shadow-md hover:shadow-lg"
@@ -893,11 +826,6 @@ export default function MedicalEquipment() {
                               Premium
                             </span>
                           )}
-                          {product.originalPrice > product.price && (
-                            <span className="bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
-                              Save {formatPrice(product.originalPrice - product.price)}
-                            </span>
-                          )}
                         </div>
                         
                         {/* Wishlist Button */}
@@ -927,14 +855,9 @@ export default function MedicalEquipment() {
                             </div>
                           </div>
                           <div className="text-right">
-                            <div className="text-2xl font-bold text-blue-600">
-                              {formatPrice(product.price)}
+                            <div className="text-sm text-blue-600 font-medium">
+                              Contact for pricing
                             </div>
-                            {product.originalPrice > product.price && (
-                              <div className="text-sm text-gray-500 line-through">
-                                {formatPrice(product.originalPrice)}
-                              </div>
-                            )}
                           </div>
                         </div>
 
@@ -1156,8 +1079,8 @@ export default function MedicalEquipment() {
                   <div>
                     <h4 className="font-bold text-gray-800">{selectedProduct.name}</h4>
                     <p className="text-gray-600 text-sm">{selectedProduct.brand} {selectedProduct.model}</p>
-                    <div className="text-lg font-bold text-blue-600">
-                      {formatPrice(selectedProduct.price)}
+                    <div className="text-sm text-blue-600 mt-1">
+                      Contact us for pricing details
                     </div>
                   </div>
                 </div>
