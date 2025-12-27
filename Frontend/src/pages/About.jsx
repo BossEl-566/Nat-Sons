@@ -29,7 +29,10 @@ import {
   FaBalanceScale,
   FaLightbulb,
   FaBullseye,
-  FaEye
+  FaEye,
+  FaHospital,
+  FaClinicMedical,
+  FaFirstAid
 } from 'react-icons/fa';
 
 // Import your video file - update this path with your actual video
@@ -735,6 +738,277 @@ export default function About() {
           </div>
         </div>
       </section>
+      {/* Health Facilities Supplied - Horizontal Slider */}
+<section className="py-16 sm:py-24 bg-white">
+  <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="text-center mb-12 sm:mb-16">
+      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-800 mb-4">
+        <span className="block text-transparent bg-gradient-to-r from-green-600 to-emerald-500 bg-clip-text">
+          SOME HEALTH FACILITIES
+        </span>
+        <span className="block text-gray-800 mt-2 text-xl sm:text-2xl lg:text-3xl">
+          SUPPLIED BY NAT AND SONS PHARMACY LTD.
+        </span>
+      </h2>
+      <p className="text-gray-600 text-base sm:text-lg max-w-2xl mx-auto">
+        With Health Commodities across multiple regions in Ghana
+      </p>
+    </div>
+
+    {/* Slider Container */}
+    <div className="relative overflow-hidden">
+      {/* Slider Track */}
+      <motion.div 
+        className="flex gap-6 pb-8"
+        animate={{ x: [0, -1000, 0] }}
+        transition={{ 
+          duration: 30,
+          repeat: Infinity,
+          ease: "linear"
+        }}
+      >
+        {/* Generate duplicate content for seamless loop */}
+        {[...Array(2)].map((_, setIndex) => (
+          <div key={setIndex} className="flex gap-6 flex-shrink-0">
+            {/* Health Institutions */}
+            <div className="w-[400px] flex-shrink-0">
+              <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-6 h-full shadow-lg">
+                <div className="flex items-center mb-4">
+                  <div className="p-3 rounded-lg bg-gradient-to-r from-green-500 to-emerald-400 text-white mr-3">
+                    <FaHospital className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-800">Health Institutions</h3>
+                </div>
+                
+                <div className="space-y-4 max-h-[400px] overflow-y-auto pr-2">
+                  <div className="grid grid-cols-3 gap-2 text-sm font-bold text-gray-700 pb-2 border-b">
+                    <div>NAME OF INSTITUTION</div>
+                    <div>LOCATION/TOWN</div>
+                    <div>REGION</div>
+                  </div>
+                  
+                  {[
+                    { name: "CENTRAL REGIONAL HEALTH DIRECTORATE", location: "CAPE COAST", region: "CENTRAL" },
+                    { name: "WESTERN REGIONAL HEALTH DIRECTORATE", location: "SEKONDI", region: "WESTERN" },
+                    { name: "CAPE COAST TEACHING HOSPITAL", location: "CAPE COAST", region: "CENTRAL" },
+                    { name: "EFFIA NKWANTA REGIONAL HOSPITAL", location: "SEKONDI", region: "WESTERN" },
+                    { name: "CAPE COAST METRO. HOSPITAL", location: "CAPE COAST", region: "CENTRAL" },
+                    { name: "ABURA DUNKWA DISTRICT HOSPITAL", location: "ABURA DUNKWA", region: "CENTRAL" },
+                    { name: "AJUMAKO DISTRICT HOSPITAL", location: "AJUMAKO", region: "CENTRAL" },
+                    { name: "TWIFO PRASO POLYCLINIC", location: "TWIFO PRASO", region: "CENTRAL" },
+                    { name: "TWIFO ATTI-MORKWA DISTRICT HOSPITAL", location: "TWIFO PRASO", region: "CENTRAL" },
+                    { name: "KWESIMINTSIM GOVERNMENT HOSPITAL", location: "TAKORADI", region: "WESTERN" },
+                    { name: "TRAUMA & SPECIALIST HOSPITAL", location: "WINNEBA", region: "CENTRAL" },
+                    { name: "SALTPOND MUNICIPAL HOSPITAL", location: "SALTPOND", region: "CENTRAL" },
+                    { name: "EWIM POLYCLINIC", location: "CAPE COAST", region: "CENTRAL" },
+                    { name: "BRAKWA POLYCLINIC", location: "BRAKWA", region: "CENTRAL" },
+                    { name: "ABURA ASEBU KWAMANKESE-DISTRICT HEALTH DIRECTORATE", location: "ABURA DUNKWA", region: "CENTRAL" },
+                  ].map((facility, index) => (
+                    <div key={index} className="grid grid-cols-3 gap-2 text-sm text-gray-600 py-2 border-b border-gray-100">
+                      <div className="font-medium">{facility.name}</div>
+                      <div>{facility.location}</div>
+                      <div>
+                        <span className={`px-2 py-1 rounded-full text-xs ${
+                          facility.region === "CENTRAL" ? "bg-blue-100 text-blue-600" :
+                          facility.region === "WESTERN" ? "bg-green-100 text-green-600" :
+                          "bg-purple-100 text-purple-600"
+                        }`}>
+                          {facility.region}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* More Health Facilities */}
+            <div className="w-[400px] flex-shrink-0">
+              <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl p-6 h-full shadow-lg">
+                <div className="flex items-center mb-4">
+                  <div className="p-3 rounded-lg bg-gradient-to-r from-blue-500 to-cyan-400 text-white mr-3">
+                    <FaHeartbeat className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-800">Health Facilities (Cont'd)</h3>
+                </div>
+                
+                <div className="space-y-4 max-h-[400px] overflow-y-auto pr-2">
+                  <div className="grid grid-cols-3 gap-2 text-sm font-bold text-gray-700 pb-2 border-b">
+                    <div>NAME OF INSTITUTION</div>
+                    <div>LOCATION/TOWN</div>
+                    <div>REGION</div>
+                  </div>
+                  
+                  {[
+                    { name: "ADISADEL URBAN H/CENTRE", location: "CAPE COAST", region: "CENTRAL" },
+                    { name: "ANKAFUL LEPROSY/GENERAL HOSPITAL", location: "ANKAFUL", region: "CENTRAL" },
+                    { name: "SWEDRU GOV'T HOSPITAL", location: "AGONA SWEDRU", region: "CENTRAL" },
+                    { name: "WINNEBA MUNICIPAL HOSPITAL", location: "WINNEBA", region: "CENTRAL" },
+                    { name: "ELMINA POLYCLINIC", location: "ELMINA", region: "CENTRAL" },
+                    { name: "ENCHI GOV'T HOSPITAL", location: "ENCHI", region: "WESTERN" },
+                    { name: "KISSI HEALTH CENTRE", location: "KISSI", region: "CENTRAL" },
+                    { name: "DUNKWA MUNICIPAL HOSPITAL", location: "DUNKWA ON OFFIN", region: "CENTRAL" },
+                    { name: "NANA HIMA DENKYI HOSPITAL", location: "DISCOVE", region: "WESTERN" },
+                    { name: "KASOA POLYCLINIC", location: "KASOA", region: "CENTRAL" },
+                    { name: "ABAKRAMPAH HEALTH CENTRE", location: "ABAKRAMPAH", region: "CENTRAL" },
+                    { name: "MOREE HEALTH CENTRE", location: "MOREE", region: "CENTRAL" },
+                    { name: "BESIASE POLYCLINIC", location: "AJUMAKO-BESIASE", region: "CENTRAL" },
+                    { name: "MOTHER & CHILD HOSPITAL", location: "WINNEBA", region: "CENTRAL" },
+                    { name: "MFANTSEMAN MUNICIPAL HEALTH DIRECTORATE", location: "SALTPOND", region: "CENTRAL" },
+                  ].map((facility, index) => (
+                    <div key={index} className="grid grid-cols-3 gap-2 text-sm text-gray-600 py-2 border-b border-gray-100">
+                      <div className="font-medium">{facility.name}</div>
+                      <div>{facility.location}</div>
+                      <div>
+                        <span className={`px-2 py-1 rounded-full text-xs ${
+                          facility.region === "CENTRAL" ? "bg-blue-100 text-blue-600" :
+                          facility.region === "WESTERN" ? "bg-green-100 text-green-600" :
+                          "bg-purple-100 text-purple-600"
+                        }`}>
+                          {facility.region}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* CHPS Zones & Compounds */}
+            <div className="w-[400px] flex-shrink-0">
+              <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-6 h-full shadow-lg">
+                <div className="flex items-center mb-4">
+                  <div className="p-3 rounded-lg bg-gradient-to-r from-purple-500 to-pink-400 text-white mr-3">
+                    <FaClinicMedical className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-800">CHPS Zones & Compounds</h3>
+                </div>
+                
+                <div className="space-y-4 max-h-[400px] overflow-y-auto pr-2">
+                  <div className="grid grid-cols-2 gap-2 text-sm font-bold text-gray-700 pb-2 border-b">
+                    <div>CHPS ZONE/COMPOUND</div>
+                    <div>DISTRICT</div>
+                  </div>
+                  
+                  {[
+                    { name: "NKWANTANAN CHPS ZONE", district: "ABURA ASEBU KWAMANKESE" },
+                    { name: "AMOSIMA CHPS ZONE", district: "ABURA ASEBU KWAMANKESE" },
+                    { name: "AYELDU CHPS ZONE", district: "ABURA ASEBU KWAMANKESE" },
+                    { name: "OBOHEN CHPS ZONE", district: "ABURA ASEBU KWAMANKESE" },
+                    { name: "GYABANKROM CHPS ZONE", district: "ABURA ASEBU KWAMANKESE" },
+                    { name: "ASUANSI RURAL CLINIC", district: "ABURA ASEBU KWAMANKESE" },
+                    { name: "ABAKA SERVICE DELIVERY POINT", district: "ABURA ASEBU KWAMANKESE" },
+                    { name: "TUAKWA CHPS ZONE", district: "ABURA ASEBU KWAMANKESE" },
+                    { name: "KWADOEGYA CHPS ZONE", district: "ABURA ASEBU KWAMANKESE" },
+                    { name: "NEW EBU CHPS ZONE", district: "ABURA ASEBU KWAMANKESE" },
+                    { name: "KWAMANKESE CHPS ZONE", district: "ABURA ASEBU KWAMANKESE" },
+                    { name: "OKYIRIKU CHPS ZONE", district: "ABURA ASEBU KWAMANKESE" },
+                    { name: "SRAFA CHPS ZONE", district: "ABURA ASEBU KWAMANKESE" },
+                  ].map((chps, index) => (
+                    <div key={index} className="grid grid-cols-2 gap-2 text-sm text-gray-600 py-2 border-b border-gray-100">
+                      <div className="font-medium">{chps.name}</div>
+                      <div>{chps.district}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* More CHPS Zones */}
+            <div className="w-[400px] flex-shrink-0">
+              <div className="bg-gradient-to-br from-orange-50 to-yellow-50 rounded-xl p-6 h-full shadow-lg">
+                <div className="flex items-center mb-4">
+                  <div className="p-3 rounded-lg bg-gradient-to-r from-orange-500 to-yellow-400 text-white mr-3">
+                    <FaFirstAid className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-800">More CHPS Zones</h3>
+                </div>
+                
+                <div className="space-y-4 max-h-[400px] overflow-y-auto pr-2">
+                  <div className="grid grid-cols-2 gap-2 text-sm font-bold text-gray-700 pb-2 border-b">
+                    <div>CHPS ZONE/COMPOUND</div>
+                    <div>DISTRICT</div>
+                  </div>
+                  
+                  {[
+                    { name: "MPESEDUADZE", district: "ABURA ASEBU KWAMANKESE" },
+                    { name: "ASEBU CHPS ZONE", district: "ABURA ASEBU KWAMANKESE" },
+                    { name: "ASOMDWEE CHPS ZONE", district: "ABURA ASEBU KWAMANKESE" },
+                    { name: "ASUANSI CHPS ZONE", district: "ABURA ASEBU KWAMANKESE" },
+                    { name: "PUTUBIW CHPS ZONE", district: "ABURA ASEBU KWAMANKESE" },
+                    { name: "MUSUNKWA CHPS ZONE", district: "ABURA ASEBU KWAMANKESE" },
+                    { name: "NYANFEKU AKROFUL CHPS ZONE", district: "ABURA ASEBU KWAMANKESE" },
+                    { name: "PAPAGYA CHPS ZONE", district: "ABURA ASEBU KWAMANKESE" },
+                    { name: "SORODOFO ABAASA", district: "ABURA ASEBU KWAMANKESE" },
+                    { name: "ABUENU CHPS", district: "ABURA ASEBU KWAMANKESE" },
+                    { name: "KORADO CHPS", district: "ABURA ASEBU KWAMANKESE" },
+                    { name: "BATANYAA CHPS", district: "ABURA ASEBU KWAMANKESE" },
+                    { name: "GOMOA TARKWA CHPS ZONE", district: "GOMOA WEST" },
+                  ].map((chps, index) => (
+                    <div key={index} className="grid grid-cols-2 gap-2 text-sm text-gray-600 py-2 border-b border-gray-100">
+                      <div className="font-medium">{chps.name}</div>
+                      <div>{chps.district}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </motion.div>
+
+      {/* Gradient overlay for fading effect */}
+      <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-white to-transparent pointer-events-none"></div>
+      <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-white to-transparent pointer-events-none"></div>
+
+      {/* Stats Summary */}
+      <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl p-6 text-center"
+        >
+          <div className="text-3xl font-bold text-blue-600 mb-2">40+</div>
+          <div className="text-gray-700 font-medium">Health Institutions</div>
+        </motion.div>
+        
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.1 }}
+          className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-6 text-center"
+        >
+          <div className="text-3xl font-bold text-green-600 mb-2">50+</div>
+          <div className="text-gray-700 font-medium">CHPS Zones</div>
+        </motion.div>
+        
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2 }}
+          className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-6 text-center"
+        >
+          <div className="text-3xl font-bold text-purple-600 mb-2">3</div>
+          <div className="text-gray-700 font-medium">Regions Covered</div>
+        </motion.div>
+        
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3 }}
+          className="bg-gradient-to-br from-orange-50 to-yellow-50 rounded-xl p-6 text-center"
+        >
+          <div className="text-3xl font-bold text-orange-600 mb-2">25+</div>
+          <div className="text-gray-700 font-medium">Districts Served</div>
+        </motion.div>
+      </div>
+    </div>
+  </div>
+</section>
 
       {/* CTA Section */}
       <section className="py-16 sm:py-24">
