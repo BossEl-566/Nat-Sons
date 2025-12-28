@@ -1058,13 +1058,13 @@ export default function PersonalCare() {
 
                   <button
                     onClick={() => {
-                      window.location.href = `tel:+233503458772`;
+                      window.location.href = `tel:+233208138549`;
                     }}
                     className="block w-full bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white py-3 rounded-lg font-bold text-center transition-all shadow-md hover:shadow-lg"
                   >
                     <div className="flex items-center justify-center">
                       <FaPhoneAlt className="mr-2" />
-                      Call Instead
+                      Call For Wholesale Inquiry
                     </div>
                   </button>
 

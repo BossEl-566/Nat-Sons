@@ -97,6 +97,7 @@ export default function About() {
       address: "Abura, Central Region, Ghana",
       hours: "Mon-Sat: 8AM-10PM | Sun: 2PM-9PM",
       phone: "+233 50 345 8772",
+      complaintsPhone: "+233 20 813 8549",
       features: ["24/7 Pharmacy", "Drive-Thru", "Clinical Services", "Compound Lab"],
       image: abura
     },
@@ -106,6 +107,7 @@ export default function About() {
       address: "Elmina, Central Region, Ghana",
       hours: "Mon-Sat: 8AM-10PM | Sun: 2PM-9PM",
       phone: "+233 50 345 9522",
+      complaintsPhone: "+233 20 813 8549",
       features: ["Pediatric Care", "Vaccination Center", "Diabetes Clinic", "Home Delivery"],
       image: elmina
     },
@@ -115,6 +117,7 @@ export default function About() {
       address: "Twifo Praso, Central Region, Ghana",
       hours: "Mon-Sat: 8AM-10PM | Sun: 2PM-9PM",
       phone: "+233 50 345 8773",
+      complaintsPhone: "+233 20 813 8549",
       features: ["Senior Care", "Medication Therapy", "Health Screenings", "Wellness Programs"],
       image: twifoPraso
     }
@@ -517,6 +520,7 @@ export default function About() {
             <p className="text-gray-600 text-base sm:text-lg max-w-2xl mx-auto">
               Serving Central Region with the same commitment to quality across all our branches
             </p>
+            
           </div>
 
           {/* Branch Navigation */}
@@ -601,6 +605,13 @@ export default function About() {
                     <FaPhoneAlt className="text-green-500 mt-1 mr-3 flex-shrink-0" />
                     <p className="text-gray-600 font-medium">{branches[activeBranch].phone}</p>
                   </div>
+                  <div className="flex items-start">
+  <FaPhoneAlt className="text-red-500 mt-1 mr-3 flex-shrink-0" />
+  <div>
+    <p className="text-gray-600 font-medium">For any complaints, call:</p>
+    <p className="text-gray-800 font-bold">{branches[activeBranch].complaintsPhone}</p>
+  </div>
+</div>
                 </div>
 
                 <div className="grid grid-cols-2 gap-3 mb-8">
@@ -1014,48 +1025,48 @@ export default function About() {
 </section>
 
       {/* CTA Section */}
-      <section className="py-16 sm:py-24">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="bg-gradient-to-br from-blue-500 via-blue-600 to-cyan-500 rounded-xl sm:rounded-2xl lg:rounded-3xl p-8 sm:p-12 lg:p-16 text-center relative overflow-hidden"
-          >
-            <div className="relative z-10">
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4 sm:mb-6">
-                Experience Healthcare That Cares
-              </h2>
-              
-              <p className="text-blue-100 text-base sm:text-lg lg:text-xl mb-6 sm:mb-8 max-w-2xl mx-auto">
-                Visit any of our three locations in Central Region and discover why thousands trust Nat & Sons Pharmacy with their health.
-              </p>
-              
-              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Link 
-                    to="/contact" 
-                    className="bg-white text-blue-600 hover:bg-blue-50 px-6 py-3 sm:px-8 sm:py-4 rounded-full font-bold text-base sm:text-lg flex items-center justify-center gap-3 transition-all duration-300 shadow-xl"
-                  >
-                    <FaPhoneAlt />
-                    <span>Schedule Consultation</span>
-                  </Link>
-                </motion.div>
-                
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Link 
-                    to="/locations" 
-                    className="bg-transparent border-2 border-white text-white hover:bg-white/10 px-6 py-3 sm:px-8 sm:py-4 rounded-full font-bold text-base sm:text-lg flex items-center justify-center gap-3 transition-all duration-300"
-                  >
-                    <FaMapMarkerAlt />
-                    <span>Find Nearest Branch</span>
-                  </Link>
-                </motion.div>
-              </div>
-            </div>
-          </motion.div>
+      {/* Complaints & Support Section */}
+<section className="py-12 sm:py-16 bg-gradient-to-b from-red-50 to-white">
+  <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="bg-white rounded-xl sm:rounded-2xl p-6 sm:p-8 shadow-lg border-l-4 border-red-500"
+    >
+      <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="text-center md:text-left">
+          <div className="inline-flex items-center bg-red-100 text-red-600 px-4 py-2 rounded-full mb-3">
+            <FaPhoneAlt className="mr-2" />
+            <span className="font-bold">Customer Support</span>
+          </div>
+          <h3 className="text-xl sm:text-2xl font-bold text-gray-800 mb-2">
+            Have a Complaint or Concern?
+          </h3>
+          <p className="text-gray-600">
+            We're committed to providing the best service. If you have any complaints or concerns about any of our branches, please contact our dedicated support line.
+          </p>
         </div>
-      </section>
+        
+        <div className="text-center">
+          <div className="bg-red-50 rounded-lg p-4 sm:p-6">
+            <div className="text-sm text-gray-600 mb-2">Call our 24/7 complaint line:</div>
+            <a 
+              href="tel:+233208138549" 
+              className="inline-flex items-center text-xl sm:text-2xl font-bold text-red-600 hover:text-red-700 transition-colors"
+            >
+              <FaPhoneAlt className="mr-3" />
+              +233 20 813 8549
+            </a>
+            <div className="text-sm text-gray-500 mt-2">
+              Available Monday to Sunday, 8AM - 10PM
+            </div>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  </div>
+</section>
     </div>
   );
 }

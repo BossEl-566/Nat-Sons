@@ -936,13 +936,13 @@ export default function Vitamin() {
 
                   <button
                     onClick={() => {
-                      window.location.href = `tel:+233551234567`;
+                      window.location.href = `tel:+233208138549`;
                     }}
                     className="block w-full bg-gradient-to-r from-blue-500 to-teal-400 hover:from-blue-600 hover:to-teal-500 text-white py-3 rounded-lg font-bold text-center transition-all shadow-md hover:shadow-lg"
                   >
                     <div className="flex items-center justify-center">
                       <FaPhoneAlt className="mr-2" />
-                      Call Instead
+                      Call Instead for whole sale inquiries
                     </div>
                   </button>
 

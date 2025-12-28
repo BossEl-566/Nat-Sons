@@ -593,7 +593,7 @@ export default function HomePage() {
               </div>
               <div className="flex items-center gap-2">
                 <FaPhoneAlt />
-                <span>+233 209 468 565</span>
+                <span>+233208138549</span>
               </div>
               <div className="flex items-center gap-2">
                 <FaMapMarkerAlt />

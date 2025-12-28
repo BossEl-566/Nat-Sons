@@ -148,7 +148,7 @@ export default function StoreLocator() {
       name: "Nat & Sons Pharmacy - Abura",
       type: "flagship",
       address: "Main Street, Abura, Cape Coast, Central Region, Ghana",
-      phone: "+233 50 345 8772",
+      phone: "+233208138549",
       whatsapp: "233209468565",
       email: "natandsons@yahoo.com",
       hours: {
@@ -186,7 +186,7 @@ export default function StoreLocator() {
       name: "Nat & Sons Pharmacy - Elmina",
       type: "premium",
       address: "Coastal Road, Elmina, Central Region, Ghana",
-      phone: "+233 50 345 8772",
+      phone: "+233208138549",
       whatsapp: "233209468565",
       email: "natandsons@yahoo.com",
       hours: {
@@ -224,7 +224,7 @@ export default function StoreLocator() {
       name: "Nat & Sons Pharmacy - Twifo Praso",
       type: "community",
       address: "Market Square, Twifo Praso, Central Region, Ghana",
-      phone: "+233 50 345 8772",
+      phone: "+233208138549",
       whatsapp: "233209468565",
       email: "natandsons@yahoo.com",
       hours: {
@@ -1027,7 +1027,7 @@ export default function StoreLocator() {
               <FaFirstAid className="mr-2" /> Emergency Services Available:
             </div>
             <span className="text-red-800">
-              All branches offer 24/7 emergency pharmacy services. Call: <strong>+233 50 345 8772</strong>
+              All branches offer 24/7 emergency pharmacy services. Call: <strong>+233208138549</strong>
             </span>
           </div>
         </div>

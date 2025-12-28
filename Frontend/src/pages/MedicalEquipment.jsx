@@ -1113,7 +1113,7 @@ const sampleProducts = [
 
                   <button
                     onClick={() => {
-                      window.location.href = `tel:+233503458772`;
+                      window.location.href = `tel:+233208138549`;
                     }}
                     className="block w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white py-3 rounded-lg font-bold text-center transition-all shadow-md hover:shadow-lg"
                   >

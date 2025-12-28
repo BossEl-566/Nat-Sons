@@ -73,7 +73,7 @@ export default function Contact() {
       id: 2,
       name: "Elmina Branch",
       address: "Elmina, Central Region, Cape Coast",
-      phone: "+233 50 345 8772",
+      phone: "+233 50 345 9522",
       whatsapp: "+233209468565",
       email: " natandsons@yahoo.com",
       hours: "Mon-Fri: 7:30 AM - 9:00 PM\nSat: 8:00 AM - 7:00 PM\nSun: 10:00 AM - 5:00 PM"
@@ -166,7 +166,7 @@ export default function Contact() {
               </motion.a>
               
               <motion.a
-                href="tel:+233551234567"
+                href="tel:+233208138549"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="inline-flex items-center bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white px-6 py-3 rounded-full font-bold transition-all border border-white/30 hover:border-white/50 shadow-lg hover:shadow-xl"
@@ -199,8 +199,8 @@ export default function Contact() {
                 </div>
                 <h3 className="text-lg font-bold text-white mb-2">Phone Support</h3>
                 <p className="text-white/80">24/7 Available</p>
-                <a href="tel:+233209468565" className="text-cyan-200 font-bold hover:text-cyan-100">
-                +233 50 345 8772
+                <a href="tel:+233208138549" className="text-cyan-200 font-bold hover:text-cyan-100">
+                +233 20 813 8549
                 </a>
               </div>
 
@@ -553,8 +553,8 @@ export default function Contact() {
                   
                   <div className="flex items-center justify-between bg-white p-4 rounded-lg border border-blue-100 hover:border-blue-200 transition-colors">
                     <div className="font-medium text-gray-800">24/7 Pharmacy Hotline</div>
-                    <a href="tel:+233302000000" className="text-blue-600 font-bold hover:text-blue-700">
-                    +233 50 345 8772
+                    <a href="tel:+233208138549" className="text-blue-600 font-bold hover:text-blue-700">
+                      +233 20 813 8549
                     </a>
                   </div>
                 </div>
@@ -679,8 +679,8 @@ export default function Contact() {
           <div className="grid md:grid-cols-3 gap-8 text-center">
             <div>
               <div className="text-2xl font-bold mb-2">Need Help Now?</div>
-              <a href="tel:+233551234567" className="text-xl font-bold hover:text-cyan-200 transition-colors">
-                +233 55 123 4567
+              <a href="tel:+233208138549" className="text-xl font-bold hover:text-cyan-200 transition-colors">
+                +233 20 813 8549
               </a>
             </div>
             
