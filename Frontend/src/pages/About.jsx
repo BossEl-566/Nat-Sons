@@ -37,6 +37,9 @@ import {
 
 // Import your video file - update this path with your actual video
 import heroVideo from '../assets/pharmacy-hero-video.mp4';
+import abura from '../assets/abura.jpg';
+import elmina from '../assets/elmina.jpg';
+import twifoPraso from '../assets/twifo.jpg';
 
 export default function About() {
   const [activeBranch, setActiveBranch] = useState(0);
@@ -95,25 +98,25 @@ export default function About() {
       hours: "Mon-Sat: 8AM-10PM | Sun: 2PM-9PM",
       phone: "+233 50 345 8772",
       features: ["24/7 Pharmacy", "Drive-Thru", "Clinical Services", "Compound Lab"],
-      image: images.pharmacyInterior
+      image: abura
     },
     {
       id: 1,
       name: "Elmina",
       address: "Elmina, Central Region, Ghana",
       hours: "Mon-Sat: 8AM-10PM | Sun: 2PM-9PM",
-      phone: "+233 50 345 8772",
+      phone: "+233 50 345 9522",
       features: ["Pediatric Care", "Vaccination Center", "Diabetes Clinic", "Home Delivery"],
-      image: images.modernPharmacy
+      image: elmina
     },
     {
       id: 2,
       name: "Twifo Praso",
       address: "Twifo Praso, Central Region, Ghana",
       hours: "Mon-Sat: 8AM-10PM | Sun: 2PM-9PM",
-      phone: "+233 50 345 8772",
+      phone: "+233 50 345 8773",
       features: ["Senior Care", "Medication Therapy", "Health Screenings", "Wellness Programs"],
-      image: images.teamConsultation
+      image: twifoPraso
     }
   ];
 
