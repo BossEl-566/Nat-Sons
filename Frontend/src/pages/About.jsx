@@ -275,7 +275,7 @@ export default function About() {
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
                 Nat & Sons
                 <span className="block bg-gradient-to-r from-cyan-300 to-blue-100 bg-clip-text text-transparent mt-2">
-                  Pharmacy
+                  Pharmacy Ltd.
                 </span>
               </h1>
               

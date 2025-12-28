@@ -26,7 +26,9 @@ import {
   FaCrosshairs,
   FaFirstAid,
   FaUsers,
-  FaAward
+  FaAward,
+  FaExternalLinkAlt,
+  FaGoogle
 } from 'react-icons/fa';
 
 // Mock Interactive Map Component
@@ -140,6 +142,13 @@ export default function StoreLocator() {
   const [userLocation, setUserLocation] = useState(null);
   const [showSearch, setShowSearch] = useState(false);
   const mapRef = useRef(null);
+
+  // Updated Google Maps URLs
+  const googleMapsUrls = {
+    1: "https://maps.app.goo.gl/f1Ry9jijxkXHXB8f9", // Abura (Cape Coast)
+    2: "https://maps.app.goo.gl/PGTHBxuicbhiYmvM8", // Elmina
+    3: "https://maps.app.goo.gl/iaqTad4zmXVRNsAi6"  // Twifo Praso
+  };
 
   // Branch data - Updated for Nat & Sons Pharmacy locations in Central Region
   const branchData = [
@@ -300,6 +309,13 @@ export default function StoreLocator() {
     window.open(`https://wa.me/${whatsapp}?text=${message}`, '_blank');
   };
 
+  const handleOpenGoogleMaps = (branchId) => {
+    const url = googleMapsUrls[branchId];
+    if (url) {
+      window.open(url, '_blank', 'noopener,noreferrer');
+    }
+  };
+
   const filteredBranches = branches.filter(branch =>
     branch.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     branch.address.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -348,8 +364,8 @@ export default function StoreLocator() {
               className="text-white"
             >
               <div className="inline-flex items-center bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 mb-6">
-                <FaHeart className="text-pink-400 mr-2" />
-                <span className="font-medium">Healthcare Access Made Easy</span>
+                <FaGoogle className="text-blue-300 mr-2" />
+                <span className="font-medium">Google Maps Verified Locations</span>
               </div>
               
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
@@ -367,7 +383,7 @@ export default function StoreLocator() {
               <div className="flex flex-wrap gap-6 mb-8">
                 <div>
                   <div className="text-3xl font-bold mb-1">3</div>
-                  <div className="text-blue-200">Locations</div>
+                  <div className="text-blue-200">Active Locations</div>
                 </div>
                 <div>
                   <div className="text-3xl font-bold mb-1">25+</div>
@@ -378,8 +394,8 @@ export default function StoreLocator() {
                   <div className="text-blue-200">Emergency Service</div>
                 </div>
                 <div>
-                  <div className="text-3xl font-bold mb-1">50k+</div>
-                  <div className="text-blue-200">Customers Served</div>
+                  <div className="text-3xl font-bold mb-1">Google</div>
+                  <div className="text-blue-200">Maps Verified</div>
                 </div>
               </div>
               
@@ -398,11 +414,11 @@ export default function StoreLocator() {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  onClick={handleGetDirections}
-                  className="bg-transparent border-2 border-white text-white px-6 py-3 rounded-full font-bold flex items-center gap-3 hover:bg-white/10 transition-all"
+                  onClick={() => handleOpenGoogleMaps(selectedBranch)}
+                  className="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-6 py-3 rounded-full font-bold flex items-center gap-3 hover:shadow-2xl transition-all shadow-lg"
                 >
-                  <FaDirections />
-                  <span>Get Directions</span>
+                  <FaExternalLinkAlt />
+                  <span>View on Google Maps</span>
                 </motion.button>
               </div>
             </motion.div>
@@ -449,9 +465,21 @@ export default function StoreLocator() {
                     <span className="text-sm">{branch.phone}</span>
                   </div>
                   <p className="text-blue-200/80 text-sm line-clamp-2">{branch.address}</p>
-                  <div className="flex items-center mt-3">
-                    <FaStar className="text-yellow-300 mr-1" />
-                    <span className="text-blue-200 text-sm">{branch.rating} ({branch.reviewCount} reviews)</span>
+                  <div className="flex items-center justify-between mt-3">
+                    <div className="flex items-center">
+                      <FaStar className="text-yellow-300 mr-1" />
+                      <span className="text-blue-200 text-sm">{branch.rating} ({branch.reviewCount} reviews)</span>
+                    </div>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleOpenGoogleMaps(branch.id);
+                      }}
+                      className="text-white/80 hover:text-white text-sm flex items-center"
+                    >
+                      <FaExternalLinkAlt className="mr-1" />
+                      Maps
+                    </button>
                   </div>
                 </motion.div>
               ))}
@@ -463,7 +491,7 @@ export default function StoreLocator() {
                 className="bg-gradient-to-r from-blue-500/20 to-cyan-500/20 backdrop-blur-sm rounded-2xl p-6 cursor-pointer border border-white/20 text-center"
               >
                 <div className="text-white font-bold mb-1">View All Locations</div>
-                <div className="text-blue-200 text-sm">Explore all 3 branches in Central Region</div>
+                <div className="text-blue-200 text-sm">Explore all 3 Google Maps verified branches</div>
               </motion.div>
             </motion.div>
           </div>
@@ -544,9 +572,21 @@ export default function StoreLocator() {
                       <div className="flex-1">
                         <div className="font-bold text-gray-800">{branch.name}</div>
                         <div className="text-sm text-gray-600 mt-1">{branch.address}</div>
-                        <div className="flex items-center mt-2 text-sm text-gray-500">
-                          <FaClock className="mr-1" />
-                          Open until {branch.hours.friday.split(' - ')[1]}
+                        <div className="flex items-center justify-between mt-2">
+                          <div className="flex items-center text-sm text-gray-500">
+                            <FaClock className="mr-1" />
+                            Open until {branch.hours.friday.split(' - ')[1]}
+                          </div>
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleOpenGoogleMaps(branch.id);
+                            }}
+                            className="text-blue-600 hover:text-blue-800 text-sm flex items-center"
+                          >
+                            <FaExternalLinkAlt className="mr-1 text-xs" />
+                            View Map
+                          </button>
                         </div>
                       </div>
                       <FaChevronRight className="text-gray-400 ml-2" />
@@ -731,19 +771,19 @@ export default function StoreLocator() {
                               <button
                                 onClick={(e) => {
                                   e.stopPropagation();
-                                  handleGetDirections();
+                                  handleOpenGoogleMaps(branch.id);
                                 }}
-                                className="flex-1 bg-blue-50 text-blue-600 hover:bg-blue-100 py-2 rounded-lg font-medium text-sm flex items-center justify-center transition-colors"
+                                className="flex-1 bg-gradient-to-r from-green-500 to-emerald-500 text-white py-2 rounded-lg font-medium text-sm flex items-center justify-center transition-all shadow-md hover:shadow-lg"
                               >
-                                <FaDirections className="mr-2" />
-                                Directions
+                                <FaGoogle className="mr-2" />
+                                Google Maps
                               </button>
                               <button
                                 onClick={(e) => {
                                   e.stopPropagation();
                                   handleCallBranch(branch.phone);
                                 }}
-                                className="flex-1 bg-green-50 text-green-600 hover:bg-green-100 py-2 rounded-lg font-medium text-sm flex items-center justify-center transition-colors"
+                                className="flex-1 bg-blue-50 text-blue-600 hover:bg-blue-100 py-2 rounded-lg font-medium text-sm flex items-center justify-center transition-colors"
                               >
                                 <FaPhoneAlt className="mr-2" />
                                 Call
@@ -786,6 +826,21 @@ export default function StoreLocator() {
                             </div>
 
                             <p className="text-gray-600 mb-8">{selectedBranchData.description}</p>
+
+                            {/* Google Maps Button */}
+                            <div className="mb-8">
+                              <button
+                                onClick={() => handleOpenGoogleMaps(selectedBranchData.id)}
+                                className="w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white py-4 rounded-xl font-bold flex items-center justify-center transition-all shadow-md hover:shadow-lg mb-4"
+                              >
+                                <FaGoogle className="mr-3 text-2xl" />
+                                <div className="text-left">
+                                  <div className="text-lg">View on Google Maps</div>
+                                  <div className="text-sm font-normal opacity-90">Click to see exact location and directions</div>
+                                </div>
+                                <FaExternalLinkAlt className="ml-auto" />
+                              </button>
+                            </div>
 
                             {/* Contact & Hours */}
                             <div className="grid md:grid-cols-2 gap-8 mb-8">
@@ -912,16 +967,16 @@ export default function StoreLocator() {
                             {/* Action Buttons */}
                             <div className="grid md:grid-cols-3 gap-4">
                               <button
-                                onClick={handleGetDirections}
-                                className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white py-3 rounded-lg font-bold flex items-center justify-center transition-all shadow-md hover:shadow-lg"
+                                onClick={() => handleOpenGoogleMaps(selectedBranchData.id)}
+                                className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white py-3 rounded-lg font-bold flex items-center justify-center transition-all shadow-md hover:shadow-lg"
                               >
-                                <FaDirections className="mr-2" />
-                                Get Directions
+                                <FaGoogle className="mr-2" />
+                                Google Maps
                               </button>
                               
                               <button
                                 onClick={() => handleCallBranch(selectedBranchData.phone)}
-                                className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white py-3 rounded-lg font-bold flex items-center justify-center transition-all shadow-md hover:shadow-lg"
+                                className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white py-3 rounded-lg font-bold flex items-center justify-center transition-all shadow-md hover:shadow-lg"
                               >
                                 <FaPhoneAlt className="mr-2" />
                                 Call Now
@@ -956,7 +1011,7 @@ export default function StoreLocator() {
                 Our Central Region Locations
               </h2>
               <p className="text-gray-600 max-w-2xl mx-auto">
-                Three branches serving different communities with the same commitment to quality healthcare
+                Three Google Maps verified branches serving different communities with the same commitment to quality healthcare
               </p>
             </div>
 
@@ -1002,18 +1057,27 @@ export default function StoreLocator() {
                         View Details
                       </button>
                       <button
-                        onClick={() => {
-                          const address = encodeURIComponent(branch.address);
-                          window.open(`https://www.google.com/maps/dir/?api=1&destination=${address}`, '_blank');
-                        }}
-                        className="flex-1 bg-white border border-blue-500 text-blue-500 hover:bg-blue-50 py-2 rounded-lg font-medium text-sm transition-colors"
+                        onClick={() => handleOpenGoogleMaps(branch.id)}
+                        className="flex-1 bg-gradient-to-r from-green-500 to-emerald-500 text-white hover:opacity-90 py-2 rounded-lg font-medium text-sm transition-opacity flex items-center justify-center"
                       >
-                        Directions
+                        <FaGoogle className="mr-2" />
+                        Google Maps
                       </button>
                     </div>
                   </div>
                 </div>
               ))}
+            </div>
+
+            {/* Google Maps Notice */}
+            <div className="mt-12 bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl p-8 text-center">
+              <div className="inline-flex items-center bg-white/90 backdrop-blur-sm rounded-full px-6 py-3 mb-4">
+                <FaGoogle className="text-green-500 mr-3 text-2xl" />
+                <h3 className="text-xl font-bold text-gray-800">All Locations Verified on Google Maps</h3>
+              </div>
+              <p className="text-gray-600 max-w-2xl mx-auto">
+                Click the Google Maps button on any location card to view exact directions, photos, reviews, and operating hours on Google Maps.
+              </p>
             </div>
           </div>
         </section>
@@ -1048,11 +1112,11 @@ export default function StoreLocator() {
         <motion.button
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
-          onClick={handleGetDirections}
+          onClick={() => handleOpenGoogleMaps(selectedBranch)}
           className="bg-gradient-to-r from-green-500 to-emerald-500 text-white p-4 rounded-full shadow-2xl hover:shadow-3xl transition-all flex items-center"
         >
-          <FaDirections className="text-xl" />
-          <span className="ml-3 font-bold hidden sm:block">Get Directions</span>
+          <FaGoogle className="text-xl" />
+          <span className="ml-3 font-bold hidden sm:block">Google Maps</span>
         </motion.button>
       </div>
     </div>
