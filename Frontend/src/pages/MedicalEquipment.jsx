@@ -1119,7 +1119,7 @@ const sampleProducts = [
                   >
                     <div className="flex items-center justify-center">
                       <FaPhoneAlt className="mr-2" />
-                      Call for Technical Support
+                      Call for Wholesale Inquiries
                     </div>
                   </button>
 

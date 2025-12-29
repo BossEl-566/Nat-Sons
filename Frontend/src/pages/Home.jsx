@@ -173,116 +173,319 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-cyan-50 pt-16 sm:pt-20 lg:pt-24">
-        <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-white to-transparent z-10" />
-        
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
-          <div className="max-w-7xl mx-auto">
-            <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
-              {/* Left Content */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                className="lg:w-1/2 text-center lg:text-left"
-              >
-                {/* Trust Badge */}
-                <div className="inline-flex items-center bg-white/80 backdrop-blur-sm border border-blue-100 text-blue-700 px-4 py-2 rounded-full font-medium text-sm mb-6">
-                  <FaAward className="mr-2 text-yellow-500" />
-                  Trusted Healthcare Since 1999
-                </div>
-                
-                {/* Main Heading */}
-                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 sm:mb-6">
-                  Premium Healthcare
-                  <span className="block text-blue-600 mt-2">For Ghana's Communities</span>
-                </h1>
-                
-                {/* Subtitle */}
-                <p className="text-base sm:text-lg text-gray-600 mb-6 sm:mb-8 max-w-xl mx-auto lg:mx-0">
-                  Serving hospitals, retailers, and families with quality medicines, 
-                  expert advice, and reliable healthcare solutions across Ghana.
-                </p>
-                
-                {/* CTA Buttons */}
-                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8 sm:mb-12">
-                  <Link 
-                    to="/healthcare-products" 
-                    className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 sm:px-8 sm:py-4 rounded-lg font-semibold flex items-center justify-center gap-2 transition-colors shadow-lg hover:shadow-xl"
-                  >
-                    <span>Browse Products</span>
-                    <FaArrowRight className="text-sm" />
-                  </Link>
-                  
-                  <Link 
-                    to="/contact" 
-                    className="bg-white hover:bg-gray-50 text-blue-600 border border-blue-200 px-6 py-3 sm:px-8 sm:py-4 rounded-lg font-semibold flex items-center justify-center gap-2 transition-colors"
-                  >
-                    <FaPhoneAlt />
-                    <span>Contact Us</span>
-                  </Link>
-                </div>
-                
-                {/* Quick Stats */}
-                <div className="grid grid-cols-2 gap-4 sm:gap-6">
-                  <div className="text-center lg:text-left">
-                    <div className="text-2xl sm:text-3xl font-bold text-blue-600 mb-1">3</div>
-                    <div className="text-sm text-gray-600">Locations</div>
-                  </div>
-                  <div className="text-center lg:text-left">
-                    <div className="text-2xl sm:text-3xl font-bold text-blue-600 mb-1">25+</div>
-                    <div className="text-sm text-gray-600">Years Experience</div>
-                  </div>
-                </div>
-              </motion.div>
+     {/* Hero Section - Enhanced Version */}
+<section className="relative min-h-[85vh] sm:min-h-[90vh] overflow-hidden bg-gradient-to-br from-blue-900 via-blue-800 to-cyan-800">
+  {/* Animated Background Elements */}
+  <div className="absolute inset-0 overflow-hidden">
+    {/* Grid pattern */}
+    <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent bg-[size:50px_50px]" />
+    
+    {/* Floating particles */}
+    <motion.div
+      animate={{ y: [0, -100, 0] }}
+      transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+      className="absolute top-1/4 left-1/4 w-2 h-2 bg-white/10 rounded-full"
+    />
+    <motion.div
+      animate={{ y: [0, -80, 0] }}
+      transition={{ duration: 15, repeat: Infinity, ease: "linear", delay: 1 }}
+      className="absolute top-1/3 right-1/4 w-3 h-3 bg-white/10 rounded-full"
+    />
+    <motion.div
+      animate={{ y: [0, -120, 0] }}
+      transition={{ duration: 25, repeat: Infinity, ease: "linear", delay: 2 }}
+      className="absolute bottom-1/4 left-1/2 w-1 h-1 bg-white/10 rounded-full"
+    />
+  </div>
 
-              {/* Hero Image */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="lg:w-1/2"
-              >
-                <div className="relative">
-                  <div className="relative h-64 sm:h-80 lg:h-96 rounded-2xl overflow-hidden shadow-2xl">
-                    <img 
-                      src={moderninterior}
-                      alt="Modern Pharmacy Interior"
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-                  </div>
-                  
-                  {/* Floating WhatsApp Card */}
-                  <motion.div
-                    animate={{ y: [0, -10, 0] }}
-                    transition={{ duration: 3, repeat: Infinity }}
-                    className="absolute -bottom-4 -right-4 sm:-bottom-6 sm:-right-6 bg-white p-4 sm:p-6 rounded-xl shadow-xl max-w-[200px] sm:max-w-xs"
-                  >
-                    <div className="flex items-center mb-3">
-                      <div className="bg-green-500 text-white p-2 rounded-lg mr-3">
-                        <FaWhatsapp className="w-5 h-5" />
-                      </div>
-                      <div>
-                        <div className="font-bold text-gray-800 text-sm sm:text-base">Quick Order</div>
-                        <div className="text-xs sm:text-sm text-gray-600">Via WhatsApp</div>
-                      </div>
-                    </div>
-                    <a 
-                      href="https://wa.me/233209468565"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="block text-center bg-green-500 hover:bg-green-600 text-white py-2 rounded-lg font-semibold text-sm transition-colors"
-                    >
-                      Order Now
-                    </a>
-                  </motion.div>
-                </div>
-              </motion.div>
-            </div>
+  {/* Hero Content */}
+  <div className="container mx-auto px-4 sm:px-6 lg:px-8 h-full">
+    <div className="flex flex-col lg:flex-row items-center justify-between h-full pt-20 sm:pt-24 lg:pt-28 pb-12 lg:pb-0 gap-8 lg:gap-12">
+      
+      {/* Left Content */}
+      <motion.div
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8 }}
+        className="lg:w-1/2 text-center lg:text-left z-20"
+      >
+        {/* Trust Badge with Wholesale/Retail Indicator */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="inline-flex items-center bg-white/10 backdrop-blur-sm border border-white/20 text-white px-4 py-2 rounded-full font-medium text-sm mb-6 hover:bg-white/20 transition-colors"
+        >
+          <div className="flex items-center gap-2">
+            <FaAward className="text-yellow-400" />
+            <span>Since 1999 •</span>
+            <span className="px-2 py-0.5 bg-blue-500/30 rounded-full text-xs font-semibold">
+              Wholesale & Retail
+            </span>
+            <FaHeart className="text-red-400" />
           </div>
+        </motion.div>
+        
+        {/* Main Heading with Highlighted Supply Chain */}
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 sm:mb-6">
+          <span className="block text-white mb-2">Pharmaceutical</span>
+          <span className="block bg-gradient-to-r from-cyan-400 via-blue-300 to-white bg-clip-text text-transparent">
+            Supply Across Ghana
+          </span>
+        </h1>
+        
+        {/* Enhanced Subtitle Highlighting Wholesale & Retail */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.4 }}
+          className="text-lg sm:text-xl text-blue-100 mb-6 sm:mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed"
+        >
+          Ghana's trusted supplier of quality medicines for{' '}
+          <span className="font-semibold text-white">hospitals, clinics, retailers, and families</span>.
+          We provide both <span className="font-semibold text-cyan-300">wholesale distribution</span> and{' '}
+          <span className="font-semibold text-cyan-300">retail pharmacy services</span> nationwide.
+        </motion.p>
+        
+        {/* Supply Chain Badges */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+          className="flex flex-wrap gap-3 mb-6 sm:mb-8 justify-center lg:justify-start"
+        >
+          <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-white/20">
+            <FaBriefcaseMedical className="text-green-400 text-sm" />
+            <span className="text-sm text-white">Wholesale Supply</span>
+          </div>
+          <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-white/20">
+            <FaStore className="text-cyan-400 text-sm" />
+            <span className="text-sm text-white">Retail Pharmacy</span>
+          </div>
+          <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-white/20">
+            <FaMapMarkerAlt className="text-yellow-400 text-sm" />
+            <span className="text-sm text-white">Nationwide Delivery</span>
+          </div>
+        </motion.div>
+        
+        {/* CTA Buttons - Enhanced with Supply Focus */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6 }}
+          className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8 sm:mb-12"
+        >
+          <Link 
+            to="/search" 
+            className="group bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white px-6 py-4 sm:px-8 sm:py-4 rounded-xl font-semibold flex items-center justify-center gap-3 transition-all duration-300 shadow-lg hover:shadow-2xl hover:scale-[1.02] active:scale-[0.98]"
+          >
+            <FaBriefcaseMedical />
+            <span>Wholesale Inquiry</span>
+            <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
+          </Link>
+          
+          <Link 
+            to="/search" 
+            className="group bg-white hover:bg-gray-50 text-blue-900 px-6 py-4 sm:px-8 sm:py-4 rounded-xl font-semibold flex items-center justify-center gap-3 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98]"
+          >
+            <FaStore />
+            <span>Retail Products</span>
+          </Link>
+        </motion.div>
+        
+        {/* Quick Stats - Enhanced with Supply Chain Metrics */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.8 }}
+          className="flex flex-wrap gap-6 sm:gap-8 justify-center lg:justify-start"
+        >
+          {[
+            { 
+              icon: <FaBriefcaseMedical className="w-4 h-4" />, 
+              value: '500+', 
+              label: 'Wholesale Partners',
+              color: 'text-green-300',
+              tooltip: 'Hospitals & Retailers'
+            },
+            { 
+              icon: <FaStore className="w-4 h-4" />, 
+              value: '3', 
+              label: 'Retail Locations', 
+              color: 'text-cyan-300',
+              tooltip: 'Across Ghana'
+            },
+            { 
+              icon: <FaTruck className="w-4 h-4" />, 
+              value: 'Nationwide', 
+              label: 'Delivery Coverage', 
+              color: 'text-yellow-300',
+              tooltip: 'All Regions'
+            },
+            { 
+              icon: <FaPills className="w-4 h-4" />, 
+              value: '1000+', 
+              label: 'Products', 
+              color: 'text-purple-300',
+              tooltip: 'Medicines & Supplies'
+            },
+          ].map((stat, index) => (
+            <motion.div
+              key={index}
+              whileHover={{ scale: 1.05 }}
+              className="text-center group relative"
+              title={stat.tooltip}
+            >
+              <div className="flex items-center gap-2 text-white mb-1">
+                {stat.icon}
+                <div className={`text-2xl sm:text-3xl font-bold ${stat.color}`}>
+                  {stat.value}
+                </div>
+              </div>
+              <div className="text-sm text-blue-200">{stat.label}</div>
+            </motion.div>
+          ))}
+        </motion.div>
+      </motion.div>
+
+      {/* Hero Image & Cards */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8, delay: 0.3 }}
+        className="lg:w-1/2 relative"
+      >
+        {/* Main Image Container */}
+        <div className="relative">
+          <div className="relative h-64 sm:h-72 md:h-80 lg:h-96 rounded-3xl overflow-hidden shadow-2xl shadow-black/30 border-4 border-white/20">
+            <img 
+              src={moderninterior}
+              alt="Modern Pharmacy Interior - Wholesale & Retail Supply"
+              className="w-full h-full object-cover"
+              loading="eager"
+            />
+            {/* Gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-blue-900/40 via-transparent to-blue-900/20" />
+            
+            {/* Supply Chain Badge */}
+            <motion.div
+              animate={{ rotate: [0, 5, -5, 0] }}
+              transition={{ duration: 4, repeat: Infinity }}
+              className="absolute -top-3 -left-3 bg-gradient-to-br from-blue-500 to-cyan-500 text-white px-4 py-2 rounded-xl shadow-lg font-bold text-sm z-10 flex items-center gap-2"
+            >
+              <FaTruck className="text-xs" />
+              <span>Wholesale & Retail</span>
+            </motion.div>
+            
+            {/* FDA Certification */}
+            <motion.div
+              animate={{ scale: [1, 1.05, 1] }}
+              transition={{ duration: 3, repeat: Infinity }}
+              className="absolute -top-3 right-4 bg-gradient-to-br from-yellow-400 to-yellow-600 text-blue-900 px-3 py-1.5 rounded-lg shadow-lg font-bold text-xs z-10"
+            >
+              FDA Approved
+            </motion.div>
+          </div>
+          
+          {/* WhatsApp Card for Wholesale & Retail */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.8 }}
+            whileHover={{ scale: 1.05 }}
+            className="absolute -bottom-4 -right-4 sm:bottom-8 sm:-right-6 bg-white/95 backdrop-blur-sm p-4 sm:p-5 rounded-2xl shadow-2xl max-w-[200px] sm:max-w-xs border border-white/30"
+          >
+            <div className="flex items-start gap-3 mb-3">
+              <div className="bg-gradient-to-br from-green-500 to-green-600 text-white p-2 rounded-lg shadow-md">
+                <FaWhatsapp className="w-5 h-5" />
+              </div>
+              <div>
+                <div className="font-bold text-gray-800 text-sm sm:text-base">Order Now</div>
+                <div className="text-xs text-gray-600 leading-tight">
+                  For wholesale & retail inquiries
+                </div>
+              </div>
+            </div>
+            <a 
+              href="https://wa.me/233209468565"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white py-2.5 rounded-xl font-semibold text-sm transition-all duration-300 shadow-md hover:shadow-lg text-center"
+            >
+              Chat on WhatsApp
+            </a>
+          </motion.div>
+          
+          {/* Nationwide Delivery Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1 }}
+            className="absolute -bottom-4 left-4 sm:bottom-12 sm:left-6 bg-gradient-to-r from-blue-500 to-cyan-500 text-white p-3 sm:p-4 rounded-2xl shadow-lg max-w-[160px] sm:max-w-[180px]"
+          >
+            <div className="flex items-center gap-2 mb-1">
+              <FaMapMarkerAlt className="w-4 h-4" />
+              <span className="font-bold text-xs sm:text-sm">Across Ghana</span>
+            </div>
+            <div className="text-xs opacity-90">Delivery to all regions</div>
+          </motion.div>
         </div>
-      </section>
+        
+        {/* Supply Chain Visual */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.2 }}
+          className="hidden lg:flex items-center justify-center gap-4 mt-8 text-white/80 text-sm"
+        >
+          <div className="flex items-center gap-2">
+            <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+            <span>Wholesale Supply</span>
+          </div>
+          <FaArrowRight className="text-xs" />
+          <div className="flex items-center gap-2">
+            <FaStore className="text-xs" />
+            <span>Our Pharmacies</span>
+          </div>
+          <FaArrowRight className="text-xs" />
+          <div className="flex items-center gap-2">
+            <div className="w-2 h-2 bg-cyan-500 rounded-full"></div>
+            <span>Retail Customers</span>
+          </div>
+        </motion.div>
+        
+        {/* Scroll Indicator */}
+        <motion.div
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className="hidden lg:flex flex-col items-center absolute -bottom-16 left-1/2 transform -translate-x-1/2 text-white/60"
+        >
+          <span className="text-sm mb-2">Explore our services</span>
+          <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
+            <div className="w-1 h-3 bg-white/50 rounded-full mt-2" />
+          </div>
+        </motion.div>
+      </motion.div>
+    </div>
+  </div>
+  
+  {/* Bottom Gradient */}
+  <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent" />
+  
+  {/* Wave Divider */}
+  <div className="absolute bottom-0 left-0 right-0 overflow-hidden">
+    <svg 
+      className="relative block w-full h-12" 
+      viewBox="0 0 1200 120" 
+      preserveAspectRatio="none"
+    >
+      <path 
+        d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" 
+        className="fill-white"
+      />
+    </svg>
+  </div>
+</section>
 
       {/* Stats Section */}
       <section className="py-12 sm:py-16 bg-white">

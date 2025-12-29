@@ -942,7 +942,7 @@ export default function Vitamin() {
                   >
                     <div className="flex items-center justify-center">
                       <FaPhoneAlt className="mr-2" />
-                      Call for whole sale inquiries
+                      Call for Wholesale inquiries
                     </div>
                   </button>
 
