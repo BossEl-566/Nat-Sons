@@ -74,7 +74,7 @@ export default function Header() {
               </div>
               <div className="hidden sm:block">
                 <h1 className="text-lg font-bold text-blue-600 leading-tight">Nat & Sons</h1>
-                <p className="text-gray-500 text-xs">Pharmacy & Healthcare</p>
+                <p className="text-gray-500 text-xs">Pharmacy & Healthcare Ltd.</p>
               </div>
             </Link>
 

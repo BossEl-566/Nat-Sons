@@ -294,7 +294,7 @@ export default function HomePage() {
         </motion.div>
         
         {/* Quick Stats - Enhanced with Supply Chain Metrics */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8 }}
@@ -345,7 +345,7 @@ export default function HomePage() {
               <div className="text-sm text-blue-200">{stat.label}</div>
             </motion.div>
           ))}
-        </motion.div>
+        </motion.div> */}
       </motion.div>
 
       {/* Hero Image & Cards */}
@@ -451,18 +451,6 @@ export default function HomePage() {
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 bg-cyan-500 rounded-full"></div>
             <span>Retail Customers</span>
-          </div>
-        </motion.div>
-        
-        {/* Scroll Indicator */}
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="hidden lg:flex flex-col items-center absolute -bottom-16 left-1/2 transform -translate-x-1/2 text-white/60"
-        >
-          <span className="text-sm mb-2">Explore our services</span>
-          <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-white/50 rounded-full mt-2" />
           </div>
         </motion.div>
       </motion.div>
@@ -759,53 +747,196 @@ export default function HomePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-12 sm:py-20 bg-gradient-to-r from-blue-600 to-cyan-600">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">
-              Ready for Better Healthcare?
-            </h2>
-            <p className="text-blue-100 mb-8 sm:mb-12 text-sm sm:text-base">
-              Visit one of our three locations or contact us for expert pharmaceutical advice
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
-              <Link 
-                to="/store-locator" 
-                className="bg-white text-blue-600 hover:bg-gray-50 px-6 py-3 sm:px-8 sm:py-4 rounded-lg font-semibold flex items-center justify-center gap-2 transition-colors"
-              >
-                <FaMapMarkerAlt />
-                <span>Find a Pharmacy</span>
-              </Link>
-              
-              <a 
-                href="https://wa.me/233209468565"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-transparent border-2 border-white text-white hover:bg-white/10 px-6 py-3 sm:px-8 sm:py-4 rounded-lg font-semibold flex items-center justify-center gap-2 transition-colors"
-              >
-                <FaWhatsapp />
-                <span>Chat on WhatsApp</span>
-              </a>
-            </div>
-            
-            <div className="mt-8 sm:mt-12 flex flex-wrap justify-center gap-4 sm:gap-6 text-white/80 text-sm">
-              <div className="flex items-center gap-2">
-                <FaClock />
-                <span>Mon-Sat: 8AM - 10PM</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <FaPhoneAlt />
-                <span>+233208138549</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <FaMapMarkerAlt />
-                <span>3 Locations in Ghana</span>
-              </div>
-            </div>
+<section className="relative py-16 sm:py-24 overflow-hidden">
+  {/* Animated background */}
+  <div className="absolute inset-0 bg-gradient-to-br from-blue-600 via-blue-700 to-cyan-600">
+    {/* Animated mesh gradient overlay */}
+    <div className="absolute inset-0 opacity-30">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(255,255,255,0.2)_0%,transparent_50%)]"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(6,182,212,0.3)_0%,transparent_50%)]"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_10%_20%,rgba(255,255,255,0.15)_0%,transparent_50%)]"></div>
+    </div>
+    
+    {/* Animated particles */}
+    {Array.from({ length: 30 }).map((_, i) => (
+      <motion.div
+        key={i}
+        className="absolute w-1 h-1 bg-white/20 rounded-full"
+        initial={{
+          x: Math.random() * 100 + '%',
+          y: Math.random() * 100 + '%',
+        }}
+        animate={{
+          y: [null, '-20%'],
+          x: [null, (Math.random() - 0.5) * 20 + '%'],
+        }}
+        transition={{
+          duration: Math.random() * 15 + 10,
+          repeat: Infinity,
+          ease: "linear",
+          delay: Math.random() * 5
+        }}
+      />
+    ))}
+  </div>
+
+  {/* Floating medical icons background */}
+  <div className="absolute inset-0 overflow-hidden opacity-10">
+    <motion.div 
+      animate={{ rotate: 360 }}
+      transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
+      className="absolute -top-20 -left-20 text-white text-9xl"
+    >
+      💊
+    </motion.div>
+    <motion.div 
+      animate={{ rotate: -360, y: [0, 20, 0] }}
+      transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+      className="absolute -bottom-20 -right-20 text-white text-9xl"
+    >
+      ❤️
+    </motion.div>
+    <motion.div 
+      animate={{ y: [0, 30, 0], x: [0, 20, 0] }}
+      transition={{ duration: 20, repeat: Infinity }}
+      className="absolute top-1/2 left-1/3 text-white text-7xl"
+    >
+      ⚕️
+    </motion.div>
+  </div>
+
+  <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      viewport={{ once: true }}
+      className="max-w-4xl mx-auto text-center"
+    >
+      {/* Badge */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.2 }}
+        className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full mb-6"
+      >
+        <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+        <span className="text-white/90 text-sm font-medium">Your Health Is Our Priority</span>
+      </motion.div>
+
+      {/* Main heading with gradient */}
+      <motion.h2 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3 }}
+        className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4"
+      >
+        Ready to Experience{' '}
+        <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-white">
+          Better Healthcare?
+        </span>
+      </motion.h2>
+
+      {/* Subheading with animation */}
+      <motion.p 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.4 }}
+        className="text-blue-100 text-base sm:text-lg md:text-xl mb-8 sm:mb-10 max-w-2xl mx-auto"
+      >
+        Join thousands of satisfied customers who trust us with their family's health. 
+        Professional care, quality products, and personalized service.
+      </motion.p>
+
+      {/* CTA Buttons with enhanced design */}
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.5 }}
+        className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center"
+      >
+        <Link 
+          to="/store-locator" 
+          className="group relative bg-white text-blue-600 hover:text-blue-700 px-8 py-4 sm:px-10 sm:py-5 rounded-xl font-semibold flex items-center justify-center gap-3 transition-all duration-300 shadow-lg hover:shadow-2xl hover:-translate-y-1"
+        >
+          <span className="absolute inset-0 bg-gradient-to-r from-yellow-300 to-yellow-400 rounded-xl opacity-0 group-hover:opacity-20 transition-opacity duration-300"></span>
+          <FaMapMarkerAlt className="text-blue-600 group-hover:scale-110 transition-transform" />
+          <span>Find Nearest Pharmacy</span>
+          <span className="text-xs bg-blue-100 px-2 py-1 rounded-full ml-2">3 locations</span>
+        </Link>
+        
+        <a 
+          href="https://wa.me/233209468565"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group relative bg-transparent border-2 border-white text-white hover:bg-white/10 px-8 py-4 sm:px-10 sm:py-5 rounded-xl font-semibold flex items-center justify-center gap-3 transition-all duration-300 hover:-translate-y-1"
+        >
+          <FaWhatsapp className="text-green-400 group-hover:scale-110 transition-transform" />
+          <span>Chat on WhatsApp</span>
+          <span className="text-xs bg-white/20 px-2 py-1 rounded-full">24/7</span>
+        </a>
+      </motion.div>
+
+      {/* Trust indicators */}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ delay: 0.6 }}
+        className="mt-10 sm:mt-14"
+      >
+        {/* Hours and contact info */}
+        <div className="flex flex-wrap justify-center gap-4 sm:gap-8 text-white/80 text-sm">
+          <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full">
+            <FaClock className="text-yellow-300" />
+            <span>Mon-Sat: 8AM - 10PM</span>
+          </div>
+          <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full">
+            <FaPhoneAlt className="text-yellow-300" />
+            <span>+233 20 813 8549</span>
+          </div>
+          <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full">
+            <FaMapMarkerAlt className="text-yellow-300" />
+            <span>Abura, Adisadel, Pedu</span>
           </div>
         </div>
-      </section>
+
+        {/* Social proof */}
+        <div className="mt-6 flex items-center justify-center gap-6 text-white/60 text-xs">
+          <div className="flex items-center gap-2">
+            <div className="flex -space-x-2">
+              {[1,2,3,4].map((i) => (
+                <div key={i} className="w-6 h-6 rounded-full bg-gradient-to-br from-yellow-300 to-yellow-400 border-2 border-white flex items-center justify-center text-xs text-blue-900 font-bold">
+                  {String.fromCharCode(64 + i)}
+                </div>
+              ))}
+            </div>
+            <span>1,000+ happy customers</span>
+          </div>
+          <div className="w-px h-4 bg-white/20"></div>
+          <div className="flex items-center gap-1">
+            <FaStar className="text-yellow-300" />
+            <FaStar className="text-yellow-300" />
+            <FaStar className="text-yellow-300" />
+            <FaStar className="text-yellow-300" />
+            <FaStar className="text-yellow-300" />
+            <span className="ml-1">4.9 rating</span>
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
+  </div>
+
+  {/* Bottom wave divider */}
+  <div className="absolute bottom-0 left-0 right-0">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 120" className="w-full h-auto">
+      <path 
+        fill="#ffffff" 
+        fillOpacity="1" 
+        d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z"
+      ></path>
+    </svg>
+  </div>
+</section>
 
       {/* WhatsApp Float */}
       <a
